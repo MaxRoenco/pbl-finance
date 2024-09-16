@@ -8,10 +8,11 @@ const Header = () => {
             <div className={styles.container}>
                 <div className={styles.logo}>Icon</div>
                 <ul className={styles.links}>
-                    <Link to='/'>Markets</Link>
-                    <Link to='/portfolio'>Portfolio</Link>
-                    <Link to='/profile'>Profile</Link>
+                    <Link to='/' className={styles.linkItem}>Markets</Link>
+                    <Link to='/portfolio' className={styles.linkItem}>Portfolio</Link>
+                    <Link to='/profile' className={styles.linkItem}>Profile</Link>
                 </ul>
+                <div className={styles.logout}>Logout</div>
             </div>
         </>
     );
