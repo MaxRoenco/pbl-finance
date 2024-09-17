@@ -1,0 +1,64 @@
+.container {
+    width: 80%;
+    background: transparent;
+    color: white;
+    display: flex;
+}
+
+.layer1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.927);
+    z-index: -5;
+}
+
+
+.layer2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: -4;
+}
+
+.greenLight {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: green;
+    border-radius: 50%;
+    box-shadow: 19px 19px 90px 90px rgba(27, 245, 27, 0.396);
+}
+
+
+.greenLight.topLeft {
+    top: 10px;
+    left: -100px;
+}
+
+.greenLight.topRight {
+    top: -60px;
+    right: -100px;
+}
+
+.greenLight.bottomLeft {
+    bottom: 10px;
+    left: -100px;
+}
+
+.greenLight.bottomRight {
+    bottom: 10px;
+    right: -100px;
+}
+
+.spendingsContainer {
+    width: calc(100%/3);
+    background: transparent;
+    height: 150px;
+    border: 1px solid green;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 0px rgb(3, 175, 63);
+    text-align: center;
+    padding: 20px 15px;
+}

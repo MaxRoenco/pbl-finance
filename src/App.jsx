@@ -1,25 +1,42 @@
-import { useState } from 'react'
-import './App.css'
-import Home from './components/Home/Home'
-import Header from './components/Header/Header'
-import Portfolio from './components/Portfolio/Portfolio'
-import Profile from './components/Profile/Profile'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
+import './App.css';
+import Home from './components/Home/Home';
+import Header from './components/Header/Header';
+import Portfolio from './components/Portfolio/Portfolio';
+import Profile from './components/Profile/Profile';
+import Dashboard from './components/Dashboard/Dashboard';
+import Features from './components/Features/Features';
+import Pricing from './components/Pricing/Pricing';
+import FAQ from './components/FAQ/FAQ';
+import ContactUs from './components/ContactUs/ContactUs';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
-function App() {
+function Layout() {
+  const location = useLocation();
 
   return (
-
-    <Router>
-      <Header />
+    <>
+      {location.pathname !== '/' && <Header />}
       <Routes>
-        {/* Define your routes here */}
         <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/contact-us" element={<ContactUs />} />
       </Routes>
-    </Router>
-  )
+    </>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <Router>
+      <Layout />
+    </Router>
+  );
+}
+
+export default App;
