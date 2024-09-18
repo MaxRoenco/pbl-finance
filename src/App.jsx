@@ -8,6 +8,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Features from './components/Features/Features';
 import Pricing from './components/Pricing/Pricing';
 import FAQ from './components/FAQ/FAQ';
+import LeftBar from './components/LeftBar/LeftBar';
 import ContactUs from './components/ContactUs/ContactUs';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
@@ -15,19 +16,23 @@ function Layout() {
   const location = useLocation();
 
   return (
-    <>
+    <div className="app-container">
       {location.pathname !== '/' && <Header />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/features" element={<Features />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/contact-us" element={<ContactUs />} />
-      </Routes>
-    </>
+      <div className="content-container">
+        {location.pathname !== '/' && <LeftBar />}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/features" element={<Features />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+        </Routes>
+      </div>
+    </div>
+
   );
 }
 

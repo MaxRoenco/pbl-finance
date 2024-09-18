@@ -9,5 +9,19 @@ body {
   display: flex;
   width: auto;
   height: auto;
+}
 
+.app-container {
+  display: flex;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  background: rgba(2, 2, 2, 1);
+  color: aliceblue;
+  z-index: 0;
+}
+
+.content-container {
+  flex: 1;
+  display: flex;
 }
