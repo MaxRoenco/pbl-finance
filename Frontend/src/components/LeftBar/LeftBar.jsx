@@ -8,7 +8,6 @@ const LeftBar = () => {
     return (
         <div className={styles.mainContainer}>
             <div className={styles.container}>
-            <div className={styles.thing}></div>
                 <ul className={styles.links}>
                     <Link to='/dashboard' className={`${styles.linkItem} ${location.pathname === '/dashboard' ? styles.selected : ''}`}>
                         <img src="/dashboard.png" alt="" /> Dashboard
