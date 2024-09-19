@@ -11,7 +11,7 @@ const Header = () => {
                     <div className={styles.path}><img src="/home.png" alt="" /> Dashboard</div>
                     <div className={styles.loopContainer}>
                         <div className={styles.loop} type='text'>
-                            <img src="" alt="icon" />
+                            <img src="/search.png" alt="icon" />
                             <p>Search</p>
                         </div>
                     </div>
