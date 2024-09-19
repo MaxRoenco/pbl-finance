@@ -8,6 +8,7 @@ const LeftBar = () => {
     return (
         <div className={styles.mainContainer}>
             <div className={styles.container}>
+            <div className={styles.thing}></div>
                 <ul className={styles.links}>
                     <Link to='/dashboard' className={`${styles.linkItem} ${location.pathname === '/dashboard' ? styles.selected : ''}`}>
                         <img src="/dashboard.png" alt="" /> Dashboard
@@ -23,12 +24,12 @@ const LeftBar = () => {
                     </Link>
                 </ul>
                 <div className={styles.settings}>
-                    <div>Settings</div>
-                    <div>Notifications</div>
+                    <div><img src="/gear.png" alt="" /> Settings</div>
+                    <div><img src="/bell.png" alt="" /> Notifications</div>
                 </div>
                 <div className={styles.userContainer}>
                     <div className={styles.infoContainer}>
-                        <img src="" alt="Profile" />
+                        <img src="/profilepic.png" alt="Profile" />
                         <div className={styles.info}>
                             <h1>Name Surname</h1>
                             <p>@username</p>
