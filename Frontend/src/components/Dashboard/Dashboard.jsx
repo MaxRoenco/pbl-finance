@@ -13,9 +13,7 @@ const Dashboard = () => {
                     <div className={`${styles.greenLight} ${styles.bottomRight}`}></div>
                 </div>
             </div> */}
-            <Header></Header>
             <div className={styles.body}>
-                <LeftBar></LeftBar>
                 <div className={styles.home}>
                     <div className={styles.container1}>
                         <div className={styles.spendingsContainer}>
