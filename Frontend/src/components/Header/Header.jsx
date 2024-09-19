@@ -7,7 +7,7 @@ const Header = () => {
         <>
             <div className={styles.logoContainer}>
                 <div className={styles.rightContainer}>
-                    <Link to='/' className={styles.logo}>Logo</Link>
+                    <Link to='/' className={styles.logo}><img src="/logo.png" alt="" /></Link>
                     <div className={styles.path}>icon {'>'} Dashboard</div>
                     <div className={styles.loopContainer}>
                         <div className={styles.loop} type='text'>

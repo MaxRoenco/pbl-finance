@@ -12,6 +12,16 @@
     gap: 30px;
 }
 
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.body {
+    display: flex;
+}
+
 .container1 {
     width: 100%;
     background: transparent;

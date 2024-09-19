@@ -6,6 +6,9 @@
     flex-direction: column;
     color: aliceblue;
     padding: 20px;
+    font-family: "Space Grotesk";
+    font-weight: 700;
+    margin-bottom: 100px;
 }
 
 .container {
@@ -16,6 +19,21 @@
     flex-direction: column;
     border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.thing {
+position: absolute;
+width: 211.33px;
+height: 107.96px;
+left: 105.17px;
+top: 150px;
+
+background: linear-gradient(180deg, #697565 53.5%, #ECDFCC 100%);
+filter: blur(175px);
+transform: matrix(0.75, 0.66, -0.33, 0.94, 0, 0);
 }
 
 .links {
@@ -29,6 +47,21 @@
 
 .linkItem {
     padding: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+}
+.linkItem>img {
+    width: 20px;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+.selected {
+    background-color: red;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    background: linear-gradient(270deg, rgba(217, 217, 217, 0) 0%, rgba(99, 89, 133, 0.4) 50%);
+    border-left: 3px solid #635985;
 }
 
 .logout {
@@ -41,7 +74,20 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 120px;
+    margin-top: 55px;
+    margin-bottom: 6px;
+}
+
+.settings>div {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 16px;
+}
+
+.settings>div>img {
+    width: 50px;
+    margin-right: 10px;
 }
 
 .infoContainer {
@@ -50,14 +96,25 @@
     border-top: 2px solid rgba(255, 255, 255, 0.09);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+    margin: 10px;
+}
+
+.infoContainer>img {
+    width: 80px;
 }
 
 .info {
-    text-align: center;
-    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.info>p {
+    font-weight: 300;
+    font-size: 16px;
 }
 
 .info>h6 {
     color: rgba(255, 255, 255, 0.3);
+    font-weight: 300;
+    font-size: 14px;
 }
