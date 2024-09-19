@@ -1,16 +1,18 @@
 import styles from './Register.module.css';
 import { useEffect, useContext, useState } from 'react';
 import { authContext } from '../../hooks/Context';
+import { Navigate } from 'react-router-dom';
 
 const Register = () => {
     const { users, register, error, isLoading, isRegistered, setIsRegistered } = useContext(authContext);
     const [newUser, setNewUser] = useState({ email: '', password: '' });
+    const [isGood, setIsGood] = useState(false);
     const [validationError, setValidationError] = useState('');
+    const [redirect, setRedirect] = useState(false); // New state for redirection
 
     useEffect(() => {
         if (users) {
             console.log(users);
-            console.log(isRegistered);
         }
     }, [users]);
 
@@ -24,15 +26,20 @@ const Register = () => {
         return passwordRegex.test(password);
     };
 
-    const handleRegister = async () => {
+    const handleRegister = () => {
         if (!validateEmail(newUser.email)) {
             setValidationError('Invalid email format');
+            setIsGood(false);
             return;
         }
         if (!validatePassword(newUser.password)) {
             setValidationError('Password must be at least 6 characters long, contain a number and an uppercase letter');
+            setIsGood(false);
             return;
         }
+
+        setIsGood(true);
+        setValidationError('');
 
         const userToAdd = {
             id: users.length.toString(),
@@ -40,10 +47,13 @@ const Register = () => {
             password: newUser.password,
         };
         register(userToAdd);
-
         setIsRegistered(true);
-
+        setRedirect(true); // Set redirect to true after registration
     };
+
+    if (redirect) {
+        return <Navigate to="/" />; // Redirect to home page if redirect state is true
+    }
 
     return (
         <div className={styles.container}>
