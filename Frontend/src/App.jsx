@@ -18,7 +18,9 @@ function Layout() {
 
   return (
     <div className="app-container">
+      {showHeaderAndSidebar && <Header />}
       <div className="content-container">
+        {showHeaderAndSidebar && <LeftBar />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
