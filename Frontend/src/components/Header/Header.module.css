@@ -16,6 +16,7 @@
 
 .logo {
     @apply p-3 w-auto;
+    width: 25%;
 }
 .logo>img {
     height: 40px;
@@ -29,9 +30,10 @@
     font-weight: 700;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    width: 25%;
-    margin-left: -36%;
+    justify-content: start;
+    width: 50%;
+    margin-left: 40px;
+    /* background-color: red; */
 }
 .path>img {
     height: 20px;

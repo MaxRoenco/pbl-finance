@@ -1,11 +1,13 @@
 :root {
     --primary-color: rgba(21, 21, 21, 1);
     --border-color: rgba(255, 255, 255, 0.04);
+    font-family: "Space Grotesk";
 }
 
 .home {
     width: 100%;
     padding: 20px;
+    padding-top: 0px;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -34,16 +36,72 @@
     width: 100%;
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 30px;
-    height: 300px;
+    gap: 20px;
+    height: 250px;
 }
 
-.graphContainer,
+
 .newsContainer {
-    background: var(--primary-color);
+    /* background: var(--primary-color); */
     border: 2px solid var(--border-color);
     border-radius: 18px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    align-self: center;
+    justify-self: center;
+}
+
+.newsTitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.newsTitle>p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.newsTitle>p>img {
+    width: 20px;
+    margin-left: 10px;
+}
+
+.newsTitle>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.3);
+    border: solid rgba(255, 255, 255, 0.3) 2px;
+    border-radius: 999px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #151515;
+    margin-left: 40px;
+    font-size: 15px;
+}
+
+.newsTitle>div>img {
+    width: 5px;
+    margin-right: 5px;
+}
+
+.newsContainer>h1 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.graphContainer {
+    height: 260px;
+    align-self: center;
+    justify-self: center;
 }
 
 .container3 {
@@ -92,6 +150,29 @@
     background: var(--primary-color);
     border: 2px solid var(--border-color);
     border-radius: 18px;
-    padding: 20px;
-    height: 150px;
+    padding: 30px;
+    height: 100px;
+    box-sizing: border-box;
+    background: radial-gradient(100% 114.02% at 64.58% 0%, rgba(68, 60, 104, 0.55) 0%, rgba(217, 217, 217, 0.55) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    mix-blend-mode: hard-light;
+    border: 1px solid rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.spendingsContainer>div {
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.overview {
+    font-size: 30px;
+    padding-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 700;
 }
