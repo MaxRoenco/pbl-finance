@@ -1,28 +1,53 @@
-.container {
-    width: 80%;
+:root {
+    --primary-color: rgba(21, 21, 21, 1);
+    --border-color: rgba(255, 255, 255, 0.04);
+}
+
+.home {
+    width: 100%;
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.container1 {
+    width: 100%;
     background: transparent;
     color: white;
     display: flex;
+    gap: 30px;
 }
 
-.layer1 {
-    position: absolute;
+.container2 {
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.927);
-    z-index: -5;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    height: 300px;
 }
 
+.graphContainer,
+.newsContainer {
+    background: var(--primary-color);
+    border: 2px solid var(--border-color);
+    border-radius: 18px;
+    padding: 20px;
+}
 
-.layer2 {
-    position: absolute;
+.container3 {
     width: 100%;
-    height: 100%;
-    background: transparent;
-    z-index: -4;
+    background: var(--primary-color);
+    border: 2px solid var(--border-color);
+    border-radius: 18px;
+    padding: 20px;
+    height: 110px;
 }
 
-.greenLight {
+
+
+/* .greenLight {
     position: absolute;
     width: 20px;
     height: 20px;
@@ -50,15 +75,13 @@
 .greenLight.bottomRight {
     bottom: 10px;
     right: -100px;
-}
+} */
 
 .spendingsContainer {
-    width: calc(100%/3);
-    background: transparent;
+    width: 100%;
+    background: var(--primary-color);
+    border: 2px solid var(--border-color);
+    border-radius: 18px;
+    padding: 20px;
     height: 150px;
-    border: 1px solid green;
-    border-radius: 5px;
-    box-shadow: 0px 0px 2px 0px rgb(3, 175, 63);
-    text-align: center;
-    padding: 20px 15px;
 }
