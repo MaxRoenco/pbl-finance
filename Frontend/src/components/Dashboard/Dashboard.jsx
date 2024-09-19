@@ -43,6 +43,16 @@ const Dashboard = () => {
                     </div>
                     <div className={styles.container3}>
                         <p>Trending Now <img src="/portfolio.png" alt="" /></p>
+                        <h1>Today</h1>
+                        <ul className={styles.todayList}>
+                            <li><img src="/company.png" alt="" />Lorem Ipsum Company</li>
+                            <li><img src="/company.png" alt="" />Lorem Ipsum Company</li>
+                        </ul>
+                        <h2>Yesterday</h2>
+                        <ul className={styles.yesterdayList}>
+                            <li><img src="/company.png" alt="" />Lorem Ipsum Company</li>
+                            <li><img src="/company.png" alt="" />Lorem Ipsum Company</li>
+                        </ul>
                     </div>
                 </div>
             </div>
