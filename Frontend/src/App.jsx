@@ -14,12 +14,11 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 
 function Layout() {
   const location = useLocation();
+  const showHeaderAndSidebar = !['/', '/login'].includes(location.pathname);
 
   return (
     <div className="app-container">
-      {location.pathname !== '/' && <Header />}
       <div className="content-container">
-        {location.pathname !== '/' && <LeftBar />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -29,6 +28,7 @@ function Layout() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          {/* <Route path="/login" element={<Login />} /> */}
         </Routes>
       </div>
     </div>
