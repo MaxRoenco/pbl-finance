@@ -42,7 +42,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div className={styles.container3}>
-                        <p>Traiding Now</p>
+                        <p>Trending Now <img src="/portfolio.png" alt="" /></p>
                     </div>
                 </div>
             </div>
