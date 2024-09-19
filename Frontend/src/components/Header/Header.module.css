@@ -3,6 +3,7 @@
     background: rgba(2, 2, 2, 1);
     color: white;
     border-bottom: 2px solid rgba(255, 255, 255, 0.04);
+    font-family: "Space Grotesk";
 }
 
 .rightContainer {
@@ -18,6 +19,7 @@
 }
 .logo>img {
     height: 40px;
+    margin-left: 10px;
 }
 
 .path {
@@ -28,6 +30,11 @@
     flex-direction: row;
     align-items: center;
     width: 25%;
+    /* background-color: red; */
+    margin-left: -25%;
+}
+.path>img {
+    height: 20px;
 }
 
 .loopContainer {
