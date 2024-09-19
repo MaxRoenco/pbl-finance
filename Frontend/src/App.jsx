@@ -10,11 +10,16 @@ import Pricing from './components/Pricing/Pricing';
 import FAQ from './components/FAQ/FAQ';
 import LeftBar from './components/LeftBar/LeftBar';
 import ContactUs from './components/ContactUs/ContactUs';
+import Login from './components/Login/Login';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import Register from './components/Register/Register';
+import ErrorPage from './components/ErrorPage/ErrorPage';
+import Context from './hooks/Context';
+import ProtectedRoute from './provider/ProtectedRoute';
 
 function Layout() {
   const location = useLocation();
-  const showHeaderAndSidebar = !['/', '/login'].includes(location.pathname);
+  const showHeaderAndSidebar = !['/', '/login', '/register', '/error'].includes(location.pathname);
 
   return (
     <div className="app-container">
@@ -23,14 +28,18 @@ function Layout() {
         {showHeaderAndSidebar && <LeftBar />}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          {/* <Route path="/login" element={<Login />} /> */}
+
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/portfolio" element={<ProtectedRoute><Portfolio /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="/features" element={<ProtectedRoute><Features /></ProtectedRoute>} />
+          <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
+          <Route path="/faq" element={<ProtectedRoute><FAQ /></ProtectedRoute>} />
+          <Route path="/contact-us" element={<ProtectedRoute><ContactUs /></ProtectedRoute>} />
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/error" element={<ErrorPage />} />
         </Routes>
       </div>
     </div>
@@ -41,7 +50,9 @@ function Layout() {
 function App() {
   return (
     <Router>
-      <Layout />
+      <Context>
+        <Layout />
+      </Context>
     </Router>
   );
 }
