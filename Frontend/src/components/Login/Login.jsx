@@ -43,7 +43,7 @@ const Login = () => {
             </div>
             <ReactTooltip
                 id="my-tooltip-1"
-                content="Enter your email and spassword"
+                content="Enter your email and password"
                 place="right"
             />
         </>
