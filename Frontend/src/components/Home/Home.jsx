@@ -11,6 +11,7 @@ const Home = () => {
 
     const logOut = (() => {
         localStorage.setItem("isRegistered", false);
+        setIsRegistered(false)
     })
     useEffect(() => {
         const value = JSON.parse(localStorage.getItem('isRegistered')); // Retrieve and parse the value from localStorage
@@ -46,9 +47,13 @@ const Home = () => {
                         -Empowering You to Make Smarter Financial Moves.
                     </p>
                     <div className={styles.buttons}>
-                        <Link to={'/login'} className={styles.login}><img src="/login.png" />Log In</Link>
-                        <Link to={'/register'} className={styles.register}><img src="/register.png" />Register</Link>
-                        <button onClick={logOut}>Log out</button>
+                        {localStorage.getItem("isRegistered") === 'false'? <>
+                            <Link to={'/login'} className={styles.login}><img src="/login.png" />Log In</Link>
+                            <Link to={'/register'} className={styles.register}><img src="/register.png" />Register</Link>
+                        </> 
+                        :
+                        <Link to={'/'} className={styles.register}><button onClick={logOut}>Log out</button></Link>
+                        }
                     </div>
                 </div>
             </div>
