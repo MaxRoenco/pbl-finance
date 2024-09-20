@@ -6,7 +6,10 @@ body {
   /* z-index: -1; */
 }
 
-html, body, #app, #app>div {
+html,
+body,
+#app,
+#app>div {
   height: 100%
 }
 

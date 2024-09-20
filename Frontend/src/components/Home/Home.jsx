@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Home.module.css';
 import "@fontsource/space-grotesk/300.css";
 import "@fontsource/space-grotesk/700.css";
 import { useEffect } from 'react';
+import { authContext } from '../../hooks/Context';
 
 const Home = () => {
+    const { users, localCheck } = useContext(authContext);
+
+    useEffect(() => {
+        if (users && users.length > 0) {
+            localCheck();
+        }
+    }, [users]);
+
+
 
     return (
         <>
