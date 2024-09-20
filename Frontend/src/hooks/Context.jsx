@@ -13,6 +13,7 @@ const Context = (props) => {
 
     const register = async (user) => {
         try {
+            setData([...users, newUser]);
             // Send a POST request to the JSON Server to add the new user
             const response = await fetch('http://localhost:3000/users', {
                 method: 'POST',
@@ -27,7 +28,6 @@ const Context = (props) => {
             }
 
             const newUser = await response.json();
-            setData([...users, newUser]);
 
         } catch (err) {
             console.error('Error during registration:', err);

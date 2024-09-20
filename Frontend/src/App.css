@@ -6,7 +6,10 @@ body {
   /* z-index: -1; */
 }
 
-html, body, #app, #app>div {
+html,
+body,
+#app,
+#app>div {
   height: 100%
 }
 
@@ -31,6 +34,6 @@ html, body, #app, #app>div {
 
 .content-container {
   /* flex-shrink: 0; */
-  /* display: flex; */
+  display: flex;
   height: 100%;
 }
