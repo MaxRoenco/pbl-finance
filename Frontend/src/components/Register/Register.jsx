@@ -4,13 +4,13 @@ import { authContext } from '../../hooks/Context';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const Register = () => {
+
     const { users,
         register,
         error,
         isLoading,
         isRegistered,
-        setIsRegistered,
-        localCheck } = useContext(authContext);
+        setIsRegistered } = useContext(authContext);
     const [newUser, setNewUser] = useState({ email: '', password: '' });
     const [isGood, setIsGood] = useState(false);
     const [validationError, setValidationError] = useState('');
@@ -19,11 +19,10 @@ const Register = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        localCheck();
         if (isRegistered) {
             navigate('/');
         }
-    }, [localCheck, isRegistered, navigate]);
+    }, [isRegistered, navigate]);
 
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -48,7 +47,7 @@ const Register = () => {
         }
         console.log(newUser);
         if (rememberMe) {
-            localStorage.setItem('newUserEmail', JSON.stringify(newUser.email));
+            localStorage.setItem("isRegistered", true);
         }
 
         setIsGood(true);
