@@ -2,6 +2,8 @@ import styles from './Register.module.css';
 import { useEffect, useContext, useState } from 'react';
 import { authContext } from '../../hooks/Context';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const Register = () => {
 
@@ -74,40 +76,99 @@ const Register = () => {
     }
 
     return (
-        <div className={styles.container}>
-            <label>Log In</label>
-            <p>Account</p>
-            <input
-                type="email"
-                placeholder='Username'
-                value={newUser.email}
-                onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-            />
-            <input
-                type="password"
-                placeholder='Password'
-                value={newUser.password}
-                onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
-            />
-            {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
-            <label>Forgot your password?</label>
-            <div>
-                <input
-                    type="checkbox"
-                    checked={rememberMe}
-                    onChange={(e) => setRememberMe(e.target.checked)}
-                />
-                <label>Remember me</label>
-                <button className={styles.register} onClick={handleRegister}>Register</button>
+        // <div className={styles.container}>
+        //     <label>Log In</label>
+        //     <p>Account</p>
+        //     <input
+        //         type="email"
+        //         placeholder='Username'
+        //         value={newUser.email}
+        //         onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+        //     />
+        //     <input
+        //         type="password"
+        //         placeholder='Password'
+        //         value={newUser.password}
+        //         onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+        //     />
+        //     {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
+        //     <div>
+        //         <input
+        //             type="checkbox"
+        //             checked={rememberMe}
+        //             onChange={(e) => setRememberMe(e.target.checked)}
+        //         />
+        //         <label>Remember me</label>
+        //         <button className={styles.register} onClick={handleRegister}>Register</button>
+        //     </div>
+        //     {isLoading && <p>Loading...</p>}
+        //     {error && <p>{error}</p>}
+        //     <div>
+        //         {users && users.map((user) => (
+        //             <p key={user.id}>{user.email}</p>
+        //         ))}
+        //     </div>
+        // </div>
+        <>
+            <div className={styles.container}>
+                <Link to='/' className={styles.arrowContainer}>
+                    <img className={styles.arrow} src="arrow.svg" alt="" />
+                </Link>
+                <div className={styles.loginContainer}>
+                    <h1>Register<img data-tooltip-id="my-tooltip-1" src="/question_icon.png" alt="" /></h1>
+                    <div className={styles.account}>
+                        <h1>Account</h1>
+                        <div>
+                            <input
+                                type="email"
+                                placeholder='Username'
+                                value={newUser.email}
+                                onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                            />
+                            <img src="/user.svg" alt="" />
+                        </div>
+                        <div>
+                            <input
+                                type="password"
+                                placeholder='Password'
+                                value={newUser.password}
+                                onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                            />
+                            <img src="/key.svg" alt="" />
+                        </div>
+                        {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
+                        <Link to='/login'><p>Already have an account?</p></Link>
+                    </div>
+                    <div className={styles.actions}>
+                        <div className={styles.remember}>
+                            <input
+                                type="checkbox"
+                                checked={rememberMe}
+                                onChange={(e) => setRememberMe(e.target.checked)}
+                            />
+                            <label htmlFor="remember">Remember Me</label>
+                        </div>
+                        <button className={styles.logIn} onClick={handleRegister}>Register</button>
+                        {isLoading && <p>Loading...</p>}
+                        {error && <p>{error}</p>}
+                    </div>
+                </div>
+                <div className={styles.banner}>
+                    <img className={styles.logo} src="/logo.svg" alt="" />
+                    <h1>Invest Smarter,<br />Trade Together</h1>
+                    <img className={styles.illustration} src="/login_img.svg" alt="" />
+                    <div className={styles.navigation}>
+                        <Link to='/faq' className={styles.linkItem}>FAQ</Link>
+                        <Link to='/contact-us' className={styles.linkItem}>Contact Us</Link>
+                    </div>
+                </div>
             </div>
-            {isLoading && <p>Loading...</p>}
-            {error && <p>{error}</p>}
-            <div>
-                {users && users.map((user) => (
-                    <p key={user.id}>{user.email}</p>
-                ))}
-            </div>
-        </div>
+            <ReactTooltip
+                id="my-tooltip-1"
+                content="Enter your email and password"
+                place="right"
+            />
+        </>
     );
 };
 
