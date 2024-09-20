@@ -21,14 +21,15 @@ const Login = () => {
                             <input type="password" placeholder='Password' />
                             <img src="/key.svg" alt="" />
                         </div>
-                        <Link to='/forgot' ><p>Forgot your password?</p></Link>
+                        <Link to='/forgot'><p>Forgot your password?</p></Link>
                     </div>
                     <div className={styles.actions}>
                         <div className={styles.remember}>
                             <input type="checkbox" name="remember"/>
                             <label htmlFor="remember">Remember Me</label>
                         </div>
-                        <button className={styles.logIn}>Log in</button>
+                        <Link to='/dashboard'><button className={styles.logIn}>Log in</button></Link>
+                        
                     </div>
                 </div>
                 <div className={styles.banner}>
