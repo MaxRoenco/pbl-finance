@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "id": "0",
+      "email": "john.doe@example.com",
+      "password": "password123"
+    },
+    {
+      "id": "1",
+      "email": "jane.smith@example.com",
+      "password": "securePass456"
+    },
+    {
+      "id": "2",
+      "email": "michael.jones@example.com",
+      "password": "mike789Pass"
+    },
+    {
+      "id": "3",
+      "email": "emily.johnson@example.com",
+      "password": "emilyPwd321"
+    },
+    {
+      "id": "4",
+      "email": "robert.brown@example.com",
+      "password": "robertSuper456"
+    },
+    {
+      "id": "5",
+      "email": "linda.williams@example.com",
+      "password": "lindaBest2020"
+    },
+    {
+      "id": "6",
+      "email": "david.miller@example.com",
+      "password": "davidM1234"
+    },
+    {
+      "id": "7",
+      "email": "susan.davis@example.com",
+      "password": "davisSecure!"
+    },
+    {
+      "id": "8",
+      "email": "james.moore@example.com",
+      "password": "jamesMoore90"
+    },
+    {
+      "id": "9",
+      "email": "patricia.white@example.com",
+      "password": "whitePatricia22"
+    },
+    {
+      "id": "10",
+      "email": "maxroenco@gmail.com",
+      "password": "IslamLox228"
+    },
+    {
+      "id": "11",
+      "email": "maxroenco20004@gmail.com",
+      "password": "ArtimLox334L"
+    }
+  ]
+}

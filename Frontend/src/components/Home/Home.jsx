@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 import styles from './Home.module.css';
 import "@fontsource/space-grotesk/300.css";
 import "@fontsource/space-grotesk/700.css";
+import { useEffect } from 'react';
 
 const Home = () => {
+
     return (
         <>
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <Link to='/' className={styles.logo}><img className={styles.logoImg} src="/logo.png"/></Link>
+                    <Link to='/' className={styles.logo}><img className={styles.logoImg} src="/logo.png" /></Link>
                     <ul className={styles.links}>
                         <li>
                             <Link to='/features' className={styles.linkItem}>Features</Link>
@@ -26,14 +28,14 @@ const Home = () => {
                     </ul>
                 </div>
                 <div className={styles.main}>
-                    <Link to={'/dashboard'} className={styles.discoverMore}>Discover More <img src="/external_link.png"/></Link>
+                    <Link to={'/dashboard'} className={styles.discoverMore}>Discover More <img src="/external_link.png" /></Link>
                     <h1 className={styles.title}>Invest Smarter, Trade Together</h1>
                     <p>Real-time Market Insights, Group Investment Tools and Personalized Strategies
                         -Empowering You to Make Smarter Financial Moves.
                     </p>
                     <div className={styles.buttons}>
-                        <div className={styles.login}><img src="/login.png"/>Log In</div>
-                        <div className={styles.register}><img src="/register.png"/>Register</div>
+                        <Link to={'/login'} className={styles.login}><img src="/login.png" />Log In</Link>
+                        <Link to={'/register'} className={styles.register}><img src="/register.png" />Register</Link>
                     </div>
                 </div>
             </div>
