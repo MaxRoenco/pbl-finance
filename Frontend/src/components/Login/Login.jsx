@@ -1,13 +1,16 @@
 import styles from './Login.module.css'
 import { Link } from 'react-router-dom';
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const Login = () => {
     return (
         <>
             <div className={styles.container}>
-                <img src="arrow.svg" alt="" />
+                <Link to='/faq' className={styles.arrowContainer}>
+                    <img className={styles.arrow} src="arrow.svg" alt="" />
+                </Link>
                 <div className={styles.loginContainer}>
-                    <h1>Log In <img src="/question_icon.png" alt="" /></h1>
+                    <h1>Log In <img data-tooltip-id="my-tooltip-1" src="/question_icon.png" alt="" /></h1>
                     <div className={styles.account}>
                         <h1>Account</h1>
                         <div>
@@ -18,7 +21,7 @@ const Login = () => {
                             <input type="password" placeholder='Password' />
                             <img src="/key.svg" alt="" />
                         </div>
-                        <p>Forgot your password?</p>
+                        <Link to='/forgot' ><p>Forgot your password?</p></Link>
                     </div>
                     <div className={styles.actions}>
                         <div className={styles.remember}>
@@ -38,6 +41,11 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            <ReactTooltip
+                id="my-tooltip-1"
+                content="Enter your email and spassword"
+                place="right"
+            />
         </>
     );
 }
