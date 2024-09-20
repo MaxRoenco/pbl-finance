@@ -1,20 +1,29 @@
 import styles from './Register.module.css';
 import { useEffect, useContext, useState } from 'react';
 import { authContext } from '../../hooks/Context';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Register = () => {
-    const { users, register, error, isLoading, isRegistered, setIsRegistered } = useContext(authContext);
+    const { users,
+        register,
+        error,
+        isLoading,
+        isRegistered,
+        setIsRegistered,
+        localCheck } = useContext(authContext);
     const [newUser, setNewUser] = useState({ email: '', password: '' });
     const [isGood, setIsGood] = useState(false);
     const [validationError, setValidationError] = useState('');
-    const [redirect, setRedirect] = useState(false); // New state for redirection
+    const [redirect, setRedirect] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if (users) {
-            console.log(users);
+        localCheck();
+        if (isRegistered) {
+            navigate('/');
         }
-    }, [users]);
+    }, [localCheck, isRegistered, navigate]);
 
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -37,6 +46,10 @@ const Register = () => {
             setIsGood(false);
             return;
         }
+        console.log(newUser);
+        if (rememberMe) {
+            localStorage.setItem('newUserEmail', JSON.stringify(newUser.email));
+        }
 
         setIsGood(true);
         setValidationError('');
@@ -46,13 +59,15 @@ const Register = () => {
             email: newUser.email,
             password: newUser.password,
         };
+        console.log('User to register:', userToAdd);
         register(userToAdd);
+
         setIsRegistered(true);
-        setRedirect(true); // Set redirect to true after registration
+        setRedirect(true);
     };
 
     if (redirect) {
-        return <Navigate to="/" />; // Redirect to home page if redirect state is true
+        return <Navigate to="/" />;
     }
 
     return (
@@ -73,7 +88,15 @@ const Register = () => {
             />
             {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
             <label>Forgot your password?</label>
-            <button className={styles.register} onClick={handleRegister}>Register</button>
+            <div>
+                <input
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <label>Remember me</label>
+                <button className={styles.register} onClick={handleRegister}>Register</button>
+            </div>
             {isLoading && <p>Loading...</p>}
             {error && <p>{error}</p>}
             <div>
