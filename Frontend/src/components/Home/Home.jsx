@@ -7,15 +7,17 @@ import { useEffect } from 'react';
 import { authContext } from '../../hooks/Context';
 
 const Home = () => {
-    const { users, localCheck } = useContext(authContext);
+    const { users, setIsRegistered } = useContext(authContext);
 
+    // const logOut = (() => {
+    //     localStorage.setItem("isRegistered", false);
+    // })
     useEffect(() => {
-        if (users && users.length > 0) {
-            localCheck();
+        const value = JSON.parse(localStorage.getItem('isRegistered')); // Retrieve and parse the value from localStorage
+        if (value) {
+            setIsRegistered(value); // Update the isRegistered state if value is truthy
         }
-    }, [users]);
-
-
+    }, [setIsRegistered]);
 
     return (
         <>
@@ -46,6 +48,7 @@ const Home = () => {
                     <div className={styles.buttons}>
                         <Link to={'/login'} className={styles.login}><img src="/login.png" />Log In</Link>
                         <Link to={'/register'} className={styles.register}><img src="/register.png" />Register</Link>
+                        {/* <button onClick={logOut()}>Log out</button> */}
                     </div>
                 </div>
             </div>
