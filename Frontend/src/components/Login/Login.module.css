@@ -15,19 +15,17 @@
 }
 
 .banner {
-    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
-
     border-radius: 36px;
     width: 500px;
     background-image: url('/background.png');
     background-size: cover;
     background-position: center;
     height: 100%;
-    padding-top: 40px;
+    /* padding-top: 40px; */
 }
 
 .navigation {
@@ -41,7 +39,7 @@
 
 .logo {
     width: 200px;
-    margin: 50px 0;
+    margin-bottom: 10%;
 }
 
 .illustration {
@@ -57,7 +55,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 5%;
+    margin: 0 5%;
     width: 400px;
 }
 
@@ -161,3 +159,32 @@
     filter: brightness(2);
 }
 
+
+@media screen and (max-width: 980px) {
+    .loginContainer {
+        /* background-color: red; */
+        width: 50%;
+    }
+    .banner {
+        width: 50%;
+    }
+    
+}
+
+@media screen and (max-width: 800px) {
+    .banner>h1 {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .logIn {
+        padding: 4px 30px;
+    }
+}
+
+/* Need mobile version after 620px */
+
+@media screen and (max-width: 620px) {
+    /* Mobile version */
+}
