@@ -6,7 +6,7 @@ const Login = () => {
     return (
         <>
             <div className={styles.container}>
-                <Link to='/faq' className={styles.arrowContainer}>
+                <Link to='/' className={styles.arrowContainer}>
                     <img className={styles.arrow} src="arrow.svg" alt="" />
                 </Link>
                 <div className={styles.loginContainer}>
