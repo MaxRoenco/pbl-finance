@@ -9,9 +9,9 @@ import { authContext } from '../../hooks/Context';
 const Home = () => {
     const { users, setIsRegistered } = useContext(authContext);
 
-    // const logOut = (() => {
-    //     localStorage.setItem("isRegistered", false);
-    // })
+    const logOut = (() => {
+        localStorage.setItem("isRegistered", false);
+    })
     useEffect(() => {
         const value = JSON.parse(localStorage.getItem('isRegistered')); // Retrieve and parse the value from localStorage
         if (value) {
@@ -48,7 +48,7 @@ const Home = () => {
                     <div className={styles.buttons}>
                         <Link to={'/login'} className={styles.login}><img src="/login.png" />Log In</Link>
                         <Link to={'/register'} className={styles.register}><img src="/register.png" />Register</Link>
-                        {/* <button onClick={logOut()}>Log out</button> */}
+                        <button onClick={logOut}>Log out</button>
                     </div>
                 </div>
             </div>

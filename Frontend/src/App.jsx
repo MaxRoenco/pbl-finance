@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import './App.css';
 import Home from './components/Home/Home';
 import Header from './components/Header/Header';
@@ -14,7 +14,7 @@ import Login from './components/Login/Login';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Register from './components/Register/Register';
 import ErrorPage from './components/ErrorPage/ErrorPage';
-import Context from './hooks/Context';
+import Context, { authContext } from './hooks/Context';
 import ProtectedRoute from './provider/ProtectedRoute';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 

@@ -19,6 +19,10 @@ const Register = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        const value = JSON.parse(localStorage.getItem('isRegistered'));
+        if (value) {
+            setIsRegistered(value);
+        }
         if (isRegistered) {
             navigate('/');
         }
