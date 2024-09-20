@@ -5,7 +5,9 @@ const Login = () => {
     return (
         <>
             <div className={styles.container}>
-                <img src="arrow.svg" alt="" />
+                <Link to='/faq' className={styles.linkItem}>
+                    <img className={styles.arrow} src="arrow.svg" alt="" />
+                </Link>
                 <div className={styles.loginContainer}>
                     <h1>Log In <img src="/question_icon.png" alt="" /></h1>
                     <div className={styles.account}>
