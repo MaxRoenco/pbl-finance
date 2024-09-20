@@ -2,19 +2,26 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  overflow: hidden;
+  height: 100%;
+  background-color: red;
+}
+
+html, body, #app, #app>div {
+  height: 100%
 }
 
 #root {
   display: flex;
-  width: auto;
-  height: auto;
+  /* width: auto; */
+  /* height: 100vh; */
+  height: 100%;
+  background-color: green;
 }
 
 .app-container {
   display: flex;
   width: 100%;
-  height: auto;
+  height: 100%;
   flex-direction: column;
   background: rgba(2, 2, 2, 1);
   color: aliceblue;
@@ -22,6 +29,7 @@ body {
 }
 
 .content-container {
-  flex-shrink: 0;
-  display: flex;
+  /* flex-shrink: 0; */
+  /* display: flex; */
+  height: 100%;
 }

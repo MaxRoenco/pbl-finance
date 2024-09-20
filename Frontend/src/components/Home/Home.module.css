@@ -3,23 +3,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
     color: white;
     background: transparent;
     font-family: "Space Grotesk";
-}
-
-.layer1 {
-    position: absolute;
-    width: 100%;
-    height: 100vh;
-    background: black;
-    z-index: -5;
-}
-
-.backgroundHome {
-    width: 100%;
+    background-image: url('/background.png'); /* Ensure the correct relative path */
+    background-size: cover; /* Adjusts image to cover the entire element */
+    background-position: center; /* Centers the image */
     height: 100%;
 }
 
@@ -39,12 +28,13 @@
 
 .header {
     width: 100%;
-    height: auto;
+    /* height: auto; */
     display: flex;
     justify-content: space-between;
     text-align: center;
     align-items: center;
     font-weight: 300;
+    /* background-color: green; */
 }
 
 .logo {
@@ -66,13 +56,11 @@
 
 .main {
     width: 100%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* background-color: red; */
-    padding-bottom: 6%;
+    padding-top: 50px;
 }
 
 

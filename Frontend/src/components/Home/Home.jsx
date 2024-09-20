@@ -7,11 +7,6 @@ import "@fontsource/space-grotesk/700.css";
 const Home = () => {
     return (
         <>
-            <div className={styles.layer1}>
-                <img src="/background.png" alt="background" className={styles.backgroundHome} />
-                <div className={`${styles.greenLight} ${styles.topRight}`}></div>
-                <div className={`${styles.greenLight} ${styles.bottomLeft}`}></div>
-            </div>
             <div className={styles.container}>
                 <div className={styles.header}>
                     <Link to='/' className={styles.logo}><img className={styles.logoImg} src="/logo.png"/></Link>
