@@ -28,8 +28,7 @@ const Login = () => {
                             <input type="checkbox" name="remember"/>
                             <label htmlFor="remember">Remember Me</label>
                         </div>
-                        <Link to='/dashboard'><button className={styles.logIn}>Log in</button></Link>
-                        
+                        <Link to='/home'><button className={styles.logIn}>Log in</button></Link>
                     </div>
                 </div>
                 <div className={styles.banner}>
