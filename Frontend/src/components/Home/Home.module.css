@@ -10,6 +10,7 @@
     background-size: cover; /* Adjusts image to cover the entire element */
     background-position: center; /* Centers the image */
     height: 100%;
+    /* background-color: red; */
 }
 
 .topRight {
@@ -186,5 +187,23 @@
     }
     .links {
         margin-right: 0px;
+    }
+}
+
+@media screen and  (max-width: 590px) {
+    .title {
+        font-size: 30px;
+    }
+    .main>p {
+        font-size: 15px;
+        width: 70%;
+    }
+    .links {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .discoverMore {
+        width: 70%;
     }
 }

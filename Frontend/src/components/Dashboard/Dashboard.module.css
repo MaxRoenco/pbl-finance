@@ -127,38 +127,6 @@
     margin-left: 10px;
 }
 
-
-
-/* .greenLight {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: green;
-    border-radius: 50%;
-    box-shadow: 19px 19px 90px 90px rgba(27, 245, 27, 0.396);
-}
-
-
-.greenLight.topLeft {
-    top: 10px;
-    left: -100px;
-}
-
-.greenLight.topRight {
-    top: -60px;
-    right: -100px;
-}
-
-.greenLight.bottomLeft {
-    bottom: 10px;
-    left: -100px;
-}
-
-.greenLight.bottomRight {
-    bottom: 10px;
-    right: -100px;
-} */
-
 .spendingsContainer {
     width: 100%;
     background: var(--primary-color);
