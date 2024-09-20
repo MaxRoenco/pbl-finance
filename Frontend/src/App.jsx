@@ -16,10 +16,11 @@ import Register from './components/Register/Register';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import Context from './hooks/Context';
 import ProtectedRoute from './provider/ProtectedRoute';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 
 function Layout() {
   const location = useLocation();
-  const showHeaderAndSidebar = !['/', '/login', '/register', '/error'].includes(location.pathname);
+  const showHeaderAndSidebar = !['/', '/login', '/register', '/error', '/forgot'].includes(location.pathname);
 
   return (
     <div className="app-container">
@@ -40,6 +41,7 @@ function Layout() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/error" element={<ErrorPage />} />
+          <Route path="/forgot" element={<ForgotPassword />} />
         </Routes>
       </div>
     </div>
