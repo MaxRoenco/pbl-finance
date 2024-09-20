@@ -11,7 +11,7 @@ const Home = () => {
         <>
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <Link to='/' className={styles.logo}><img className={styles.logoImg} src="/logo.png" /></Link>
+                    <Link to='/' className={styles.logo}><img className={styles.logoImg} src="/logo.svg" /></Link>
                     <ul className={styles.links}>
                         <li>
                             <Link to='/features' className={styles.linkItem}>Features</Link>
