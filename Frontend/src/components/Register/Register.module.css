@@ -56,7 +56,7 @@
     flex-direction: column;
     justify-content: center;
     margin: 0 5%;
-    width: 400px;
+    width: 50%;
 }
 
 .loginContainer>h1 {
@@ -75,13 +75,8 @@
 
 .account {
     display: flex;
-    flex-direction: column;
-}
-
-.account>h1 {
-    font-size: 20px;
-    font-weight: medium;
-    color: #F9F9F9;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .account>div>input {
@@ -93,21 +88,30 @@
     height: 50px;
     padding: 0 20px;
     margin: 10px 0;
-    padding-left: 50px;
+    padding-left: 20px
 }
+
+.account>div>label {
+    font-weight: 700;
+    font-size: 20px;
+}
+
 
 .account>div {
-    position: relative;
+    width: 45%;
 }
 
-.account>div>img {
-    position: absolute;
-    width: 20px;
-    top: calc(50% - 10px);
-    left: 20px;
+.first {
+    flex-basis: 100%;  /* Forces the element to take up a full line */
+    display: flex;
+    flex-direction: column;
+}
+.first>input {
+    width: 45% !important;
+    background-color: green;
 }
 
-.account p {
+.loginContainer p {
     color: #BDD8B5;
 }
 

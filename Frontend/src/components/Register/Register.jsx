@@ -76,39 +76,6 @@ const Register = () => {
     }
 
     return (
-        // <div className={styles.container}>
-        //     <label>Log In</label>
-        //     <p>Account</p>
-        //     <input
-        //         type="email"
-        //         placeholder='Username'
-        //         value={newUser.email}
-        //         onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-        //     />
-        //     <input
-        //         type="password"
-        //         placeholder='Password'
-        //         value={newUser.password}
-        //         onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
-        //     />
-        //     {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
-        //     <div>
-        //         <input
-        //             type="checkbox"
-        //             checked={rememberMe}
-        //             onChange={(e) => setRememberMe(e.target.checked)}
-        //         />
-        //         <label>Remember me</label>
-        //         <button className={styles.register} onClick={handleRegister}>Register</button>
-        //     </div>
-        //     {isLoading && <p>Loading...</p>}
-        //     {error && <p>{error}</p>}
-        //     <div>
-        //         {users && users.map((user) => (
-        //             <p key={user.id}>{user.email}</p>
-        //         ))}
-        //     </div>
-        // </div>
         <>
             <div className={styles.container}>
                 <Link to='/' className={styles.arrowContainer}>
@@ -117,28 +84,64 @@ const Register = () => {
                 <div className={styles.loginContainer}>
                     <h1>Register<img data-tooltip-id="my-tooltip-1" src="/question_icon.png" alt="" /></h1>
                     <div className={styles.account}>
-                        <h1>Account</h1>
+                        <div className={styles.first}>
+                            <label>Username</label>
+                            <input
+                                type="text"
+                                placeholder='ex. janedoe'
+                            />
+                        </div>
                         <div>
+                            <label>First Name</label>
+                            <input
+                                type="text"
+                                placeholder='ex. Jane'
+                            />
+                        </div>
+                        <div>
+                            <label>Last Name</label>
+                            <input
+                                type="text"
+                                placeholder='ex. Doe'
+                            />
+                        </div>
+                        <div>
+                            <label>Email</label>
                             <input
                                 type="email"
-                                placeholder='Username'
+                                placeholder='ex. janedoe@gmail.com'
                                 value={newUser.email}
                                 onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
                             />
-                            <img src="/user.svg" alt="" />
                         </div>
                         <div>
+                            <label>Phone number</label>
+                            <input
+                                type="tel"
+                                placeholder='+(373) 12345678'
+                                value={newUser.email}
+                                onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                            />
+                        </div>
+                        <div>
+                            <label>Password</label>
                             <input
                                 type="password"
-                                placeholder='Password'
+                                placeholder='●●●●●●●●●'
                                 value={newUser.password}
                                 onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
                             />
-                            <img src="/key.svg" alt="" />
                         </div>
-                        {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
-                        <Link to='/login'><p>Already have an account?</p></Link>
+                        <div>
+                            <label>Confirm Password</label>
+                            <input
+                                type="password"
+                                placeholder='●●●●●●●●●'
+                            />
+                        </div>
                     </div>
+                    {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
+                    <Link to='/login'><p>Already have an account?</p></Link>
                     <div className={styles.actions}>
                         <div className={styles.remember}>
                             <input
