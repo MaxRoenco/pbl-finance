@@ -60,8 +60,11 @@ const Register = () => {
         setValidationError('');
 
         const userToAdd = {
-            id: users.length.toString(),
+            username: newUser.username,
+            firstName: newUser.firstName,
+            lastName: newUser.lastName,
             email: newUser.email,
+            phoneNumber: newUser.phoneNumber,
             password: newUser.password,
         };
         console.log('User to register:', userToAdd);
@@ -89,6 +92,8 @@ const Register = () => {
                             <input
                                 type="text"
                                 placeholder='ex. janedoe'
+                                value={newUser.username}
+                                onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
                             />
                         </div>
                         <div>
@@ -96,6 +101,8 @@ const Register = () => {
                             <input
                                 type="text"
                                 placeholder='ex. Jane'
+                                value={newUser.firstName}
+                                onChange={(e) => setNewUser({ ...newUser, firstName: e.target.value })}
                             />
                         </div>
                         <div>
@@ -103,6 +110,8 @@ const Register = () => {
                             <input
                                 type="text"
                                 placeholder='ex. Doe'
+                                value={newUser.lastName}
+                                onChange={(e) => setNewUser({ ...newUser, lastName: e.target.value })}
                             />
                         </div>
                         <div>
@@ -119,8 +128,8 @@ const Register = () => {
                             <input
                                 type="tel"
                                 placeholder='+(373) 12345678'
-                                value={newUser.email}
-                                onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                                value={newUser.phoneNumber}
+                                onChange={(e) => setNewUser({ ...newUser, phoneNumber: e.target.value })}
                             />
                         </div>
                         <div>
