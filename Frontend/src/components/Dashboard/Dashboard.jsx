@@ -2,7 +2,10 @@ import styles from './Dashboard.module.css'
 import LeftBar from '../LeftBar/LeftBar';
 import Header from '../Header/Header';
 
+
 const Dashboard = () => {
+
+
     return (
         <div className={styles.main}>
                 <h1 className={styles.overview}>Name Surname’s Overview</h1>

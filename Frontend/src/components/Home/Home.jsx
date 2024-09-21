@@ -11,6 +11,7 @@ const Home = () => {
 
     const logOut = (() => {
         localStorage.setItem("isRegistered", false);
+        localStorage.setItem("id", "");
         setIsRegistered(false)
     })
     useEffect(() => {
@@ -47,12 +48,13 @@ const Home = () => {
                         -Empowering You to Make Smarter Financial Moves.
                     </p>
                     <div className={styles.buttons}>
-                        {localStorage.getItem("isRegistered") === 'false'? <>
+                        {localStorage.getItem("isRegistered") === 'true'? 
+                        <Link to={'/'} onClick={logOut} className={styles.register}><button>Log out</button></Link>
+                        :
+                        <>
                             <Link to={'/login'} className={styles.login}><img src="/login.png" />Log In</Link>
                             <Link to={'/register'} className={styles.register}><img src="/register.png" />Register</Link>
                         </> 
-                        :
-                        <Link to={'/'} onClick={logOut} className={styles.register}><button>Log out</button></Link>
                         }
                     </div>
                 </div>

@@ -36,6 +36,7 @@ const Login = () => {
             const res = await response.json();
             if(res.exists === 'true') {
                 localStorage.setItem("isRegistered", true);
+                localStorage.setItem("id", res.id);
                 console.log("login Successful");
                 setRedirect("dashboard");
                 setIsRegistered(true);
@@ -44,7 +45,6 @@ const Login = () => {
                 console.log("Account doesn't exist")
                 setRedirect("");
             }
-
         } catch (err) {
             console.error('Error during login:', err);
         }

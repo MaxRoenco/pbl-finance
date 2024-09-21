@@ -27,35 +27,20 @@ connectToDb((err) => {
 })
 
 
-
-
-// app.get('/users', (req, res) => {
-//     let users = []
-//     db.collection('users')
-//     .find()
-//     .forEach(user => users.push(user))
-//     .then(() => {
-//         res.status(200).json(users);
-//     })
-//     .catch(() => {
-//         res.status(500).json({error: 'Could not fetch documents'})
-//     })
-// })
-
-// app.get('/books/:id', (req, res) => {
-//     if(ObjectId.isValid(req.params.id)) {
-//         db.collection('books')
-//         .findOne({_id: new ObjectId(req.params.id)})
-//         .then(doc => {
-//             res.status(200).json(doc)
-//         })
-//         .catch(err => {
-//             res.status(500).json({error: 'Could not fetch book'})
-//         })
-//     } else {
-//         res.status(500).json({error: 'The book id is invalid'})
-//     }
-// })
+app.get('/users/:id', (req, res) => {
+    if(ObjectId.isValid(req.params.id)) {
+        db.collection('users')
+        .findOne({_id: new ObjectId(req.params.id)})
+        .then(doc => {
+            res.status(200).json(doc)
+        })
+        .catch(err => {
+            res.status(500).json({error: 'Could not fetch user'})
+        })
+    } else {
+        res.status(500).json({error: 'The user id is invalid'})
+    }
+})
 
 app.post('/register', (req, res) => {
     const user = req.body;
@@ -74,7 +59,7 @@ app.post('/register', (req, res) => {
                             db.collection('users')
                                 .insertOne(user)
                                 .then(result => {
-                                    res.status(201).json({ exists: "false" })
+                                    res.status(201).json({ exists: "false", id: result.insertedId })
                                 })
                                 .catch(err => {
                                     res.status(500).json({ err: 'could not create a new document' })
@@ -98,7 +83,7 @@ app.post('/login', (req, res) => {
         .then(result => {
             console.log(result)
             if(result) {
-                res.status(201).json({ exists: "true" })
+                res.status(201).json({ exists: "true", id: result._id })
             } else {
                 res.status(201).json({ exists: "false" })
             }
@@ -107,6 +92,20 @@ app.post('/login', (req, res) => {
             res.status(500).json({ err: 'could not create a new document' })
         })
 })
+
+
+// app.get('/users', (req, res) => {
+//     let users = []
+//     db.collection('users')
+//     .find()
+//     .forEach(user => users.push(user))
+//     .then(() => {
+//         res.status(200).json(users);
+//     })
+//     .catch(() => {
+//         res.status(500).json({error: 'Could not fetch documents'})
+//     })
+// })
 
 // app.delete('/books/:id', (req, res) => {
 //     if(ObjectId.isValid(req.params.id)) {
@@ -125,7 +124,6 @@ app.post('/login', (req, res) => {
 
 // app.patch('/books/:id', (req, res) => {
 //     const updates = req.body
-
 //     if(ObjectId.isValid(req.params.id)) {
 //         db.collection('books')
 //         .updateOne({_id: new ObjectId(req.params.id)}, {$set: updates})

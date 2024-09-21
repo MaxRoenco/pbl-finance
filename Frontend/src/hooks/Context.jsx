@@ -5,6 +5,7 @@ export const authContext = createContext()
 
 const Context = (props) => {
     const [isRegistered, setIsRegistered] = useState(false);
+    const [userData, setUserData] = useState({});
     // const { data: users, setData, error, isLoading } = useFetch('http://localhost:3000/users')
 
     const register = async (user) => {
@@ -25,6 +26,7 @@ const Context = (props) => {
             const res = await response.json();
             if(res.exists === 'false') {
                 localStorage.setItem("isRegistered", true);
+                localStorage.setItem("id", res.id);
             }
             return res;
 
