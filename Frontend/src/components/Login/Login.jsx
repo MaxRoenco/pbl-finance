@@ -9,6 +9,7 @@ const Login = () => {
     const { isRegistered, setIsRegistered } = useContext(authContext);
     const [info, setInfo] = useState({ username: '', password: '' });
     const [redirect, setRedirect] = useState('');
+    const [validationError, setValidationError] = useState('');
     let handleLogIn = () => {
         let user = {
             username: info.username,
@@ -39,8 +40,9 @@ const Login = () => {
                 setRedirect("dashboard");
                 setIsRegistered(true);
             } else {
+                setValidationError("Incorrect username or password...")
                 console.log("Account doesn't exist")
-                setRedirect("login");
+                setRedirect("");
             }
 
         } catch (err) {
@@ -71,6 +73,7 @@ const Login = () => {
                             <img src="/key.svg" alt="" />
                         </div>
                         <Link to='/forgot'><p>Forgot your password?</p></Link>
+                        {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
                     </div>
                     <div className={styles.actions}>
                         <div className={styles.remember}>

@@ -51,6 +51,14 @@ const Register = () => {
             setIsGood(false);
             return;
         }
+
+        for (const [key, value] of Object.entries(newUser)) {
+            if(!value) {
+                setValidationError(`Please fill in your ${key}.`)
+            }
+            return;
+        }
+
         console.log(newUser);
         if (rememberMe) {
             localStorage.setItem("isRegistered", true);
