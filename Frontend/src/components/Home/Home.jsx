@@ -52,7 +52,7 @@ const Home = () => {
                             <Link to={'/register'} className={styles.register}><img src="/register.png" />Register</Link>
                         </> 
                         :
-                        <Link to={'/'} className={styles.register}><button onClick={logOut}>Log out</button></Link>
+                        <Link to={'/'} onClick={logOut} className={styles.register}><button>Log out</button></Link>
                         }
                     </div>
                 </div>

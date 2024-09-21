@@ -70,6 +70,23 @@ app.post('/register', (req, res) => {
         })
 })
 
+app.post('/login', (req, res) => {
+    const user = req.body;
+    db.collection('users')
+        db.collection('users').findOne({ username: user.username, password: user.password })
+        .then(result => {
+            console.log(result)
+            if(result) {
+                res.status(201).json({ exists: "true" })
+            } else {
+                res.status(201).json({ exists: "false" })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ err: 'could not create a new document' })
+        })
+})
+
 // app.delete('/books/:id', (req, res) => {
 //     if(ObjectId.isValid(req.params.id)) {
 //         db.collection('books')

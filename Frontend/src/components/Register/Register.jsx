@@ -13,7 +13,7 @@ const Register = () => {
         isLoading,
         isRegistered,
         setIsRegistered } = useContext(authContext);
-    const [newUser, setNewUser] = useState({ email: '', password: '' });
+    const [newUser, setNewUser] = useState({ username: '', firstName: '', lastName: '', email: '', phoneNumber: '', password: '' });
     const [isGood, setIsGood] = useState(false);
     const [validationError, setValidationError] = useState('');
     const [redirect, setRedirect] = useState(false);
