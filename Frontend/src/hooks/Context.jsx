@@ -5,12 +5,12 @@ export const authContext = createContext()
 
 const Context = (props) => {
     const [isRegistered, setIsRegistered] = useState(false);
-    const { data: users, setData, error, isLoading } = useFetch('http://localhost:3000/users')
+    // const { data: users, setData, error, isLoading } = useFetch('http://localhost:3000/users')
 
     const register = async (user) => {
         try {
             // Send a POST request to the JSON Server to add the new user
-            const response = await fetch('http://localhost:3000/users', {
+            const response = await fetch('http://localhost:3000/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ const Context = (props) => {
             }
 
             const newUser = await response.json();
-            setData([...users, newUser]);
+            // setData([...users, newUser]);
             localStorage.setItem("isRegistered", true);
 
         } catch (err) {
@@ -32,10 +32,7 @@ const Context = (props) => {
     };
 
     const value1 = {
-        users,
         register,
-        error,
-        isLoading,
         isRegistered,
         setIsRegistered
     };
