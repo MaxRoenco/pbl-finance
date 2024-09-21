@@ -209,7 +209,7 @@ const Register = () => {
             </div>
             <ReactTooltip
                 id="my-tooltip-1"
-                content="Enter your email and password"
+                content="Fill in your data to create a new account"
                 place="right"
             />
         </>
