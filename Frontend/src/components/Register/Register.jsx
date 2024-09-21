@@ -13,7 +13,7 @@ const Register = () => {
         isLoading,
         isRegistered,
         setIsRegistered } = useContext(authContext);
-    const [newUser, setNewUser] = useState({ username: '', firstName: '', lastName: '', email: '', phoneNumber: '', password: '' });
+    const [newUser, setNewUser] = useState({ username: '', firstName: '', lastName: '', email: '', phoneNumber: '', password: '', passwordRepeat: '' });
     const [isGood, setIsGood] = useState(false);
     const [validationError, setValidationError] = useState('');
     const [redirect, setRedirect] = useState(false);
@@ -52,11 +52,19 @@ const Register = () => {
             return;
         }
 
-        for (const [key, value] of Object.entries(newUser)) {
-            if(!value) {
-                setValidationError(`Please fill in your ${key}.`)
-            }
+        if (newUser.password !== newUser.passwordRepeat) {
+            setValidationError('Confirm Password does not match the first Password.');
+            setIsGood(false);
             return;
+        }
+
+        console.log(newUser)
+        for (const [key, value] of Object.entries(newUser)) {
+            if(value === '') {
+                setValidationError(`Please fill in your ${key}.`)
+                setIsGood(false);
+                return;
+            }
         }
 
         console.log(newUser);
@@ -154,6 +162,8 @@ const Register = () => {
                             <input
                                 type="password"
                                 placeholder='●●●●●●●●●'
+                                value={newUser.passwordRepeat}
+                                onChange={(e) => setNewUser({ ...newUser, passwordRepeat: e.target.value })}
                             />
                         </div>
                     </div>
