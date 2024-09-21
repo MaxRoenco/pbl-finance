@@ -22,9 +22,11 @@ const Context = (props) => {
                 throw new Error('Failed to register user');
             }
 
-            const newUser = await response.json();
-            // setData([...users, newUser]);
-            localStorage.setItem("isRegistered", true);
+            const res = await response.json();
+            if(res.exists === 'false') {
+                localStorage.setItem("isRegistered", true);
+            }
+            return res;
 
         } catch (err) {
             console.error('Error during registration:', err);

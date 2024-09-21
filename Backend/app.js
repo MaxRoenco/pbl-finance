@@ -59,11 +59,32 @@ connectToDb((err) => {
 
 app.post('/register', (req, res) => {
     const user = req.body;
-
     db.collection('users')
-        .insertOne(user)
+        .findOne({ username: user.username })
         .then(result => {
-            res.status(201).json(result)
+            if(result) {
+                res.status(201).json({ exists: "username" })
+            } else {
+                db.collection('users')
+                    .findOne({ email: user.email })
+                    .then(result => {
+                        if(result) {
+                            res.status(201).json({ exists: "email" })
+                        } else {
+                            db.collection('users')
+                                .insertOne(user)
+                                .then(result => {
+                                    res.status(201).json({ exists: "false" })
+                                })
+                                .catch(err => {
+                                    res.status(500).json({ err: 'could not create a new document' })
+                                })
+                        }
+                    })
+                    .catch(err => {
+                        res.status(500).json({ err: 'could not create a new document' })
+                    })
+            }
         })
         .catch(err => {
             res.status(500).json({ err: 'could not create a new document' })
@@ -73,7 +94,7 @@ app.post('/register', (req, res) => {
 app.post('/login', (req, res) => {
     const user = req.body;
     db.collection('users')
-        db.collection('users').findOne({ username: user.username, password: user.password })
+        .findOne({ username: user.username, password: user.password })
         .then(result => {
             console.log(result)
             if(result) {

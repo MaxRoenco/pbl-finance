@@ -84,10 +84,24 @@ const Register = () => {
             password: newUser.password,
         };
         console.log('User to register:', userToAdd);
-        register(userToAdd);
 
-        setIsRegistered(true);
-        setRedirect(true);
+        (async () => {
+            let res = await register(userToAdd);
+            console.log(res);
+            if(res.exists === 'username') {
+                setValidationError(`This username already exists, try another one.`);
+                setIsGood(false);
+                return;
+            }
+            if(res.exists === 'email') {
+                setValidationError(`This email already exists, try to login into your account.`);
+                setIsGood(false);
+                return;
+            }
+            setIsRegistered(true);
+            setRedirect(true);
+        })();
+        
     };
 
     if (redirect) {
