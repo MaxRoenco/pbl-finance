@@ -11,7 +11,7 @@ const Register = () => {
         register,
         isRegistered,
         setIsRegistered } = useContext(authContext);
-    const [newUser, setNewUser] = useState({ email: '', password: '' });
+    const [newUser, setNewUser] = useState({ username: '', firstName: '', lastName: '', email: '', phoneNumber: '', password: '', passwordRepeat: '' });
     const [isGood, setIsGood] = useState(false);
     const [validationError, setValidationError] = useState('');
     const [redirect, setRedirect] = useState(false);
@@ -49,6 +49,22 @@ const Register = () => {
             setIsGood(false);
             return;
         }
+
+        if (newUser.password !== newUser.passwordRepeat) {
+            setValidationError('Confirm Password does not match the first Password.');
+            setIsGood(false);
+            return;
+        }
+
+        console.log(newUser)
+        for (const [key, value] of Object.entries(newUser)) {
+            if(value === '') {
+                setValidationError(`Please fill in your ${key}.`)
+                setIsGood(false);
+                return;
+            }
+        }
+
         console.log(newUser);
         if (rememberMe) {
             localStorage.setItem("isRegistered", true);
@@ -66,10 +82,24 @@ const Register = () => {
             password: newUser.password,
         };
         console.log('User to register:', userToAdd);
-        register(userToAdd);
 
-        setIsRegistered(true);
-        setRedirect(true);
+        (async () => {
+            let res = await register(userToAdd);
+            console.log(res);
+            if(res.exists === 'username') {
+                setValidationError(`This username already exists, try another one.`);
+                setIsGood(false);
+                return;
+            }
+            if(res.exists === 'email') {
+                setValidationError(`This email already exists, try to login into your account.`);
+                setIsGood(false);
+                return;
+            }
+            setIsRegistered(true);
+            setRedirect(true);
+        })();
+        
     };
 
     if (redirect) {
@@ -144,6 +174,8 @@ const Register = () => {
                             <input
                                 type="password"
                                 placeholder='●●●●●●●●●'
+                                value={newUser.passwordRepeat}
+                                onChange={(e) => setNewUser({ ...newUser, passwordRepeat: e.target.value })}
                             />
                         </div>
                     </div>
@@ -173,7 +205,7 @@ const Register = () => {
             </div>
             <ReactTooltip
                 id="my-tooltip-1"
-                content="Enter your email and password"
+                content="Fill in your data to create a new account"
                 place="right"
             />
         </>

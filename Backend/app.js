@@ -27,6 +27,71 @@ connectToDb((err) => {
 })
 
 
+app.get('/users/:id', (req, res) => {
+    if(ObjectId.isValid(req.params.id)) {
+        db.collection('users')
+        .findOne({_id: new ObjectId(req.params.id)})
+        .then(doc => {
+            res.status(200).json(doc)
+        })
+        .catch(err => {
+            res.status(500).json({error: 'Could not fetch user'})
+        })
+    } else {
+        res.status(500).json({error: 'The user id is invalid'})
+    }
+})
+
+app.post('/register', (req, res) => {
+    const user = req.body;
+    db.collection('users')
+        .findOne({ username: user.username })
+        .then(result => {
+            if(result) {
+                res.status(201).json({ exists: "username" })
+            } else {
+                db.collection('users')
+                    .findOne({ email: user.email })
+                    .then(result => {
+                        if(result) {
+                            res.status(201).json({ exists: "email" })
+                        } else {
+                            db.collection('users')
+                                .insertOne(user)
+                                .then(result => {
+                                    res.status(201).json({ exists: "false", id: result.insertedId })
+                                })
+                                .catch(err => {
+                                    res.status(500).json({ err: 'could not create a new document' })
+                                })
+                        }
+                    })
+                    .catch(err => {
+                        res.status(500).json({ err: 'could not create a new document' })
+                    })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ err: 'could not create a new document' })
+        })
+})
+
+app.post('/login', (req, res) => {
+    const user = req.body;
+    db.collection('users')
+        .findOne({ username: user.username, password: user.password })
+        .then(result => {
+            console.log(result)
+            if(result) {
+                res.status(201).json({ exists: "true", id: result._id })
+            } else {
+                res.status(201).json({ exists: "false" })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ err: 'could not create a new document' })
+        })
+})
 
 
 // app.get('/users', (req, res) => {
@@ -41,34 +106,6 @@ connectToDb((err) => {
 //         res.status(500).json({error: 'Could not fetch documents'})
 //     })
 // })
-
-// app.get('/books/:id', (req, res) => {
-//     if(ObjectId.isValid(req.params.id)) {
-//         db.collection('books')
-//         .findOne({_id: new ObjectId(req.params.id)})
-//         .then(doc => {
-//             res.status(200).json(doc)
-//         })
-//         .catch(err => {
-//             res.status(500).json({error: 'Could not fetch book'})
-//         })
-//     } else {
-//         res.status(500).json({error: 'The book id is invalid'})
-//     }
-// })
-
-app.post('/register', (req, res) => {
-    const user = req.body;
-
-    db.collection('users')
-        .insertOne(user)
-        .then(result => {
-            res.status(201).json(result)
-        })
-        .catch(err => {
-            res.status(500).json({ err: 'could not create a new document' })
-        })
-})
 
 // app.delete('/books/:id', (req, res) => {
 //     if(ObjectId.isValid(req.params.id)) {
@@ -87,7 +124,6 @@ app.post('/register', (req, res) => {
 
 // app.patch('/books/:id', (req, res) => {
 //     const updates = req.body
-
 //     if(ObjectId.isValid(req.params.id)) {
 //         db.collection('books')
 //         .updateOne({_id: new ObjectId(req.params.id)}, {$set: updates})

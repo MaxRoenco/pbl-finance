@@ -1,9 +1,41 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './LeftBar.module.css';
+import { useState, useEffect } from 'react';
 
 const LeftBar = () => {
     const location = useLocation(); // Get the current route
+    const [userData, setUserData] = useState({});
+    let loadData = async () => {
+        const userId = localStorage.getItem("id");
+        await fetch('http://localhost:3000/users/' + userId)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setUserData(prev =>
+                ({
+                    ...prev,
+                    username: data.username,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                })
+                )
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+            });
+    }
+
+    useEffect(() => {
+        loadData();
+    }, []);
+    useEffect(() => {
+        console.log('Updated userData:', userData);
+    }, [userData]);
 
     return (
         <div className={styles.mainContainer}>
@@ -30,8 +62,8 @@ const LeftBar = () => {
                     <div className={styles.infoContainer}>
                         <img src="/profilepic.png" alt="Profile" />
                         <div className={styles.info}>
-                            <h1>Name Surname</h1>
-                            <p>@username</p>
+                            <h1>{userData.firstName + ' ' + userData.lastName}</h1>
+                            <p>@{userData.username}</p>
                             <h6>Log out</h6>
                         </div>
                     </div>
