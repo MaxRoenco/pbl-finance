@@ -7,10 +7,8 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const Register = () => {
 
-    const { users,
+    const {
         register,
-        error,
-        isLoading,
         isRegistered,
         setIsRegistered } = useContext(authContext);
     const [newUser, setNewUser] = useState({ email: '', password: '' });
@@ -161,8 +159,6 @@ const Register = () => {
                             <label htmlFor="remember">Remember Me</label>
                         </div>
                         <button className={styles.logIn} onClick={handleRegister}>Register</button>
-                        {isLoading && <p>Loading...</p>}
-                        {error && <p>{error}</p>}
                     </div>
                 </div>
                 <div className={styles.banner}>
