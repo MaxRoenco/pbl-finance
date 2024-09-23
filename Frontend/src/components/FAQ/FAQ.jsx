@@ -12,7 +12,7 @@ const FAQ = () => {
     {
       question: "What is a hedge fund?",
       answer:
-        "A hedge fund is a pooled investment vehicle that uses a range of strategies to generate returns for its investors. These strategies may involve the use of leverage, derivatives, and other non-traditional assets to manage risk and seek opportunities for growth.",
+        "A hedge fund is a pooled investment vehicle that uses a wide range of strategies to generate returns for its investors. These strategies may involve the use of leverage, derivatives, and other non-traditional assets to manage risk and seek opportunities for growth.",
     },
     {
       question: "How is a hedge fund different from other investment funds?",
