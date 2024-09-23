@@ -22,6 +22,7 @@
     border-radius: 18px;
     position: relative;
     overflow: hidden;
+    justify-content: space-between;
 }
 
 .thing {
@@ -102,8 +103,7 @@ transform: matrix(0.75, 0.66, -0.33, 0.94, 0, 0);
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 55px;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
 }
 
 .settings>div {
@@ -119,13 +119,12 @@ transform: matrix(0.75, 0.66, -0.33, 0.94, 0, 0);
 }
 
 .infoContainer {
-    width: 100%;
-    height: 100%;
     border-top: 2px solid rgba(255, 255, 255, 0.09);
+    padding: 10px;
+    padding-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: start;
-    margin: 10px;
 }
 
 .infoContainer>img {

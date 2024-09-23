@@ -54,11 +54,11 @@ const LeftBar = () => {
                         <img src="/assets.png" alt="" /> Assets
                     </Link>
                 </ul>
-                <div className={styles.settings}>
-                    <div><img src="/gear.png" alt="" /> Settings</div>
-                    <div><img src="/bell.png" alt="" /> Notifications</div>
-                </div>
-                <div className={styles.userContainer}>
+                <div className={styles.lowerWrapper}>
+                    <div className={styles.settings}>
+                        <div><img src="/gear.png" alt="" /> Settings</div>
+                        <div><img src="/bell.png" alt="" /> Notifications</div>
+                    </div>
                     <div className={styles.infoContainer}>
                         <img src="/profilepic.png" alt="Profile" />
                         <div className={styles.info}>
