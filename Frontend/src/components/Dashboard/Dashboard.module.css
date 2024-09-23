@@ -1,73 +1,48 @@
 .main {
-    width: calc(100% - 20px);
-    height: calc(100% - 20px);
+    width: 100%;
+    height: 100%;
     font-family: "Space Grotesk";
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: 5% 15% 60% 20%;
+    grid-template-rows: 1fr 4fr 12fr 8fr;
     grid-template-areas: 
     "title    title    title    title    title     title     title  "
     "init     init     invested invested remaining remaining deposit"
     "chart    chart    chart    chart    chart     news      news   "
     "trending trending trending trending events    events    events ";
     grid-gap: 15px;
-    margin: 10px;
 }
 
-.initial {
-    grid-area: init;
-}
+/* title */
 
-.invested {
-    grid-area: invested;
-}
-
-.remaining {
-    grid-area: remaining;
-}
-
-.deposit {
-    grid-area: deposit;
-}
-
-.home {
-    width: 100%;
-    padding: 20px;
-    padding-top: 0px;
-    height: 100vh;
+.overview {
     display: flex;
-    flex-direction: column;
-    gap: 30px;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 700;
+    grid-area: title;
+    overflow: hidden;
 }
 
-.body {
-    display: flex;
-}
+/* second row */
 
-.container1 {
+.graphContainer {
+    grid-area: chart;
+    background-color: blue;
+    border-radius: 18px;
+    overflow: hidden;
+}
+.graphContainer>img {
+    height: 100%;
     width: 100%;
-    background: transparent;
-    color: white;
-    display: flex;
-    gap: 30px;
+    object-fit: contain;
 }
-
-.container2 {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-    height: 250px;
-}
-
 
 .newsContainer {
     border: 2px solid var(--border-color);
     border-radius: 18px;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
     grid-area: news;
     background-color: green;
 }
@@ -117,13 +92,86 @@
     margin-bottom: 5px;
 }
 
-.graphContainer {
-    align-self: center;
-    justify-self: center;
-    grid-area: chart;
-    background-color: blue;
-    border-radius: 18px;
+/* third row */
+
+.initial {
+    grid-area: init;
 }
+
+.invested {
+    grid-area: invested;
+}
+
+.remaining {
+    grid-area: remaining;
+}
+
+.spendingsContainer {
+    overflow: hidden;
+    box-sizing: border-box;
+    background: radial-gradient(1093.36% 4667.59% at -143.85% -32.04%, rgba(68, 60, 104, 0.55) 0%, rgba(217, 217, 217, 0.55) 49%, rgba(68, 60, 104, 0.55) 82.5%);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.spendingsContainer>div {
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.deposit {
+    grid-area: deposit;
+    box-sizing: border-box;
+    background: #151515;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;        
+}
+.deposit>div {
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.deposit>p {
+    text-align: center;
+    font-size: 14px;
+}
+
+/* second row */
+
+.body {
+    display: flex;
+}
+
+.container1 {
+    width: 100%;
+    background: transparent;
+    color: white;
+    display: flex;
+    gap: 30px;
+}
+
+.container2 {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    height: 250px;
+}
+
+
+
+
+
 
 .trending {
     width: 100%;
@@ -133,13 +181,12 @@
     /* height: 110px; */
     grid-area: trending;
     background-color: yellow;
+    overflow-y: hidden;
 }
 
 .container3>p {
     display: flex;
-    /* justify-content: center; */
     align-items: center;
-    /* background-color: red; */
     font-weight: 700;
     font-size: 20px;
 }
@@ -149,33 +196,6 @@
     margin-left: 10px;
 }
 
-.spendingsContainer {
-    border-radius: 18px;
-    background: radial-gradient(100% 114.02% at 64.58% 0%, rgba(68, 60, 104, 0.55) 0%, rgba(217, 217, 217, 0.55) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-    mix-blend-mode: hard-light;
-    border: 1px solid rgba(0, 0, 0, 1);
-    box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.08);
-    border-radius: 16px;
-    font-weight: 700;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.spendingsContainer>div {
-    font-size: 35px;
-    font-weight: 600;
-}
-
-.overview {
-    display: flex;
-    align-items: center;
-    font-size: 30px;
-    font-weight: 700;
-    grid-area: title;
-    border-radius: 18px;
-    background-color: aqua;
-}
 
 .container3>h1 {
     font-size: 15px;

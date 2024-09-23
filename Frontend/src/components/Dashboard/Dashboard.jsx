@@ -10,22 +10,24 @@ const Dashboard = () => {
         <div className={styles.main}>
             <h1 className={styles.overview}>Name Surname’s Overview</h1>
             <div className={styles.spendingsContainer + ' ' + styles.initial}>
-                <p>Total Balance</p>
-                <div className="">$12456.654</div>
+                <p>Total Initial Deposit</p>
+                <div>$12456.654</div>
             </div>
             <div className={styles.spendingsContainer + ' ' + styles.invested}>
-                <p>TOTAL SPENDINGS</p>
-                <div className="">This week</div>
+                <p>Total Invested Deposit</p>
+                <div>$2364.5</div>
             </div>
             <div className={styles.spendingsContainer + ' ' + styles.remaining}>
-                <p>TOTAL SPENDINGS</p>
-                <div className="">This week</div>
+                <p>Total Remaining Deposit</p>
+                <div>$10,092.15</div>
             </div>
-            <div className={styles.spendingsContainer + ' ' + styles.deposit}>
-                <p>TOTAL SPENDINGS</p>
-                <div className="">This week</div>
+            <div className={styles.deposit}>
+                <div>18.98%</div>
+                <p>of deposit <br /> invested</p>
             </div>
-            <img className={styles.graphContainer} src='/chart.png' />
+            <div className={styles.graphContainer}>
+                <img src='/chart.png' />
+            </div>
             <div className={styles.newsContainer}>
                 <div className={styles.newsTitle}><p>News Tab<img src="/external_link.png" alt="" /></p><div><img src="/week.png" alt="" /> Week</div></div>
                 <h1>Market is <br /> down 0.80%</h1>
