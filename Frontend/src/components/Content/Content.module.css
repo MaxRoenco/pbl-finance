@@ -1,8 +1,8 @@
 .mainContainer {
     margin-left: 330px;
     position: fixed;
-    width: 100%;
+    width: calc(100% - 330px);
     height: 90%;
     top: 10%;
-    overflow-y: auto;   
+    overflow-y: auto;
 }
