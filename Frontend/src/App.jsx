@@ -17,6 +17,7 @@ import ErrorPage from './components/ErrorPage/ErrorPage';
 import Context, { authContext } from './hooks/Context';
 import ProtectedRoute from './provider/ProtectedRoute';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+import Content from './components/content/content';
 
 function Layout() {
   const location = useLocation();
@@ -27,22 +28,24 @@ function Layout() {
       {showHeaderAndSidebar && <Header />}
       <div className="content-container">
         {showHeaderAndSidebar && <LeftBar />}
-        <Routes>
-          <Route path="/" element={<Home />} />
+        <Content shouldWrap={showHeaderAndSidebar}>
+          <Routes>
+            <Route path="/" element={<Home />} />
 
-          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/portfolio" element={<ProtectedRoute><Portfolio /></ProtectedRoute>} />
-          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-          <Route path="/features" element={<ProtectedRoute><Features /></ProtectedRoute>} />
-          <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
-          <Route path="/faq" element={<ProtectedRoute><FAQ /></ProtectedRoute>} />
-          <Route path="/contact-us" element={<ProtectedRoute><ContactUs /></ProtectedRoute>} />
+            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/portfolio" element={<ProtectedRoute><Portfolio /></ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path="/features" element={<ProtectedRoute><Features /></ProtectedRoute>} />
+            <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
+            <Route path="/faq" element={<ProtectedRoute><FAQ /></ProtectedRoute>} />
+            <Route path="/contact-us" element={<ProtectedRoute><ContactUs /></ProtectedRoute>} />
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/error" element={<ErrorPage />} />
-          <Route path="/forgot" element={<ForgotPassword />} />
-        </Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/error" element={<ErrorPage />} />
+            <Route path="/forgot" element={<ForgotPassword />} />
+          </Routes>
+        </Content>
       </div>
     </div>
 

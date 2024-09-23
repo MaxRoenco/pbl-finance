@@ -1,9 +1,12 @@
 .logoContainer {
-    @apply w-full h-full flex flex-col;
+    @apply w-full flex flex-col;
     background: rgba(2, 2, 2, 1);
     color: white;
     border-bottom: 2px solid rgba(255, 255, 255, 0.04);
     font-family: "Space Grotesk";
+    height: 9%;
+    margin-bottom: 1%;
+    position: fixed;
 }
 
 .rightContainer {
