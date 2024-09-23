@@ -4,13 +4,22 @@
     font-family: "Space Grotesk";
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: 1fr 4fr 12fr 8fr;
+    grid-template-rows: 1fr 3.5fr 12fr 8fr;
     grid-template-areas: 
     "title    title    title    title    title     title     title  "
     "init     init     invested invested remaining remaining deposit"
     "chart    chart    chart    chart    chart     news      news   "
     "trending trending trending trending events    events    events ";
     grid-gap: 15px;
+}
+
+/* general */
+.grayBox {
+    box-sizing: border-box;
+    background: #151515;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
 }
 
 /* title */
@@ -26,25 +35,99 @@
 
 /* second row */
 
+.initial {
+    grid-area: init;
+}
+
+.invested {
+    grid-area: invested;
+}
+
+.remaining {
+    grid-area: remaining;
+}
+
+.remaining,
+.invested,
+.initial {
+    overflow: hidden;
+    box-sizing: border-box;
+    background: radial-gradient(1093.36% 4667.59% at -143.85% -32.04%, rgba(68, 60, 104, 0.55) 0%, rgba(217, 217, 217, 0.55) 49%, rgba(68, 60, 104, 0.55) 82.5%);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.remaining>div,
+.invested>div,
+.initial>div {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.deposit {
+    grid-area: deposit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;   
+}
+.deposit>div {
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.deposit>p {
+    text-align: center;
+    font-size: 14px;
+}
+
+/* third row */
+
 .graphContainer {
     grid-area: chart;
-    background-color: blue;
-    border-radius: 18px;
     overflow: hidden;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
 }
 .graphContainer>img {
     height: 100%;
-    width: 100%;
-    object-fit: contain;
+    object-fit:contain;
+}
+
+.market {
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+}
+
+.market>h2 {
+    font-size: 25px;
+}
+
+.market>h2 {
+    color: #635985;
+    font-weight: 700;
+    font-size: 40px;
+}
+
+.market>h3 {
+    color: #635985;
+    font-weight: 700;
 }
 
 .newsContainer {
-    border: 2px solid var(--border-color);
-    border-radius: 18px;
     display: flex;
     flex-direction: column;
     grid-area: news;
-    background-color: green;
+    padding: 30px;
+    overflow: hidden;
 }
 
 .newsTitle {
@@ -90,140 +173,81 @@
     line-height: 30px;
     margin-top: 5px;
     margin-bottom: 5px;
+    border-bottom: #FFFFFF 1px solid;
+    padding-bottom: 10px;
 }
 
-/* third row */
+/* fourth row */
 
-.initial {
-    grid-area: init;
-}
-
-.invested {
-    grid-area: invested;
-}
-
-.remaining {
-    grid-area: remaining;
-}
-
-.spendingsContainer {
+.trending {
+    grid-area: trending;
     overflow: hidden;
-    box-sizing: border-box;
-    background: radial-gradient(1093.36% 4667.59% at -143.85% -32.04%, rgba(68, 60, 104, 0.55) 0%, rgba(217, 217, 217, 0.55) 49%, rgba(68, 60, 104, 0.55) 82.5%);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.trendingNow {
+    padding: 10px;
+    align-self: center;
+    justify-self: stretch;
+}
+.trendingNow>p {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    gap: 5px;
+    font-weight: 700;
+    font-size: 20px;
 }
-
-.spendingsContainer>div {
-    font-size: 35px;
-    font-weight: 600;
+.trendingNow>p>img {
+    width: 20px;
 }
-
-.deposit {
-    grid-area: deposit;
-    box-sizing: border-box;
-    background: #151515;
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
+.newsList>li {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;        
+    align-items: center;
+    gap: 5px;
+    font-size: 15px;
 }
-.deposit>div {
+.newsList>li>img {
+    width: 15px;
+}
+
+.trendingNews {
+    align-self: center;
+    justify-self: stretch;
+    border-left: 1px white solid;
+    padding: 10px;
+}
+
+.trendingNews>h1 {
     font-weight: 700;
     font-size: 30px;
 }
-
-.deposit>p {
-    text-align: center;
-    font-size: 14px;
+.trendingNews>h2 {
+    font-weight: 700;
 }
 
-/* second row */
+.events {
+    grid-area: events;
+    padding: 10px;
+    overflow: hidden;
+}
 
-.body {
+.events>h1 {
     display: flex;
-}
-
-.container1 {
-    width: 100%;
-    background: transparent;
-    color: white;
-    display: flex;
-    gap: 30px;
-}
-
-.container2 {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-    height: 250px;
-}
-
-
-
-
-
-
-.trending {
-    width: 100%;
-    /* background: var(--primary-color); */
-    border: 2px solid var(--border-color);
-    border-radius: 18px;
-    /* height: 110px; */
-    grid-area: trending;
-    background-color: yellow;
-    overflow-y: hidden;
-}
-
-.container3>p {
-    display: flex;
+    gap: 5px;
     align-items: center;
     font-weight: 700;
     font-size: 20px;
 }
 
-.container3>p>img {
-    width: 25px;
-    margin-left: 10px;
+.events>h1>img {
+    width: 20px;
 }
 
-
-.container3>h1 {
-    font-size: 15px;
+.events>h2 {
+    font-weight: 700;
+    font-size: 17px;
 }
 
-.todayList>li {
-    display: flex;
-    align-items: center;
+.events>p {
     font-size: 12px;
-}
-
-.todayList>li>img {
-    width: 15px;
-    margin-right: 5px;
-}
-
-.container3>h2 {
-    font-size: 10px;
-    margin-top: 3px;
-}
-
-.yesterdayList>li {
-    display: flex;
-    align-items: center;
-    font-size: 10px;
-}
-
-.yesterdayList>li>img {
-    width: 12px;
-    margin-right: 5px;
 }

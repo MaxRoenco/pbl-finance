@@ -1,14 +1,15 @@
 .mainContainer {
     background: rgba(2, 2, 2, 1);
-    width: 330px;
+    width: 315px;
+    margin-left: 15px;
     display: flex;
     flex-direction: column;
     color: aliceblue;
     font-family: "Space Grotesk";
     font-weight: 700;
     position: fixed;
-    height: 89%;
-    top: 10%;
+    height: calc(100% - 90px);
+    top: 75px;
 }
 
 .container {

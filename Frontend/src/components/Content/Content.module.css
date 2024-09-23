@@ -3,7 +3,7 @@
     width: calc(100% - 330px);
     overflow-y: auto;
     position: fixed;
-    height: 89%;
-    top: 10%;
-    padding: 10px;
+    height: calc(100% - 90px);
+    top: 75px;
+    padding: 0 15px;
 }
