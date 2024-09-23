@@ -1,11 +1,9 @@
 .mainContainer {
     background: rgba(2, 2, 2, 1);
     width: 330px;
-    /* height: 94vh; */
     display: flex;
     flex-direction: column;
     color: aliceblue;
-    /* padding: 20px; */
     font-family: "Space Grotesk";
     font-weight: 700;
     position: fixed;
