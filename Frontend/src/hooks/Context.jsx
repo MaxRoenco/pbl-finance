@@ -8,6 +8,10 @@ const Context = (props) => {
     const [userData, setUserData] = useState({});
     // const { data: users, setData, error, isLoading } = useFetch('http://localhost:3000/users')
 
+    useEffect(() => {
+        loadData();
+    }, []);
+
     const register = async (user) => {
         try {
             // Send a POST request to the JSON Server to add the new user
@@ -35,10 +39,35 @@ const Context = (props) => {
         }
     };
 
+    let loadData = async () => {
+        const userId = localStorage.getItem("id");
+        await fetch('http://localhost:3000/users/' + userId)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setUserData(prev =>
+                ({
+                    ...prev,
+                    username: data.username,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                })
+                )
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+            });
+    }
+
     const value1 = {
         register,
         isRegistered,
-        setIsRegistered
+        setIsRegistered,
+        userData
     };
 
     return (

@@ -1,14 +1,15 @@
 import styles from './Dashboard.module.css'
 import LeftBar from '../LeftBar/LeftBar';
 import Header from '../Header/Header';
+import { authContext } from '../../hooks/Context';
+import { useContext } from 'react';
 
 
 const Dashboard = () => {
-
-
+    const { userData } = useContext(authContext);
     return (
         <div className={styles.main}>
-            <h1 className={styles.overview}>Name Surname’s Overview</h1>
+            <h1 className={styles.overview}>{userData.firstName + ' ' + userData.lastName}’s Overview</h1>
             <div className={styles.initial}>
                 <p>Total Initial Deposit</p>
                 <div>$12456.654</div>

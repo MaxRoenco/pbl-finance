@@ -35,7 +35,7 @@
 }
 
 .faqTitle:hover {
-    color: #ffcc00;
+    color: #ecdfcc;
 }
 
 .faqTitle::after {
@@ -66,7 +66,7 @@
 
 .faqItem:hover {
     background-color: #1c1c1c;
-    border-color: #ffcc00;
+    border-color: #ecdfcc;
 }
 
 .description {

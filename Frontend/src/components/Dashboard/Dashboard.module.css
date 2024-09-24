@@ -30,7 +30,7 @@
     font-size: 30px;
     font-weight: 700;
     grid-area: title;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 /* second row */
