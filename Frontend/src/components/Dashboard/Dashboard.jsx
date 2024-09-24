@@ -41,7 +41,7 @@ const Dashboard = () => {
                         <img src="/external_link.png" />
                     </p>
                     <div>
-                        <img src="/week.png" />
+                        <img src="/right_arrow.svg" />
                         Week
                     </div>
                 </div>
@@ -54,7 +54,7 @@ const Dashboard = () => {
             </div>
             <div className={styles.trending + ' ' + styles.grayBox}>
                 <div className={styles.trendingNow}>
-                    <p>Trending Now <img src="/portfolio.png" alt="" /></p>
+                    <p>Trending Now <img src="/trending_svg.svg" alt="" /></p>
                     <h1>Today</h1>
                     <ul className={styles.newsList}>
                         <li><img src="/company.png" alt="" />Lorem Ipsum Company</li>

@@ -1,0 +1,236 @@
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 2fr 0.8fr;
+    grid-template-rows: 0.5fr 9fr;
+    grid-template-areas: 
+    "title title"
+    "main  side ";
+    box-sizing: border-box;
+    grid-gap: 15px;
+}
+
+.grayBox {
+    box-sizing: border-box;
+    background: #151515;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+}
+
+.colorBox {
+    box-sizing: border-box;
+    background: radial-gradient(101.04% 136.06% at 64.21% -19.34%, rgba(68, 60, 104, 0.55) 0%, rgba(217, 217, 217, 0.55) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: 700;
+    grid-area: title;
+    display: flex;
+    align-items: center;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+    grid-area: main;
+    display: grid;
+    grid-template-rows: 5fr 1fr 4fr;
+    grid-template-areas: 
+    "table" 
+    "options" 
+    "stats";
+    grid-gap: 15px;
+}
+
+.table {
+    grid-area: table;
+    width: 100%;
+    padding: 15px;
+}
+
+.table>table {
+    width: 100%;
+}
+
+.table>table th {
+    font-size: 15px;
+    text-align: start;
+}
+
+.table>h1 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.options {
+    grid-area: options;
+    /* overflow: hidden; */
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.options button {
+    box-sizing: border-box;
+    background: #151515;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.08);
+    border-radius: 18px;
+    padding: 3px 15px;
+}
+
+.intervals {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.stats {
+    grid-area: stats;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: "chart company summary";
+    grid-gap: 25px;
+    padding: 15px;
+}
+
+.chart {
+    grid-area: chart;
+    align-self: center;
+}
+
+.company {
+    grid-area: company;
+}
+.company>h1 {
+    font-weight: 700;
+    font-size: 23px;
+}
+.company>h2 {
+    font-weight: 700;
+    /* font-size: 23px; */
+}
+
+.summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    grid-area: summary;
+    text-align: end;
+}
+
+.summary>p {
+    font-weight: 700;
+}
+.summary>h1 {
+    font-weight: 700;
+    font-size: 40px;
+    color: #BDD8B5;
+}
+.summary>h2 {
+    font-size: 17px;
+    color: #BDD8B5;
+}
+
+.side {
+    grid-area: side;
+    display: grid;
+    grid-template-rows: 1fr 4.5fr 4.5fr;
+    grid-template-areas: 
+    "invest" 
+    "deposit" 
+    "preferences";
+    grid-gap: 15px;
+}
+
+.invest {
+    grid-area: invest;
+    font-family: 'Space Grotesk';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    text-align: center;
+    color: #F9F9F9;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+.deposit,
+.preferences {
+    grid-area: deposit;
+    padding: 0 10px;
+}
+.deposit>h1,
+.preferences>h1 {
+    color: #020202;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.deposit>h2 {
+    font-size: 20px;
+    font-weight: 700;
+}
+.deposit>p {
+    color: #BDD8B5;
+    font-weight: 700;
+}
+
+
+.preferences {
+    grid-area: preferences;
+}
+
+.preferences h2 {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.checkBox {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.checkBox>input {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+    border: 3px solid #D0D0D0;
+    border-radius: 100%;
+    width: 22px;
+    height: 22px;
+    transition: box-shadow 400ms ease;
+}
+
+.checkBox>input:checked {
+    box-shadow: inset 0 0 10px #ffffff;
+}
+
+.trending>h1 {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.trending>h2 {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.trending>h2>img {
+    width: 15px;
+}
+.trending>h1>img {
+    width: 13px;
+}

@@ -9,7 +9,6 @@ const Header = () => {
     return (
         <>
             <div className={styles.logoContainer}>
-                <div className={styles.rightContainer}>
                     <Link to='/' className={styles.logo}><img src="/logo.png" alt="" /></Link>
                     <div className={styles.path}><img src="/home.png" alt="" />{`${location}`}</div>
                     <div className={styles.loopContainer}>
@@ -18,7 +17,6 @@ const Header = () => {
                             <p>Search</p>
                         </div>
                     </div>
-                </div>
             </div>
         </>
     );
