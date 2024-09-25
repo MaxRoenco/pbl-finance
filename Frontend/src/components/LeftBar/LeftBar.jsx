@@ -23,6 +23,9 @@ const LeftBar = () => {
                     <Link to='/assets' className={`${styles.linkItem} ${location.pathname === '/assets' ? styles.selected : ''}`}>
                         <img src="/assets.png" alt="" /> Assets
                     </Link>
+                    <Link to='/bubbles' className={`${styles.linkItem} ${location.pathname === '/bubbles' ? styles.selected : ''}`}>
+                        <img src="/assets.png" alt="" /> Bubbles
+                    </Link>
                 </ul>
                 <div className={styles.lowerWrapper}>
                     <div className={styles.settings}>
