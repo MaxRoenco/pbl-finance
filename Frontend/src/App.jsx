@@ -18,6 +18,8 @@ import Context, { authContext } from './hooks/Context';
 import ProtectedRoute from './provider/ProtectedRoute';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import Content from './components/content/content';
+import Buy from './components/Buy/Buy'
+import Bubbles from './components/Bubbles/Bubbles'
 
 function Layout() {
   const location = useLocation();
