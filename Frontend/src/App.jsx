@@ -18,7 +18,6 @@ import Context, { authContext } from './hooks/Context';
 import ProtectedRoute from './provider/ProtectedRoute';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import Content from './components/content/content';
-import Buy from './components/Buy/Buy';
 
 function Layout() {
   const location = useLocation();
@@ -36,6 +35,7 @@ function Layout() {
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/portfolio" element={<ProtectedRoute><Portfolio /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path="/bubbles" element={<ProtectedRoute><Bubbles /></ProtectedRoute>} />
             <Route path="/features" element={<ProtectedRoute><Features /></ProtectedRoute>} />
             <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
             <Route path="/faq" element={<ProtectedRoute><FAQ /></ProtectedRoute>} />
