@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Bubbles.module.css';
 import * as d3 from 'd3';
+import Chart from '../Chart/Chart'
 
 const Bubbles = () => {
     const [cryptoData, setCryptoData] = useState([]);
@@ -24,6 +25,7 @@ const Bubbles = () => {
         const height = 700;
 
         d3.select('#bubble-chart').selectAll("*").remove();
+        d3.select('#bubble-chart').on()
 
         const svg = d3.select('#bubble-chart')
             .attr('width', width)
@@ -42,11 +44,7 @@ const Bubbles = () => {
             .data(root.children)
             .enter().append('g')
             .attr('transform', d => `translate(${d.x},${d.y})`)
-            .call(d3.drag()
-                .on('start', dragStarted)
-                .on('drag', dragged)
-                .on('end', dragEnded))
-            .on('click', (event, d) => setSelectedCrypto(d.data));
+            .on('click', (event, d) => {setSelectedCrypto(d.data); console.log("clicked")});
 
         nodes.append('circle')
             .attr('class', `${styles.bubble}`)
@@ -127,6 +125,7 @@ const Bubbles = () => {
                     <p>Price Change (24h): {selectedCrypto.price_change_percentage_24h}%</p>
                     <p>Market Cap: ${selectedCrypto.market_cap.toLocaleString()}</p>
                     <p>Current Price: ${selectedCrypto.current_price}</p>
+                    <Chart></Chart>
                     <button onClick={() => setSelectedCrypto(null)}>Close</button>
                 </div>
             )}
