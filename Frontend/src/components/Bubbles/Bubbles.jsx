@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Bubbles.module.css'
+import styles from './Bubbles.module.css';
 import * as d3 from 'd3';
 
 const Bubbles = () => {
@@ -18,8 +18,8 @@ const Bubbles = () => {
     }, [cryptoData]);
 
     const createBubbleChart = () => {
-        const width = 1200;
-        const height = 600;
+        const width = 1100;
+        const height = 850;
 
         const svg = d3.select('#bubble-chart')
             .attr('width', width)
@@ -34,93 +34,87 @@ const Bubbles = () => {
 
         bubble(root);
 
-        const node = svg.selectAll('circle')
+        const nodes = svg.selectAll('g')
             .data(root.children)
             .enter().append('g')
-            .attr('transform', d => `translate(${d.x},${d.y})`);
+            .attr('transform', d => `translate(${d.x},${d.y})`)
+            .call(d3.drag()
+                .on('start', dragStarted)
+                .on('drag', dragged)
+                .on('end', dragEnded));
 
-        // Append circles for each node
-        node.append('circle')
+        nodes.append('circle')
+            .attr('class', `${styles.bubble}`)
             .attr('r', d => d.r)
             .style('fill', d => {
                 if (d.data.price_change_percentage_24h > 0) {
-                    return 'green'; // Positive price change
+                    return 'lightgreen';
                 } else if (d.data.price_change_percentage_24h < 0) {
-                    return 'red';   // Negative price change
+                    return 'lightcoral';
                 } else {
-                    return 'grey';  // No price change
+                    return 'lightgrey';
                 }
             })
-        // .on('click', function (event, d) {
-        //     // Make the clicked circle brighter
-        //     d3.select(this)
-        //         .style('fill', 'yellow'); // Change to a brighter color
-        // })
-        // .call(d3.drag() // Enable dragging
-        //     .on('start', dragStarted)
-        //     .on('drag', dragged)
-        //     .on('end', dragEnded)
-        // );
-
-        // // Drag functions
-        // function dragStarted(event, d) {
-        //     d3.select(this).raise().classed('active', true);
-        // }
-
-        // function dragged(event, d) {
-        //     d3.select(this)
-        //         .attr('cx', d.x = event.x)
-        //         .attr('cy', d.y = event.y);
-        // }
-
-        // function dragEnded(event, d) {
-        //     d3.select(this).classed('active', false);
-        // }
-
-        // Light "wobble" animation to make circles look alive
-        // node.select('circle')
-        //     .transition()
-        //     .duration(1000)
-        //     .ease(d3.easeSin)
-        //     .attr('transform', d => `translate(${d.x + (Math.random() - 0.5) * 2},${d.y + (Math.random() - 0.5) * 2})`)
-        //     .on('end', function repeat() {
-        //         d3.select(this)
-        //             .transition()
-        //             .duration(1000)
-        //             .ease(d3.easeSin)
-        //             .attr('transform', d => `translate(${d.x + (Math.random() - 0.5) * 2},${d.y + (Math.random() - 0.5) * 2})`)
-        //             .on('end', repeat);
-        //     });
+            .style('stroke', d => {
+                if (d.data.price_change_percentage_24h > 0) {
+                    return 'green';
+                } else if (d.data.price_change_percentage_24h < 0) {
+                    return 'red';
+                } else {
+                    return 'grey';
+                }
+            })
+            .style('stroke-width', '3');
 
 
-        node.append('text')
-            .attr('x', 0) // Center text horizontally within the bubble
-            .attr('y', 0) // Center text vertically within the bubble
-            .style('text-anchor', 'middle') // Horizontally center the text
-            .style('dominant-baseline', 'middle') // Vertically center the text
-            .style('font-size', d => `${d.r / 3}px`) // Scale text based on bubble size
+        nodes.transition()
+            .duration(1000)
+            .ease(d3.easeSin)
+            .attr('transform', d => `translate(${d.x + (Math.random() - 0.5) * 5},${d.y + (Math.random() - 0.5) * 5})`)
+            .on('end', function repeat() {
+                d3.select(this)
+                    .transition()
+                    .duration(1000)
+                    .ease(d3.easeSin)
+                    .attr('transform', d => `translate(${d.x + (Math.random() - 0.5) * 5},${d.y + (Math.random() - 0.5) * 5})`)
+                    .on('end', repeat);
+            });
+
+        nodes.append('text')
+            .style('text-anchor', 'middle')
+            .style('dominant-baseline', 'middle')
+            .style('font-size', d => `${d.r / 5}px`)
             .style('display', d => d.r < 20 ? 'none' : 'block')
             .each(function (d) {
                 const element = d3.select(this);
-
                 element.append('tspan')
                     .attr('x', 0)
-                    .attr('dy', '1.2em')
+                    .attr('dy', '0')
                     .text(d.data.name);
-
                 element.append('tspan')
                     .attr('x', 0)
                     .attr('dy', '1.2em')
                     .text(`${d.data.price_change_percentage_24h}%`);
             });
+
+        function dragStarted(event, d) {
+            d3.select(this).raise().classed('active', true);
+        }
+
+        function dragged(event, d) {
+            d3.select(this)
+                .attr('transform', `translate(${d.x = event.x},${d.y = event.y})`); // Update position
+        }
+
+        function dragEnded(event, d) {
+            d3.select(this).classed('active', false);
+        }
     };
 
     return (
-        <>
-            <div className={styles.container}>
-                <svg id="bubble-chart"></svg>
-            </div>
-        </>
+        <div className={styles.container}>
+            <svg id="bubble-chart"></svg>
+        </div>
     );
 };
 

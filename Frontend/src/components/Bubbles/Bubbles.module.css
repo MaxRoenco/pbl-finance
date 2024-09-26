@@ -1,5 +1,21 @@
 .container {
-    width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Adjust as needed */
+}
 
+#bubble-chart {
+    border: 1px solid #ccc;
+    /* Optional border for visibility */
+}
+
+.bubble {
+    transition: filter 200ms ease-in;
+}
+
+.bubble:hover {
+    cursor: pointer;
+    filter: brightness(1.4);
 }
