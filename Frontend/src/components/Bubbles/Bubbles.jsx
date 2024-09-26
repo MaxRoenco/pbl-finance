@@ -4,22 +4,26 @@ import * as d3 from 'd3';
 
 const Bubbles = () => {
     const [cryptoData, setCryptoData] = useState([]);
+    const [currentVariable, setCurrentVariable] = useState('price_change_percentage_24h');
+    const [selectedCrypto, setSelectedCrypto] = useState(null);
 
     useEffect(() => {
-        fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1')
+        fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1')
             .then(response => response.json())
             .then(data => setCryptoData(data));
     }, []);
 
     useEffect(() => {
         if (cryptoData.length) {
-            createBubbleChart();
+            createBubbleChart(currentVariable);
         }
-    }, [cryptoData]);
+    }, [cryptoData, currentVariable]);
 
-    const createBubbleChart = () => {
-        const width = 1100;
-        const height = 850;
+    const createBubbleChart = (variable) => {
+        const width = 1159;
+        const height = 700;
+
+        d3.select('#bubble-chart').selectAll("*").remove();
 
         const svg = d3.select('#bubble-chart')
             .attr('width', width)
@@ -30,7 +34,7 @@ const Bubbles = () => {
             .padding(2);
 
         const root = d3.hierarchy({ children: cryptoData })
-            .sum(d => d.market_cap);
+            .sum(d => d[variable] || 1);
 
         bubble(root);
 
@@ -41,7 +45,8 @@ const Bubbles = () => {
             .call(d3.drag()
                 .on('start', dragStarted)
                 .on('drag', dragged)
-                .on('end', dragEnded));
+                .on('end', dragEnded))
+            .on('click', (event, d) => setSelectedCrypto(d.data));
 
         nodes.append('circle')
             .attr('class', `${styles.bubble}`)
@@ -74,7 +79,7 @@ const Bubbles = () => {
             .on('end', function repeat() {
                 d3.select(this)
                     .transition()
-                    .duration(1000)
+                    .duration(700)
                     .ease(d3.easeSin)
                     .attr('transform', d => `translate(${d.x + (Math.random() - 0.5) * 5},${d.y + (Math.random() - 0.5) * 5})`)
                     .on('end', repeat);
@@ -113,7 +118,18 @@ const Bubbles = () => {
 
     return (
         <div className={styles.container}>
+            <button onClick={() => setCurrentVariable('market_cap')} className={styles.marketCap}>Market Capitalization</button>
+            <button onClick={() => setCurrentVariable('price_change_percentage_24h')} className={styles.percentage24h}>Price change 24h</button>
             <svg id="bubble-chart"></svg>
+            {selectedCrypto && (
+                <div className={styles.infoWindow}>
+                    <h3>{selectedCrypto.name}</h3>
+                    <p>Price Change (24h): {selectedCrypto.price_change_percentage_24h}%</p>
+                    <p>Market Cap: ${selectedCrypto.market_cap.toLocaleString()}</p>
+                    <p>Current Price: ${selectedCrypto.current_price}</p>
+                    <button onClick={() => setSelectedCrypto(null)}>Close</button>
+                </div>
+            )}
         </div>
     );
 };

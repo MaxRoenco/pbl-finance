@@ -3,12 +3,15 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    position: relative;
+
     /* Adjust as needed */
 }
 
 #bubble-chart {
     border: 1px solid #ccc;
     /* Optional border for visibility */
+    overflow-y: scroll;
 }
 
 .bubble {
@@ -18,4 +21,44 @@
 .bubble:hover {
     cursor: pointer;
     filter: brightness(1.4);
+}
+
+.marketCap,
+.percentage24h {
+    background: rgba(21, 21, 21, 1);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 18px;
+    position: absolute;
+    padding: 10px;
+    transition: filter, transform 200ms ease-in;
+}
+
+.marketCap {
+    top: 5px;
+    left: 30px;
+}
+
+.percentage24h {
+    top: 5px;
+    left: 230px;
+}
+
+.marketCap:hover,
+.percentage24h:hover {
+    transform: scale(1.05);
+    filter: brightness(1.3);
+}
+
+.infoWindow {
+    position: absolute;
+    top: 30px;
+    left: 250px;
+    background: rgba(21, 21, 21, 1);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 18px;
+    padding: 50px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 700px;
+    height: 500px;
+    z-index: 1000;
 }
