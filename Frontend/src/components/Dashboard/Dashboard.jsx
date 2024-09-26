@@ -1,29 +1,28 @@
 import styles from './Dashboard.module.css'
-import LeftBar from '../LeftBar/LeftBar';
-import Header from '../Header/Header';
 import { authContext } from '../../hooks/Context';
 import { useContext } from 'react';
 
 
 const Dashboard = () => {
     const { userData } = useContext(authContext);
+    console.log(userData)
     return (
         <div className={styles.main}>
             <h1 className={styles.overview}>{userData.firstName + ' ' + userData.lastName}’s Overview</h1>
             <div className={styles.initial}>
                 <p>Total Initial Deposit</p>
-                <div>$12456.654</div>
+                <div>${userData.deposit.initial}</div>
             </div>
             <div className={styles.invested}>
                 <p>Total Invested Deposit</p>
-                <div>$2364.5</div>
+                <div>${userData.deposit.invested}</div>
             </div>
             <div className={styles.remaining}>
                 <p>Total Remaining Deposit</p>
-                <div>$10,092.15</div>
+                <div>${userData.deposit.initial - userData.deposit.invested}</div>
             </div>
             <div className={styles.deposit + ' ' + styles.grayBox}>
-                <div>18.98%</div>
+                <div>{userData.deposit.initial/userData.deposit.invested || 0}%</div>
                 <p>of deposit <br /> invested</p>
             </div>
             <div className={styles.graphContainer + ' ' + styles.grayBox}>

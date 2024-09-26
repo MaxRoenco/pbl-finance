@@ -1,10 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Buy.module.css';
 
 const Buy = () => {
     const [symbol, setSymbol] = useState('');
     const [money, setMoney] = useState('');
     const [responseMessage, setResponseMessage] = useState(''); // State for server response
+    const [cur, setCur] = useState([]);
+    const loadCurrencies = async () => {
+        let prices = await fetch("https://api.binance.com/api/v3/ticker/price");
+        prices = await prices.json()
+        let currencies = []
+        console.log(prices)
+        prices.forEach(price => {
+            currencies.push(price.symbol);
+        })
+        setCur(currencies);
+    }
+    useEffect(() => {
+        loadCurrencies()
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission
@@ -46,16 +60,21 @@ const Buy = () => {
             ) : (
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="symbol">Symbol (e.g., BTCUSDT):</label>
-                    <input
+                    <select
+                        className={styles.input}
                         type="text"
                         id="symbol"
                         name="symbol"
                         value={symbol}
                         onChange={(e) => setSymbol(e.target.value)}
                         required
-                    />
+                    >
+                        <option value="" disabled hidden>Select a symbol</option> {/* Empty default value */}
+                        {cur.map((c, i) => <option key={i}>{c}</option>)}
+                    </select>
                     <label htmlFor="money">Money (USDT):</label>
                     <input
+                        className={styles.input}
                         type="number"
                         id="money"
                         name="money"

@@ -1,6 +1,7 @@
-import { useContext } from 'react';
 import styles from './Portfolio.module.css'
+import { useContext } from 'react';
 import { authContext } from '../../hooks/Context';
+import { Link } from 'react-router-dom';
 
 
 const Portfolio = () => {
@@ -14,7 +15,7 @@ const Portfolio = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>Start Time</th><th>Symbol</th><th>Interval</th><th>Profit/Loss (USDT)</th><th>Date Created</th>
+                                <th>Buying Time</th><th>Symbol</th><th>Interval</th><th>Profit/Loss (USDT)</th><th>Selling Time</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,16 +62,16 @@ const Portfolio = () => {
                 </div>
             </div>
             <div className={styles.side}>
-                <button className={styles.invest + ' ' + styles.colorBox}>Invest Now</button>
+                <Link to='/buy'  className={styles.invest + ' ' + styles.colorBox}>Buy Now</Link>
                 <div className={styles.deposit + ' ' + styles.colorBox}>
                     <h1>Deposit Analysis</h1>
-                    <h2>$12456.654</h2>
+                    <h2>${userData.deposit.initial}</h2>
                     <h3>Total Initial Deposit</h3>
-                    <h2>$2364.5</h2>
+                    <h2>${userData.deposit.invested}</h2>
                     <h3>Total Invested Deposit</h3>
-                    <p>18.98% of deposit invested</p>
-                    <h2>$2364.5</h2>
-                    <h3>Total Invested Deposit</h3>
+                    <p>{userData.deposit.invested/userData.deposit.initial*100 || 0}% of deposit invested</p>
+                    <h2>${userData.deposit.initial - userData.deposit.invested}</h2>
+                    <h3>Total Remaining Deposit</h3>
                 </div>
                 <div className={styles.preferences + ' ' + styles.colorBox}>
                     <h1>My Preferences</h1>

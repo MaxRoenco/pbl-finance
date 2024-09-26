@@ -55,6 +55,7 @@ const Context = (props) => {
                     username: data.username,
                     firstName: data.firstName,
                     lastName: data.lastName,
+                    deposit: data.deposit,
                 })
                 )
             })

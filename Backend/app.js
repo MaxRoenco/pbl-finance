@@ -66,6 +66,10 @@ app.post('/register', (req, res) => {
                                 phoneNumber: user.phoneNumber,
                                 assets: [],
                                 posts: [],
+                                deposit: {
+                                    initial: 0,
+                                    invested: 0,
+                                }
                             }
                             db.collection('users')
                                 .insertOne(newUser)
@@ -115,7 +119,7 @@ app.post('/buy', async (req, res) => {
       const response = await axios.get('https://api.binance.com/api/v3/ticker/price', {
         params: { symbol: symbol }
       });
-  
+      console.log("RESPONSE", response)
       const closePriceOnStart = parseFloat(response.data.price);
       console.log(`Close price on start for ${symbol}: ${closePriceOnStart} USDT`);
   
