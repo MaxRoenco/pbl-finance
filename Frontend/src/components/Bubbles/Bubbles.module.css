@@ -51,14 +51,37 @@
 
 .infoWindow {
     position: absolute;
-    top: 30px;
+    top: 10px;
     left: 250px;
     background: rgba(21, 21, 21, 1);
     border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: 18px;
-    padding: 50px;
+    padding: 30px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     width: 700px;
-    height: 600px;
+    height: 690px;
     z-index: 1000;
+}
+
+.cryptoImage {
+    width: 30px;
+}
+
+.close {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid gray;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close:hover {
+    background: rgb(34, 34, 34);
+    transform: scale(1.03);
 }

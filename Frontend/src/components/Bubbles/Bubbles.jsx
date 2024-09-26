@@ -44,7 +44,7 @@ const Bubbles = () => {
             .data(root.children)
             .enter().append('g')
             .attr('transform', d => `translate(${d.x},${d.y})`)
-            .on('click', (event, d) => {setSelectedCrypto(d.data); console.log("clicked")});
+            .on('click', (event, d) => { setSelectedCrypto(d.data); console.log("clicked") });
 
         nodes.append('circle')
             .attr('class', `${styles.bubble}`)
@@ -68,6 +68,14 @@ const Bubbles = () => {
                 }
             })
             .style('stroke-width', '3');
+
+        nodes.append('image')
+            .attr('xlink:href', d => d.data.image)
+            .attr('x', d => -d.r / 2)
+            .attr('y', d => -d.r / 2)
+            .attr('width', d => d.r)
+            .attr('height', d => d.r)
+            .attr('class', styles.image);
 
 
         nodes.transition()
@@ -121,13 +129,16 @@ const Bubbles = () => {
             <svg id="bubble-chart"></svg>
             {selectedCrypto && (
                 <div className={styles.infoWindow}>
-                    <h3>{selectedCrypto.name}</h3>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <img src={selectedCrypto.image} alt={selectedCrypto.name} className={styles.cryptoImage} />
+                        <h3>{selectedCrypto.name}</h3>
+                    </div>
                     <p>Price Change (24h): {selectedCrypto.price_change_percentage_24h}%</p>
                     <p>Market Cap: ${selectedCrypto.market_cap.toLocaleString()}</p>
                     <p>Current Price: ${selectedCrypto.current_price}</p>
                     {console.log(selectedCrypto)}
                     <Chart symbol={selectedCrypto.symbol.toUpperCase() + "USDT"}></Chart>
-                    <button onClick={() => setSelectedCrypto(null)}>Close</button>
+                    <button className={styles.close} onClick={() => setSelectedCrypto(null)}>Close</button>
                 </div>
             )}
         </div>
