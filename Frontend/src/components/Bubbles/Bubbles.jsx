@@ -125,7 +125,8 @@ const Bubbles = () => {
                     <p>Price Change (24h): {selectedCrypto.price_change_percentage_24h}%</p>
                     <p>Market Cap: ${selectedCrypto.market_cap.toLocaleString()}</p>
                     <p>Current Price: ${selectedCrypto.current_price}</p>
-                    <Chart></Chart>
+                    {console.log(selectedCrypto)}
+                    <Chart symbol={selectedCrypto.symbol.toUpperCase() + "USDT"}></Chart>
                     <button onClick={() => setSelectedCrypto(null)}>Close</button>
                 </div>
             )}
