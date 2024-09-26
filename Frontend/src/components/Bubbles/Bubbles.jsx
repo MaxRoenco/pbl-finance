@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styles from './Bubbles.module.css'
 import * as d3 from 'd3';
 
 const Bubbles = () => {
@@ -115,7 +116,11 @@ const Bubbles = () => {
     };
 
     return (
-        <svg id="bubble-chart"></svg>
+        <>
+            <div className={styles.container}>
+                <svg id="bubble-chart"></svg>
+            </div>
+        </>
     );
 };
 
