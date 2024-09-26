@@ -2,6 +2,7 @@ const express = require('express')
 const { ObjectId } = require('mongodb')
 const { connectToDb, getDb } = require('./db')
 const cors = require('cors');  // Import the cors package
+const axios = require('axios')
 
 // init app & middleware
 const app = express()
@@ -56,8 +57,18 @@ app.post('/register', (req, res) => {
                         if(result) {
                             res.status(201).json({ exists: "email" })
                         } else {
+                            const newUser = {
+                                username: user.username,
+                                firstName: user.firstName,
+                                lastName: user.lastName,
+                                email: user.email,
+                                password: user.password,
+                                phoneNumber: user.phoneNumber,
+                                assets: [],
+                                posts: [],
+                            }
                             db.collection('users')
-                                .insertOne(user)
+                                .insertOne(newUser)
                                 .then(result => {
                                     res.status(201).json({ exists: "false", id: result.insertedId })
                                 })
@@ -93,47 +104,42 @@ app.post('/login', (req, res) => {
         })
 })
 
-
-// app.get('/users', (req, res) => {
-//     let users = []
-//     db.collection('users')
-//     .find()
-//     .forEach(user => users.push(user))
-//     .then(() => {
-//         res.status(200).json(users);
-//     })
-//     .catch(() => {
-//         res.status(500).json({error: 'Could not fetch documents'})
-//     })
-// })
-
-// app.delete('/books/:id', (req, res) => {
-//     if(ObjectId.isValid(req.params.id)) {
-//         db.collection('books')
-//         .deleteOne({_id: new ObjectId(req.params.id)})
-//         .then(result => {
-//             res.status(200).json(result)
-//         })
-//         .catch(err => {
-//             res.status(500).json({error: 'Could not delete book'})
-//         })
-//     } else {
-//         res.status(500).json({error: 'The book id is invalid'})
-//     }
-// })
-
-// app.patch('/books/:id', (req, res) => {
-//     const updates = req.body
-//     if(ObjectId.isValid(req.params.id)) {
-//         db.collection('books')
-//         .updateOne({_id: new ObjectId(req.params.id)}, {$set: updates})
-//         .then(result => {
-//             res.status(200).json(result)
-//         })
-//         .catch(err => {
-//             res.status(500).json({error: 'Could not update book'})
-//         })
-//     } else {
-//         res.status(500).json({error: 'The book id is invalid'})
-//     }
-// })
+app.post('/buy', async (req, res) => {
+    console.log("worked")
+    const { symbol, money, userId } = req.body; // User specifies symbol and money to invest
+    const interval = '1m'; // Using 1-minute interval for current price data
+    const startTime = Date.now(); // Get current timestamp
+    
+    try {
+      // Fetch current price (real-time price for the symbol)
+      const response = await axios.get('https://api.binance.com/api/v3/ticker/price', {
+        params: { symbol: symbol }
+      });
+  
+      const closePriceOnStart = parseFloat(response.data.price);
+      console.log(`Close price on start for ${symbol}: ${closePriceOnStart} USDT`);
+  
+      const quantity = money / closePriceOnStart;
+  
+      const asset = {
+        symbol,
+        quantity,
+        money,
+        interval,
+        closePriceOnStart,
+        startTime: new Date(startTime),
+        _id: new ObjectId()
+      }
+  
+      const collection = db.collection('users');
+        const result = await collection.updateOne(
+            { id: userId }, // Find the user by id
+            { $push: { assets: asset } } // Push the new apple into the apples array
+        );
+      res.send(`Bought ${quantity} ${symbol} at ${closePriceOnStart} USDT`);
+  
+    } catch (error) {
+      console.error('Error during buying:', error);
+      res.render('error', { error });
+    }
+  });

@@ -18,7 +18,8 @@ import Context, { authContext } from './hooks/Context';
 import ProtectedRoute from './provider/ProtectedRoute';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import Content from './components/content/content';
-import Bubbles from './components/Bubbles/Bubbles';
+import Buy from './components/Buy/Buy'
+import Bubbles from './components/Bubbles/Bubbles'
 
 function Layout() {
   const location = useLocation();
@@ -46,6 +47,7 @@ function Layout() {
             <Route path="/register" element={<Register />} />
             <Route path="/error" element={<ErrorPage />} />
             <Route path="/forgot" element={<ForgotPassword />} />
+            <Route path="/buy" element={<Buy />} />
           </Routes>
         </Content>
       </div>
