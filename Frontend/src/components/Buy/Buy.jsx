@@ -4,39 +4,30 @@ import styles from './Buy.module.css';
 const Buy = () => {
     const [symbol, setSymbol] = useState('');
     const [money, setMoney] = useState('');
-    const [responseMessage, setResponseMessage] = useState('');
+    const [responseMessage, setResponseMessage] = useState(''); // State for server response
     const [cur, setCur] = useState([]);
-    const [filteredCur, setFilteredCur] = useState([]); // State for filtered currencies
-    const [filterText, setFilterText] = useState(''); // State for the filter input
-
     const loadCurrencies = async () => {
         let prices = await fetch("https://api.binance.com/api/v3/ticker/price");
         prices = await prices.json()
-        let currencies = prices.map(price => price.symbol);
+        let currencies = []
+        console.log(prices)
+        prices.forEach(price => {
+            currencies.push(price.symbol);
+        })
         currencies.sort()
         setCur(currencies);
-        setFilteredCur(currencies); // Initialize the filtered list with all currencies
     }
-
     useEffect(() => {
         loadCurrencies()
     }, [])
 
-    // Update filtered currencies when filterText changes
-    useEffect(() => {
-        const filtered = cur.filter(currency => 
-            currency.toLowerCase().includes(filterText.toLowerCase())
-        );
-        setFilteredCur(filtered);
-    }, [filterText, cur]);
-
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent default form submission
 
-        const id = localStorage.getItem('id');
+        const id = localStorage.getItem('id'); // Retrieve the id from local storage
 
         const data = {
-            id,
+            id,         // Add the id to the data
             symbol,
             money,
         };
@@ -54,47 +45,34 @@ const Buy = () => {
                 throw new Error('Network response was not ok');
             }
 
-            const result = await response.text();
-            setResponseMessage(result);
+            const result = await response.text(); // Expecting a string response
+            setResponseMessage(result); // Set the response message
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
-            setResponseMessage('An error occurred. Please try again.');
+            setResponseMessage('An error occurred. Please try again.'); // Optional error message
         }
     };
 
     return (
         <>
             <h1>Buy Cryptocurrency</h1>
-            {responseMessage ? (
-                <div>{responseMessage}</div>
+            {responseMessage ? ( // Conditional rendering based on responseMessage
+                <div>{responseMessage}</div> // Display the server response
             ) : (
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="filter">Search Symbol:</label>
-                    <input
-                        className={styles.input}
-                        type="text"
-                        id="filter"
-                        name="filter"
-                        placeholder="Search..."
-                        value={filterText}
-                        onChange={(e) => setFilterText(e.target.value)}
-                    />
-
                     <label htmlFor="symbol">Symbol (e.g., BTCUSDT):</label>
                     <select
                         className={styles.input}
+                        type="text"
                         id="symbol"
                         name="symbol"
                         value={symbol}
                         onChange={(e) => setSymbol(e.target.value)}
                         required
                     >
-                        <option value="" disabled hidden>Select a symbol</option>
-                        {filteredCur.map((c, i) => (
-                            <option key={i} value={c}>{c}</option>
-                        ))}
+                        <option value="" disabled hidden>Select a symbol</option> {/* Empty default value */}
+                        {cur.map((c, i) => <option key={i}>{c}</option>)}
                     </select>
-
                     <label htmlFor="money">Money (USDT):</label>
                     <input
                         className={styles.input}
