@@ -14,6 +14,7 @@ const Buy = () => {
         prices.forEach(price => {
             currencies.push(price.symbol);
         })
+        currencies.sort()
         setCur(currencies);
     }
     useEffect(() => {
