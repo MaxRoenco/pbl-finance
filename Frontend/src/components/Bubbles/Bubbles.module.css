@@ -64,6 +64,7 @@
     z-index: 1000;
     overflow-y: scroll;
 }
+
 .close {
     padding: 12px 24px;
     font-size: 16px;
@@ -85,4 +86,8 @@
 
 .image {
     overflow: hidden;
+}
+
+.cryptoImage {
+    width: 30px;
 }
