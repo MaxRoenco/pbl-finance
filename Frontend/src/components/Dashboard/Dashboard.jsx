@@ -1,6 +1,7 @@
 import styles from './Dashboard.module.css'
 import { authContext } from '../../hooks/Context';
 import { useContext } from 'react';
+import News from '../News/News';
 
 
 const Dashboard = () => {
@@ -45,11 +46,7 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <h1>Market is <br /> down 0.80%</h1>
-                <p>Lorem Ipsum Lorem Ipsum Lorem </p>
-                <p>Lorem Ipsum Lorem Ipsum Lorem </p>
-                <p>Lorem Ipsum Lorem Ipsum Lorem </p>
-                <p>Lorem Ipsum Lorem Ipsum Lorem </p>
-                <p>Lorem Ipsum Lorem Ipsum Lorem </p>
+                <News topic='cryptocurrency'/>
             </div>
             <div className={styles.trending + ' ' + styles.grayBox}>
                 <div className={styles.trendingNow}>

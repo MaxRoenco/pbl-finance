@@ -44,9 +44,6 @@ function Layout() {
             <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
             <Route path="/faq" element={<ProtectedRoute><FAQ /></ProtectedRoute>} />
             <Route path="/contact-us" element={<ProtectedRoute><ContactUs /></ProtectedRoute>} />
-            <Route path="/news" element={<News />} />
-
-
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/error" element={<ErrorPage />} />

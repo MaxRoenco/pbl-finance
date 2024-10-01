@@ -127,7 +127,7 @@
     flex-direction: column;
     grid-area: news;
     padding: 30px;
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .newsTitle {
