@@ -45,7 +45,6 @@ const Dashboard = () => {
                         Week
                     </div>
                 </div>
-                <h1>Market is <br /> down 0.80%</h1>
                 <News topic='cryptocurrency'/>
             </div>
             <div className={styles.trending + ' ' + styles.grayBox}>

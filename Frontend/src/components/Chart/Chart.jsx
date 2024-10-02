@@ -4,7 +4,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { calculateSMA, calculateEMA, addBuySellSignals } from './Indicators'
 import styles from './Chart.module.css'
 
-const ChartComponent = ({ symbol = 'BTCUSDT' }) => {
+const ChartComponent = ({ symbol = 'BTCUSDT', className }) => {
   const [chartData, setChartData] = useState([]);
   const [timeFrame, setTimeFrame] = useState('1d');
 
@@ -69,7 +69,7 @@ const ChartComponent = ({ symbol = 'BTCUSDT' }) => {
   };
 
   return (
-    <div className={styles.chartContainer}>
+    <div className={styles.chartContainer + ' ' + className}>
       <h1 className={styles.h1}>{symbol} Price Chart</h1>
 
       {/* Buttons to switch between time frames */}
