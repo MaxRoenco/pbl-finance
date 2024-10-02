@@ -24,7 +24,7 @@ const LeftBar = () => {
                         <img src="/assets.png" alt="" /> Assets
                     </Link>
                     <Link to='/bubbles' className={`${styles.linkItem} ${location.pathname === '/bubbles' ? styles.selected : ''}`}>
-                        <img src="/assets.png" alt="" /> Bubbles
+                        <img src="/bubble.png" style={{ filter: 'invert(1)' }} alt="" /> Bubbles
                     </Link>
                 </ul>
                 <div className={styles.lowerWrapper}>
