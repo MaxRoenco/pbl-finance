@@ -22,6 +22,7 @@ import Buy from './components/Buy/Buy'
 import Bubbles from './components/Bubbles/Bubbles'
 import Chart from './components/Chart/Chart'
 import News from './components/News/News';
+import Assets from './components/Assets/Assets';
 
 function Layout() {
   const location = useLocation();
@@ -49,6 +50,7 @@ function Layout() {
             <Route path="/error" element={<ErrorPage />} />
             <Route path="/forgot" element={<ForgotPassword />} />
             <Route path="/buy" element={<Buy />} />
+            <Route path="/assets" element={<Assets />} />
             <Route path="/chart" element={<Chart symbol='ETCUSDT' />} />
           </Routes>
         </Content>

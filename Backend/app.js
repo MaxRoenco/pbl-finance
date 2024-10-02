@@ -96,7 +96,6 @@ app.post('/login', (req, res) => {
     db.collection('users')
         .findOne({ username: user.username, password: user.password })
         .then(result => {
-            console.log(result)
             if(result) {
                 res.status(201).json({ exists: "true", id: result._id })
             } else {
@@ -109,8 +108,8 @@ app.post('/login', (req, res) => {
 })
 
 app.post('/buy', async (req, res) => {
-    console.log("worked")
     const { symbol, money, userId } = req.body; // User specifies symbol and money to invest
+    console.log(symbol, money, userId)
     const interval = '1m'; // Using 1-minute interval for current price data
     const startTime = Date.now(); // Get current timestamp
     
@@ -119,7 +118,6 @@ app.post('/buy', async (req, res) => {
       const response = await axios.get('https://api.binance.com/api/v3/ticker/price', {
         params: { symbol: symbol }
       });
-      console.log("RESPONSE", response)
       const closePriceOnStart = parseFloat(response.data.price);
       console.log(`Close price on start for ${symbol}: ${closePriceOnStart} USDT`);
   
@@ -134,12 +132,14 @@ app.post('/buy', async (req, res) => {
         startTime: new Date(startTime),
         _id: new ObjectId()
       }
-  
+      
       const collection = db.collection('users');
-        const result = await collection.updateOne(
-            { id: userId }, // Find the user by id
-            { $push: { assets: asset } } // Push the new apple into the apples array
+      const result = await collection.updateOne(
+        { _id: new ObjectId(userId) },
+        { $push: { assets: asset } } 
         );
+    
+        console.log(result)
       res.send(`Bought ${quantity} ${symbol} at ${closePriceOnStart} USDT`);
   
     } catch (error) {
