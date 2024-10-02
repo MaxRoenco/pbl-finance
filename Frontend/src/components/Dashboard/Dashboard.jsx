@@ -1,11 +1,11 @@
 import styles from './Dashboard.module.css'
 import { authContext } from '../../hooks/Context';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import News from '../News/News';
 
 
 const Dashboard = () => {
-    const { userData } = useContext(authContext);
+    const { userData, loadData } = useContext(authContext);
     console.log(userData)
     return (
         <div className={styles.main}>

@@ -6,9 +6,9 @@ import { useState, useContext } from 'react';
 import { authContext } from '../../hooks/Context';
 
 const Login = () => {
-    const { isRegistered, setIsRegistered } = useContext(authContext);
+    const { isRegistered, setIsRegistered, loadData } = useContext(authContext);
     const [info, setInfo] = useState({ username: '', password: '' });
-    const [redirect, setRedirect] = useState('');
+    const [redirect, setRedirect] = useState(false);
     const [validationError, setValidationError] = useState('');
     let handleLogIn = () => {
         let user = {
@@ -38,12 +38,13 @@ const Login = () => {
                 localStorage.setItem("isRegistered", true);
                 localStorage.setItem("id", res.id);
                 console.log("login Successful");
-                setRedirect("dashboard");
+                setRedirect(true);
                 setIsRegistered(true);
+                await loadData()
             } else {
                 setValidationError("Incorrect username or password...")
                 console.log("Account doesn't exist")
-                setRedirect("");
+                setRedirect(false);
             }
         } catch (err) {
             console.error('Error during login:', err);
@@ -51,7 +52,7 @@ const Login = () => {
     };
 
     if(redirect) {
-        return <Navigate to={"/"+redirect }/>;
+        return <Navigate to={"/"}/>;
     }
 
     return (

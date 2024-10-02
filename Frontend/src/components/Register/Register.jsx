@@ -10,7 +10,9 @@ const Register = () => {
     const {
         register,
         isRegistered,
-        setIsRegistered } = useContext(authContext);
+        setIsRegistered,
+        loadData,
+    } = useContext(authContext);
     const [newUser, setNewUser] = useState({ username: '', firstName: '', lastName: '', email: '', phoneNumber: '', password: '', passwordRepeat: '' });
     const [isGood, setIsGood] = useState(false);
     const [validationError, setValidationError] = useState('');
@@ -98,6 +100,7 @@ const Register = () => {
             }
             setIsRegistered(true);
             setRedirect(true);
+            await loadData();
         })();
         
     };
