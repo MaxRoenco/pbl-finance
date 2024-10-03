@@ -192,7 +192,8 @@ app.post('/sell/:id', async (req, res) => {
         console.log(currentPriceResponse, currentPrice)
 
         // Calculate profit or loss
-        const profitOrLoss = (currentPrice - assetsResponse.closePriceOnStart) * assetsResponse.quantity;
+        const profitOrLoss = (currentPrice - asset.closePriceOnStart) * asset.quantity;
+        console.log(profitOrLoss)
 
         // Save the transaction to the Post collection
         
@@ -203,7 +204,8 @@ app.post('/sell/:id', async (req, res) => {
             interval: asset.interval,
             profitOrLoss,
             money: asset.money,
-            quantity: asset.quantity
+            quantity: asset.quantity,
+            sellTime: new Date(),
         };
         
         const result = await collection.updateOne(

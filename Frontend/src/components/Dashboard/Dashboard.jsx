@@ -23,7 +23,7 @@ const Dashboard = () => {
                 <div>${userData.deposit.initial - userData.deposit.invested}</div>
             </div>
             <div className={styles.deposit + ' ' + styles.grayBox}>
-                <div>{userData.deposit.initial/userData.deposit.invested || 0}%</div>
+                <div>{Math.min((userData.deposit.invested / userData.deposit.initial * 100, 100)) || 0}%</div>
                 <p>of deposit <br /> invested</p>
             </div>
             <div className={styles.graphContainer + ' ' + styles.grayBox}>

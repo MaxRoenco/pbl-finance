@@ -25,7 +25,7 @@ const Assets = () => {
 
     const handleSell = async (assetId) => {
         const payload = { assetId };
-        setLoadingId(assetId); // Set the loading ID to the current asset being sold
+        setLoadingId(assetId);
 
         try {
             const response = await fetch('http://localhost:3000/sell/' + localStorage.getItem("id"), {

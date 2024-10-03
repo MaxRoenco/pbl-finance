@@ -49,7 +49,7 @@ const Portfolio = () => {
                                         <td>{trade.symbol}</td>
                                         <td>{trade.interval}</td>
                                         <td>{trade.profitOrLoss} USDT</td>
-                                        <td>Put date here</td>
+                                        <td>{trade.sellTime}</td>
                                     </tr>
                                 ))
                             ) : (
@@ -95,7 +95,7 @@ const Portfolio = () => {
                     <h3>Total Initial Deposit</h3>
                     <h2>${userData.deposit.invested}</h2>
                     <h3>Total Invested Deposit</h3>
-                    <p>{(userData.deposit.invested / userData.deposit.initial * 100) || 0}% of deposit invested</p>
+                    <p>{Math.min((userData.deposit.invested / userData.deposit.initial * 100, 100)) || 0}% of deposit invested</p>
                     <h2>${userData.deposit.initial - userData.deposit.invested}</h2>
                     <h3>Total Remaining Deposit</h3>
                 </div>
