@@ -3,6 +3,7 @@ import styles from './Assets.module.css';
 
 const Assets = () => {
     const [assets, setAssets] = useState([]);
+    const [loadingId, setLoadingId] = useState(null); // Track which asset is currently being sold
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,9 +23,46 @@ const Assets = () => {
         fetchData();
     }, []);
 
-    const handleSell = (symbol) => {
-        console.log(`Selling asset: ${symbol}`);
-        // Implement your selling logic here
+    const handleSell = async (assetId) => {
+        const payload = { assetId };
+        setLoadingId(assetId); // Set the loading ID to the current asset being sold
+
+        try {
+            const response = await fetch('http://localhost:3000/sell/' + localStorage.getItem("id"), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            let result;
+
+            // Check if the response is in JSON format
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                result = await response.json();
+            } else {
+                const text = await response.text();
+                console.error('Unexpected response format:', text);
+                return;
+            }
+
+            if (response.ok) {
+                console.log('Sell successful:', result);
+                setAssets((prevAssets) => {
+                    const updatedAssets = prevAssets.filter(asset => asset._id !== assetId);
+                    console.log('Updated assets:', updatedAssets);
+                    return updatedAssets;
+                });
+            } else {
+                console.error('Error selling asset:', response.statusText, result);
+            }
+        } catch (error) {
+            console.error('Sell error:', error);
+        } finally {
+            setLoadingId(null); // Reset loading ID after operation
+        }
     };
 
     return (
@@ -42,8 +80,8 @@ const Assets = () => {
             </thead>
             <tbody className={styles.tableBody}>
                 {assets.length > 0 ? (
-                    assets.map((asset, index) => (
-                        <tr key={index} className={styles.tableRow}>
+                    assets.map((asset) => (
+                        <tr key={asset._id} className={styles.tableRow}>
                             <td className={styles.tableCell}>{asset.symbol}</td>
                             <td className={styles.tableCell}>{asset.quantity}</td>
                             <td className={styles.tableCell}>{asset.money}</td>
@@ -51,11 +89,12 @@ const Assets = () => {
                             <td className={styles.tableCell}>{asset.closePriceOnStart}</td>
                             <td className={styles.tableCell}>{asset.startTime}</td>
                             <td className={styles.tableCell}>
-                                <button 
+                                <button
                                     className={styles.sellButton}
-                                    onClick={() => handleSell(asset.symbol)}
+                                    onClick={() => handleSell(asset._id)}
+                                    disabled={loadingId === asset._id} // Disable if this asset is being sold
                                 >
-                                    Sell
+                                    {loadingId === asset._id ? 'Loading...' : 'Sell'}
                                 </button>
                             </td>
                         </tr>

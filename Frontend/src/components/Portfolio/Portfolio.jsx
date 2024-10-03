@@ -1,11 +1,30 @@
-import styles from './Portfolio.module.css'
-import { useContext } from 'react';
+import styles from './Portfolio.module.css';
+import { useContext, useEffect, useState } from 'react';
 import { authContext } from '../../hooks/Context';
 import { Link } from 'react-router-dom';
 
-
 const Portfolio = () => {
     const { userData } = useContext(authContext);
+    const [tradingHistory, setTradingHistory] = useState([]);
+
+    // Fetch trading history from the backend
+    useEffect(() => {
+        const fetchTradingHistory = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/users/'+localStorage.getItem("id")); // Update with your API endpoint
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setTradingHistory(data.posts);
+            } catch (error) {
+                console.error('Error fetching trading history:', error);
+            }
+        };
+
+        fetchTradingHistory();
+    }, []); // Empty dependency array means this runs once on mount
+
     return (
         <div className={styles.wrapper}>
             <h1 className={styles.title}>{userData.firstName + ' ' + userData.lastName}'s Portfolio</h1>
@@ -15,22 +34,29 @@ const Portfolio = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>Buying Time</th><th>Symbol</th><th>Interval</th><th>Profit/Loss (USDT)</th><th>Selling Time</th>
+                                <th>Buying Time</th>
+                                <th>Symbol</th>
+                                <th>Interval</th>
+                                <th>Profit/Loss (USDT)</th>
+                                <th>Selling Time</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Sun Sep 01 2024</td><td>BTCUSDT</td><td>1d</td><td>97.99 USDT</td><td>Fri Sep 20 2024</td>
-                            </tr>
-                            <tr>
-                                <td>Sun Sep 01 2024</td><td>BTCUSDT</td><td>1d</td><td>97.99 USDT</td><td>Fri Sep 20 2024</td>
-                            </tr>
-                            <tr>
-                                <td>Sun Sep 01 2024</td><td>BTCUSDT</td><td>1d</td><td>97.99 USDT</td><td>Fri Sep 20 2024</td>
-                            </tr>
-                            <tr>
-                                <td>Sun Sep 01 2024</td><td>BTCUSDT</td><td>1d</td><td>97.99 USDT</td><td>Fri Sep 20 2024</td>
-                            </tr>
+                            {tradingHistory.length > 0 ? (
+                                tradingHistory.map((trade, index) => (
+                                    <tr key={index}>
+                                        <td>{trade.startTime}</td>
+                                        <td>{trade.symbol}</td>
+                                        <td>{trade.interval}</td>
+                                        <td>{trade.profitOrLoss} USDT</td>
+                                        <td>Put date here</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="5">No trading history available.</td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
@@ -45,7 +71,7 @@ const Portfolio = () => {
                     </div>
                 </div>
                 <div className={styles.stats + ' ' + styles.grayBox}>
-                    <img src='/dummyChart.png' className={styles.chart}/>
+                    <img src='/dummyChart.png' className={styles.chart} alt="Dummy Chart"/>
                     <div className={styles.company}>
                         <h1>Company Name</h1>
                         <h2>Mine</h2>
@@ -62,14 +88,14 @@ const Portfolio = () => {
                 </div>
             </div>
             <div className={styles.side}>
-                <Link to='/buy'  className={styles.invest + ' ' + styles.colorBox}>Buy Now</Link>
+                <Link to='/buy' className={styles.invest + ' ' + styles.colorBox}>Buy Now</Link>
                 <div className={styles.deposit + ' ' + styles.colorBox}>
                     <h1>Deposit Analysis</h1>
                     <h2>${userData.deposit.initial}</h2>
                     <h3>Total Initial Deposit</h3>
                     <h2>${userData.deposit.invested}</h2>
                     <h3>Total Invested Deposit</h3>
-                    <p>{userData.deposit.invested/userData.deposit.initial*100 || 0}% of deposit invested</p>
+                    <p>{(userData.deposit.invested / userData.deposit.initial * 100) || 0}% of deposit invested</p>
                     <h2>${userData.deposit.initial - userData.deposit.invested}</h2>
                     <h3>Total Remaining Deposit</h3>
                 </div>
@@ -91,10 +117,10 @@ const Portfolio = () => {
                         </div>
                     </div>
                     <div className={styles.trending}>
-                        <h2>Trending Now <img src="/trending_svg.svg"/></h2>
+                        <h2>Trending Now <img src="/trending_svg.svg" alt="Trending Icon"/></h2>
                         <p>Today</p>
-                        <h1><img src="/rectangle.svg"/>Lorem Ipsum Company </h1>
-                        <h1><img src="/rectangle.svg"/>Lorem Ipsum Company </h1>
+                        <h1><img src="/rectangle.svg" alt="Rectangle"/>Lorem Ipsum Company </h1>
+                        <h1><img src="/rectangle.svg" alt="Rectangle"/>Lorem Ipsum Company </h1>
                     </div>
                 </div>
             </div>

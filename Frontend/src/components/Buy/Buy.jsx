@@ -6,6 +6,7 @@ const Buy = () => {
     const [money, setMoney] = useState('');
     const [responseMessage, setResponseMessage] = useState('');
     const [isPurchased, setIsPurchased] = useState(false); // New state to track purchase
+    const [isLoading, setIsLoading] = useState(false); // State to track loading status
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -13,6 +14,8 @@ const Buy = () => {
             symbol,
             money,
         };
+
+        setIsLoading(true); // Set loading to true when starting the request
 
         try {
             const response = await fetch('http://localhost:3000/buy', {
@@ -34,6 +37,8 @@ const Buy = () => {
             console.error('There was a problem with the fetch operation:', error);
             setResponseMessage('An error occurred. Please try again.');
             setIsPurchased(false); // Reset purchase state on error
+        } finally {
+            setIsLoading(false); // Set loading to false after the request
         }
     };
 
@@ -73,7 +78,9 @@ const Buy = () => {
                         onChange={(e) => setMoney(e.target.value)}
                         required
                     />
-                    <button type="submit" className={styles.submitButton}>Buy</button>
+                    <button type="submit" className={styles.submitButton} disabled={isLoading}>
+                        {isLoading ? 'Loading...' : 'Buy'}
+                    </button>
                 </form>
             )}
         </div>
