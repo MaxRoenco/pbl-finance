@@ -36,7 +36,6 @@ function Layout() {
         <Content shouldWrap={showHeaderAndSidebar}>
           <Routes>
             <Route path="/" element={<Home />} />
-
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/portfolio" element={<ProtectedRoute><Portfolio /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
