@@ -6,11 +6,12 @@ import { Link } from 'react-router-dom';
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const Register = () => {
-
     const {
         register,
         isRegistered,
-        setIsRegistered } = useContext(authContext);
+        setIsRegistered,
+        loadData,
+    } = useContext(authContext);
     const [newUser, setNewUser] = useState({ username: '', firstName: '', lastName: '', email: '', phoneNumber: '', password: '', passwordRepeat: '' });
     const [isGood, setIsGood] = useState(false);
     const [validationError, setValidationError] = useState('');
@@ -98,8 +99,14 @@ const Register = () => {
             }
             setIsRegistered(true);
             setRedirect(true);
+            await loadData();
         })();
-        
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleRegister();
+        }
     };
 
     if (redirect) {
@@ -122,6 +129,7 @@ const Register = () => {
                                 placeholder='ex. janedoe'
                                 value={newUser.username}
                                 onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
+                                onKeyDown={handleKeyDown} // Add the keydown event listener
                             />
                         </div>
                         <div>
@@ -131,6 +139,7 @@ const Register = () => {
                                 placeholder='ex. Jane'
                                 value={newUser.firstName}
                                 onChange={(e) => setNewUser({ ...newUser, firstName: e.target.value })}
+                                onKeyDown={handleKeyDown} // Add the keydown event listener
                             />
                         </div>
                         <div>
@@ -140,6 +149,7 @@ const Register = () => {
                                 placeholder='ex. Doe'
                                 value={newUser.lastName}
                                 onChange={(e) => setNewUser({ ...newUser, lastName: e.target.value })}
+                                onKeyDown={handleKeyDown} // Add the keydown event listener
                             />
                         </div>
                         <div>
@@ -149,6 +159,7 @@ const Register = () => {
                                 placeholder='ex. janedoe@gmail.com'
                                 value={newUser.email}
                                 onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                                onKeyDown={handleKeyDown} // Add the keydown event listener
                             />
                         </div>
                         <div>
@@ -158,6 +169,7 @@ const Register = () => {
                                 placeholder='+(373) 12345678'
                                 value={newUser.phoneNumber}
                                 onChange={(e) => setNewUser({ ...newUser, phoneNumber: e.target.value })}
+                                onKeyDown={handleKeyDown} // Add the keydown event listener
                             />
                         </div>
                         <div>
@@ -167,6 +179,7 @@ const Register = () => {
                                 placeholder='●●●●●●●●●'
                                 value={newUser.password}
                                 onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                                onKeyDown={handleKeyDown} // Add the keydown event listener
                             />
                         </div>
                         <div>
@@ -176,6 +189,7 @@ const Register = () => {
                                 placeholder='●●●●●●●●●'
                                 value={newUser.passwordRepeat}
                                 onChange={(e) => setNewUser({ ...newUser, passwordRepeat: e.target.value })}
+                                onKeyDown={handleKeyDown} // Add the keydown event listener
                             />
                         </div>
                     </div>

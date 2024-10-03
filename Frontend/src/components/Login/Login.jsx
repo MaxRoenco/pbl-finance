@@ -1,4 +1,4 @@
-import styles from './Login.module.css'
+import styles from './Login.module.css';
 import { Link } from 'react-router-dom';
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { Navigate, useNavigate } from 'react-router-dom';
@@ -6,17 +6,18 @@ import { useState, useContext } from 'react';
 import { authContext } from '../../hooks/Context';
 
 const Login = () => {
-    const { isRegistered, setIsRegistered } = useContext(authContext);
+    const { isRegistered, setIsRegistered, loadData } = useContext(authContext);
     const [info, setInfo] = useState({ username: '', password: '' });
-    const [redirect, setRedirect] = useState('');
+    const [redirect, setRedirect] = useState(false);
     const [validationError, setValidationError] = useState('');
-    let handleLogIn = () => {
+
+    const handleLogIn = () => {
         let user = {
             username: info.username,
             password: info.password,
-        }
-        login(user)
-    }
+        };
+        login(user);
+    };
 
     const login = async (user) => {
         try {
@@ -34,24 +35,31 @@ const Login = () => {
             }
 
             const res = await response.json();
-            if(res.exists === 'true') {
+            if (res.exists === 'true') {
                 localStorage.setItem("isRegistered", true);
                 localStorage.setItem("id", res.id);
                 console.log("login Successful");
-                setRedirect("dashboard");
+                setRedirect(true);
                 setIsRegistered(true);
+                await loadData();
             } else {
-                setValidationError("Incorrect username or password...")
-                console.log("Account doesn't exist")
-                setRedirect("");
+                setValidationError("Incorrect username or password...");
+                console.log("Account doesn't exist");
+                setRedirect(false);
             }
         } catch (err) {
             console.error('Error during login:', err);
         }
     };
 
-    if(redirect) {
-        return <Navigate to={"/"+redirect }/>;
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            handleLogIn();
+        }
+    };
+
+    if (redirect) {
+        return <Navigate to={"/"} />;
     }
 
     return (
@@ -65,11 +73,21 @@ const Login = () => {
                     <div className={styles.account}>
                         <h1>Account</h1>
                         <div>
-                            <input type="name" placeholder='Username' onChange={(e) => setInfo({ ...info, username: e.target.value })}/>
+                            <input 
+                                type="name" 
+                                placeholder='Username' 
+                                onChange={(e) => setInfo({ ...info, username: e.target.value })}
+                                onKeyPress={handleKeyPress} // Add onKeyPress event
+                            />
                             <img src="/user.svg" alt="" />
                         </div>
                         <div>
-                            <input type="password" placeholder='Password' onChange={(e) => setInfo({ ...info, password: e.target.value })} />
+                            <input 
+                                type="password" 
+                                placeholder='Password' 
+                                onChange={(e) => setInfo({ ...info, password: e.target.value })} 
+                                onKeyPress={handleKeyPress} // Add onKeyPress event
+                            />
                             <img src="/key.svg" alt="" />
                         </div>
                         <Link to='/forgot'><p>Forgot your password?</p></Link>
@@ -100,6 +118,6 @@ const Login = () => {
             />
         </>
     );
-}
+};
 
 export default Login;

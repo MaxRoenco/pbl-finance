@@ -1,12 +1,10 @@
 import { createContext, useEffect, useState } from "react";
-import useFetch from "./useFetch";
 
-export const authContext = createContext()
+export const authContext = createContext();
 
 const Context = (props) => {
     const [isRegistered, setIsRegistered] = useState(false);
     const [userData, setUserData] = useState({});
-    // const { data: users, setData, error, isLoading } = useFetch('http://localhost:3000/users')
 
     useEffect(() => {
         loadData();
@@ -14,7 +12,6 @@ const Context = (props) => {
 
     const register = async (user) => {
         try {
-            // Send a POST request to the JSON Server to add the new user
             const response = await fetch('http://localhost:3000/register', {
                 method: 'POST',
                 headers: {
@@ -28,9 +25,10 @@ const Context = (props) => {
             }
 
             const res = await response.json();
-            if(res.exists === 'false') {
+            if (res.exists === 'false') {
                 localStorage.setItem("isRegistered", true);
                 localStorage.setItem("id", res.id);
+                setIsRegistered(true); // Update registered status
             }
             return res;
 
@@ -39,40 +37,48 @@ const Context = (props) => {
         }
     };
 
-    let loadData = async () => {
+    const loadData = async () => {
         const userId = localStorage.getItem("id");
-        await fetch('http://localhost:3000/users/' + userId)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                setUserData(prev =>
-                ({
-                    ...prev,
-                    username: data.username,
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    deposit: data.deposit,
-                })
-                )
-            })
-            .catch(error => {
-                console.error('There was a problem with your fetch operation:', error);
-            });
-    }
+        if (!userId) return; 
+        
+        if (!userId) {
+            console.log("No user ID found in localStorage.");
+            return; // Exit early if no user ID
+        }
+
+        console.log("Fetching data for user ID:", userId);
+
+        try {
+            const response = await fetch('http://localhost:3000/users/' + userId);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            setUserData(prev => ({
+                ...prev,
+                username: data.username,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                deposit: data.deposit,
+            }));
+        } catch (error) {
+            console.error('There was a problem with your fetch operation:', error);
+        }
+    };
 
     const value1 = {
         register,
         isRegistered,
         setIsRegistered,
-        userData
+        userData,
+        loadData,
     };
 
     return (
-        <authContext.Provider value={value1}>{props.children}</authContext.Provider>
+        <authContext.Provider value={value1}>
+            {props.children}
+        </authContext.Provider>
     );
 }
 

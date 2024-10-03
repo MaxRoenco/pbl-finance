@@ -1,0 +1,54 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+.tableHeader {
+    background-color: #f4f4f4;
+    color: black;
+}
+
+.tableHeaderCell {
+    padding: 12px;
+    border-bottom: 2px solid #dddddd;
+    font-weight: bold;
+}
+
+.tableBody .tableRow {
+    transition: background-color 0.3s;
+}
+
+.tableRow:nth-child(even) {
+    background-color: #f9f9f93e;
+}
+
+.tableRow:hover {
+    background-color: #f1f1f12a;
+}
+
+.tableCell {
+    padding: 10px;
+    border-bottom: 1px solid #dddddd;
+}
+
+.noDataCell {
+    text-align: center;
+    color: #999;
+}
+
+.sellButton {
+    background-color: #ff4d4d;
+    color: #fff;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sellButton:hover {
+    background-color: #ff3333;
+}

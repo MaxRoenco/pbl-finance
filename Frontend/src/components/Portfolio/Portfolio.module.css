@@ -46,12 +46,14 @@
     "options" 
     "stats";
     grid-gap: 15px;
+    overflow-y: auto;
 }
 
 .table {
     grid-area: table;
     width: 100%;
     padding: 15px;
+    overflow-y: auto;
 }
 
 .table>table {
@@ -105,7 +107,7 @@
 .stats {
     grid-area: stats;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 2fr 1fr 1fr;
     grid-template-areas: "chart company summary";
     grid-gap: 25px;
     padding: 15px;
@@ -180,7 +182,7 @@
 }
 .deposit>h1,
 .preferences>h1 {
-    color: #020202;
+    color: #ffffff;
     font-size: 25px;
     font-weight: 700;
     text-align: center;

@@ -1,10 +1,11 @@
 import styles from './Dashboard.module.css'
 import { authContext } from '../../hooks/Context';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
+import News from '../News/News';
 
 
 const Dashboard = () => {
-    const { userData } = useContext(authContext);
+    const { userData, loadData } = useContext(authContext);
     console.log(userData)
     return (
         <div className={styles.main}>
@@ -22,7 +23,7 @@ const Dashboard = () => {
                 <div>${userData.deposit.initial - userData.deposit.invested}</div>
             </div>
             <div className={styles.deposit + ' ' + styles.grayBox}>
-                <div>{userData.deposit.initial/userData.deposit.invested || 0}%</div>
+                <div>{Math.min((userData.deposit.invested / userData.deposit.initial * 100, 100)) || 0}%</div>
                 <p>of deposit <br /> invested</p>
             </div>
             <div className={styles.graphContainer + ' ' + styles.grayBox}>
@@ -44,12 +45,7 @@ const Dashboard = () => {
                         Week
                     </div>
                 </div>
-                <h1>Market is <br /> down 0.80%</h1>
-                <p>Lorem Ipsum Lorem Ipsum Lorem </p>
-                <p>Lorem Ipsum Lorem Ipsum Lorem </p>
-                <p>Lorem Ipsum Lorem Ipsum Lorem </p>
-                <p>Lorem Ipsum Lorem Ipsum Lorem </p>
-                <p>Lorem Ipsum Lorem Ipsum Lorem </p>
+                <News topic='cryptocurrency'/>
             </div>
             <div className={styles.trending + ' ' + styles.grayBox}>
                 <div className={styles.trendingNow}>

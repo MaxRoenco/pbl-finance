@@ -4,33 +4,18 @@ import styles from './Buy.module.css';
 const Buy = () => {
     const [symbol, setSymbol] = useState('');
     const [money, setMoney] = useState('');
-    const [responseMessage, setResponseMessage] = useState(''); // State for server response
-    const [cur, setCur] = useState([]);
-    const loadCurrencies = async () => {
-        let prices = await fetch("https://api.binance.com/api/v3/ticker/price");
-        prices = await prices.json()
-        let currencies = []
-        console.log(prices)
-        prices.forEach(price => {
-            currencies.push(price.symbol);
-        })
-        currencies.sort()
-        setCur(currencies);
-    }
-    useEffect(() => {
-        loadCurrencies()
-    }, [])
+    const [responseMessage, setResponseMessage] = useState('');
+    const [isPurchased, setIsPurchased] = useState(false); // New state to track purchase
+    const [isLoading, setIsLoading] = useState(false); // State to track loading status
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent default form submission
-
-        const id = localStorage.getItem('id'); // Retrieve the id from local storage
-
+        e.preventDefault();
         const data = {
-            id,         // Add the id to the data
             symbol,
             money,
         };
+
+        setIsLoading(true); // Set loading to true when starting the request
 
         try {
             const response = await fetch('http://localhost:3000/buy', {
@@ -38,42 +23,52 @@ const Buy = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify({ ...data, userId: localStorage.getItem('id') }),
             });
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
 
-            const result = await response.text(); // Expecting a string response
-            setResponseMessage(result); // Set the response message
+            const result = await response.text();
+            setResponseMessage(result);
+            setIsPurchased(true); // Set purchase state to true
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
-            setResponseMessage('An error occurred. Please try again.'); // Optional error message
+            setResponseMessage('An error occurred. Please try again.');
+            setIsPurchased(false); // Reset purchase state on error
+        } finally {
+            setIsLoading(false); // Set loading to false after the request
         }
     };
 
+    const handleBack = () => {
+        setSymbol(''); // Reset symbol input
+        setMoney(''); // Reset money input
+        setResponseMessage(''); // Clear the response message
+        setIsPurchased(false); // Reset purchase state
+    };
+
     return (
-        <>
-            <h1>Buy Cryptocurrency</h1>
-            {responseMessage ? ( // Conditional rendering based on responseMessage
-                <div>{responseMessage}</div> // Display the server response
+        <div className={styles.container}>
+            <h1 className={styles.title}>Buy Cryptocurrency</h1>
+            {responseMessage ? (
+                <div className={styles.responseContainer}>
+                    <div className={styles.responseMessage}>{responseMessage}</div>
+                    <button className={styles.backButton} onClick={handleBack}>Back</button>
+                </div>
             ) : (
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="symbol">Symbol (e.g., BTCUSDT):</label>
-                    <select
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <label htmlFor="symbol" className={styles.label}>Symbol (e.g., BTC):</label>
+                    <input
+                        type='text'
                         className={styles.input}
-                        type="text"
                         id="symbol"
                         name="symbol"
-                        value={symbol}
-                        onChange={(e) => setSymbol(e.target.value)}
+                        onChange={(e) => setSymbol(e.target.value.toUpperCase() + 'USDT')}
                         required
-                    >
-                        <option value="" disabled hidden>Select a symbol</option> {/* Empty default value */}
-                        {cur.map((c, i) => <option key={i}>{c}</option>)}
-                    </select>
-                    <label htmlFor="money">Money (USDT):</label>
+                    />
+                    <label htmlFor="money" className={styles.label}>Money (USDT):</label>
                     <input
                         className={styles.input}
                         type="number"
@@ -83,10 +78,12 @@ const Buy = () => {
                         onChange={(e) => setMoney(e.target.value)}
                         required
                     />
-                    <button type="submit">Buy</button>
+                    <button type="submit" className={styles.submitButton} disabled={isLoading}>
+                        {isLoading ? 'Loading...' : 'Buy'}
+                    </button>
                 </form>
             )}
-        </>
+        </div>
     );
 };
 
