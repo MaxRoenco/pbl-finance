@@ -10,6 +10,8 @@
     display: grid;
     grid-template-columns: 345px 1fr 1fr;
     grid-template-areas: "logo path search";
+    z-index: 5;
+    background: transparent;
 }
 
 .logo {

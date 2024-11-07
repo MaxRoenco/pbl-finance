@@ -23,17 +23,19 @@ import Bubbles from './components/Bubbles/Bubbles'
 import Chart from './components/Chart/Chart'
 import News from './components/News/News';
 import Assets from './components/Assets/Assets';
+import Contact from './components/ContactUs/Contact';
+import { StarsCanvas } from './components/canvas';
 
 function Layout() {
   const location = useLocation();
-  const showHeaderAndSidebar = !['/', '/login', '/register', '/error', '/forgot'].includes(location.pathname);
-
+  const showHeader = !['/', '/login', '/register', '/error', '/forgot'].includes(location.pathname);
+  const showSidebar = !['/', '/login', '/register', '/error', '/forgot', '/contact-us'].includes(location.pathname);
   return (
     <div className="app-container">
-      {showHeaderAndSidebar && <Header />}
+      {showHeader && <Header />}
       <div className="content-container">
-        {showHeaderAndSidebar && <LeftBar />}
-        <Content shouldWrap={showHeaderAndSidebar}>
+        {showSidebar && <LeftBar />}
+        <Content shouldWrap={showHeader && showSidebar}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
@@ -43,7 +45,7 @@ function Layout() {
             <Route path="/features" element={<ProtectedRoute><Features /></ProtectedRoute>} />
             <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
             <Route path="/faq" element={<ProtectedRoute><FAQ /></ProtectedRoute>} />
-            <Route path="/contact-us" element={<ProtectedRoute><ContactUs /></ProtectedRoute>} />
+            <Route path="/contact-us" element={<ProtectedRoute><div className="relative z-0 w-full p-10"><Contact /> <StarsCanvas/></div></ProtectedRoute>} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/error" element={<ErrorPage />} />
@@ -68,5 +70,6 @@ function App() {
     </Router>
   );
 }
+
 
 export default App;
