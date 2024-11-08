@@ -25,11 +25,12 @@ import News from './components/News/News';
 import Assets from './components/Assets/Assets';
 import Contact from './components/ContactUs/Contact';
 import { StarsCanvas } from './components/canvas';
+import Preferences from './components/Preferences/Preferences';
 
 function Layout() {
   const location = useLocation();
-  const showHeader = !['/', '/login', '/register', '/error', '/forgot'].includes(location.pathname);
-  const showSidebar = !['/', '/login', '/register', '/error', '/forgot', '/contact-us', '/pricing'].includes(location.pathname);
+  const showHeader = !['/', '/login', '/register', '/error', '/forgot', '/preferences'].includes(location.pathname);
+  const showSidebar = !['/', '/login', '/register', '/error', '/forgot', '/contact-us', '/pricing', '/preferences'].includes(location.pathname);
   return (
     <div className="app-container">
       {showHeader && <Header />}
@@ -37,6 +38,7 @@ function Layout() {
         {showSidebar && <LeftBar />}
         <Content shouldWrap={showHeader && showSidebar}>
           <Routes>
+            <Route path='/preferences' element={<Preferences/>}/>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/portfolio" element={<ProtectedRoute><Portfolio /></ProtectedRoute>} />
@@ -45,7 +47,7 @@ function Layout() {
             <Route path="/features" element={<ProtectedRoute><Features /></ProtectedRoute>} />
             <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
             <Route path="/faq" element={<ProtectedRoute><FAQ /></ProtectedRoute>} />
-            <Route path="/contact-us" element={<ProtectedRoute><div className="relative z-0 w-full p-10"><Contact /> <StarsCanvas/></div></ProtectedRoute>} />
+            <Route path="/contact-us" element={<ProtectedRoute><div className="relative z-0 w-full p-10 "><Contact /> <StarsCanvas/></div></ProtectedRoute>} />
             {/* <Route path="/contact-us" element={<ProtectedRoute><ContactUs /></ProtectedRoute>} /> */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
