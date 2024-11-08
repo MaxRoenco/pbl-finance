@@ -16,6 +16,10 @@
     border-bottom: 2px solid #dddddd;
     font-weight: bold;
 }
+.tableHeader_light {
+    background-color: black;
+    color: white;
+}
 
 .tableBody .tableRow {
     transition: background-color 0.3s;

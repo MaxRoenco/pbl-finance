@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './Assets.module.css';
+import { authContext } from '../../hooks/Context';
 
 const Assets = () => {
     const [assets, setAssets] = useState([]);
     const [loadingId, setLoadingId] = useState(null); // Track which asset is currently being sold
+    const {lightMode} = useContext(authContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -67,7 +69,7 @@ const Assets = () => {
 
     return (
         <table className={styles.table}>
-            <thead className={styles.tableHeader}>
+            <thead className={styles.tableHeader + " " + (lightMode?styles.tableHeader_light:"")}>
                 <tr className={styles.tableRow}>
                     <th className={styles.tableHeaderCell}>Symbol</th>
                     <th className={styles.tableHeaderCell}>Quantity</th>
@@ -81,7 +83,7 @@ const Assets = () => {
             <tbody className={styles.tableBody}>
                 {assets.length > 0 ? (
                     assets.map((asset) => (
-                        <tr key={asset._id} className={styles.tableRow}>
+                        <tr key={asset._id} className={styles.tableRow + " " + (lightMode?"text-black":"")}>
                             <td className={styles.tableCell}>{asset.symbol}</td>
                             <td className={styles.tableCell}>{asset.quantity}</td>
                             <td className={styles.tableCell}>{asset.money}</td>
