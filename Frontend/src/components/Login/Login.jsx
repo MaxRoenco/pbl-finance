@@ -6,11 +6,10 @@ import { useState, useContext } from 'react';
 import { authContext } from '../../hooks/Context';
 
 const Login = () => {
-    const { isRegistered, setIsRegistered, loadData } = useContext(authContext);
+    const { isRegistered, setIsRegistered, loadData, lightMode, setLightMode } = useContext(authContext);
     const [info, setInfo] = useState({ username: '', password: '' });
     const [redirect, setRedirect] = useState(false);
     const [validationError, setValidationError] = useState('');
-    let {lightMode, setLightMode} = useContext(authContext);
 
     const handleLogIn = () => {
         let user = {
