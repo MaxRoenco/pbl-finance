@@ -1,62 +1,38 @@
-// const axios = require('axios');
-// const fetchRealTimeData = async (ticker) => {
-//     const options = {
-//       method: 'GET',
-//       url: `https://api.polygon.io/v1/last/stocks/${ticker}`,
-//       params: { apiKey: '' }
-//     };
-  
-//     try {
-//       const response = await axios.request(options);
-//       console.log(response.data);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-  
-//   // Example call
-//   fetchRealTimeData('AAPL');
-  
-//   const axios = require('axios');
-
-// const fetchTickerDetails = async (ticker) => {
-//   const options = {
-//     method: 'GET',
-//     url: `https://api.polygon.io/v3/reference/tickers/${ticker}`,
-//     params: { apiKey: '' } // Replace with your Polygon.io API key
-//   };
-
-//   try {
-//     const response = await axios.request(options);
-//     console.log(response.data);
-//     console.log(response.data[price])
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
-
-// // Example call
-// fetchTickerDetails('AAPL');
-
-
-
 const axios = require('axios');
 
-const getStockPrice = async (ticker) => {
-  const options = {
-    method: 'GET',
-    url: `https://api.polygon.io/v2/last/trade/${ticker}`,
-    params: { apiKey: 'oLGiQ7IEdPESk_A4AnuBkqibEbW2lNmr' } // Replace with your actual API key
-  };
+// Your Finnhub API Key
+const FINNHUB_API_KEY = 'cslpf79r01qgp6njjucgcslpf79r01qgp6njjud0'; // Replace with your Finnhub API key
 
-  try {
-    const response = await axios.request(options);
-    const price = response.data.results.price; // Latest price
-    console.log(`The latest price for ${ticker} is $${price}`);
-  } catch (error) {
-    console.error('Error:', error.response ? error.response.data : error.message);
+// List of stock symbols you want to track
+const stockSymbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'FB', 'TSLA', 'NFLX', 'NVDA', 'JPM', 'V'];
+
+const fetchStockData = async () => {
+  console.log('Fetching real-time stock prices...\n');
+  console.log('Symbol\tCurrent Price\t\t24h Change\t\tProfit/Loss\n');
+
+  for (const symbol of stockSymbols) {
+    try {
+      // Fetch current price
+      const response = await axios.get(`https://finnhub.io/api/v1/quote`, {
+        params: {
+          symbol: symbol,
+          token: FINNHUB_API_KEY
+        }
+      });
+
+      // Extract relevant data
+      const { c: currentPrice, pc: previousClose } = response.data;
+      
+      // Calculate 24-hour profit/loss percentage and amount
+      const profitLossPercentage = ((currentPrice - previousClose) / previousClose) * 100;
+      const profitLossAmount = currentPrice - previousClose;
+
+      console.log(`${symbol}\t$${currentPrice.toFixed(2)}\t\t${profitLossPercentage.toFixed(2)}%\t\t$${profitLossAmount.toFixed(2)}`);
+    } catch (error) {
+      console.error(`Error fetching data for ${symbol}:`, error.response ? error.response.data : error.message);
+    }
   }
 };
 
-// Example call
-getStockPrice('AAPL');
+// Run the function to display stock prices
+fetchStockData();
