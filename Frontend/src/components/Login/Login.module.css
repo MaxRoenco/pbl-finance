@@ -46,7 +46,7 @@
     width: 200px;
 }
 
-.banner>h1 {
+.banner_h1{
     font-size: 40px;
     font-weight: 700;
 }
@@ -59,7 +59,7 @@
     width: 400px;
 }
 
-.loginContainer>h1 {
+.h1_dark {
     font-weight: 700;
     font-size: 60px;
     color: white;
@@ -78,13 +78,13 @@
     flex-direction: column;
 }
 
-.account>h1 {
+.h1_account {
     font-size: 20px;
     font-weight: medium;
     color: #F9F9F9;
 }
 
-.account>div>input {
+.account_input{
     border: 1px solid rgba(209, 209, 209, 0.5);
     filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.06)) drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.1));
     border-radius: 60px;
@@ -94,6 +94,10 @@
     padding: 0 20px;
     margin: 10px 0;
     padding-left: 50px;
+}
+.account_input_light {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    color: black;
 }
 
 .account>div {
@@ -107,7 +111,7 @@
     left: 20px;
 }
 
-.account p {
+.forgot {
     color: #BDD8B5;
 }
 
@@ -122,9 +126,10 @@
     align-items: center;
 }
 
-.remember>label {
+.remember_label {
     font-size: 16px;
 }
+
 
 .remember>input {
     -webkit-appearance: none;
@@ -153,6 +158,10 @@
     border: 1px solid rgba(209, 209, 209, 0.04);
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1), inset 0px 1px 0px rgba(255, 255, 255, 0.25);
     border-radius: 60px;
+}
+
+.logIn_light {
+    background: rgba(28, 41, 26, 0.599);
 }
 
 .logIn:hover {
