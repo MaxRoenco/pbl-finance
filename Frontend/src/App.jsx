@@ -29,7 +29,7 @@ import { StarsCanvas } from './components/canvas';
 function Layout() {
   const location = useLocation();
   const showHeader = !['/', '/login', '/register', '/error', '/forgot'].includes(location.pathname);
-  const showSidebar = !['/', '/login', '/register', '/error', '/forgot', '/contact-us'].includes(location.pathname);
+  const showSidebar = !['/', '/login', '/register', '/error', '/forgot', '/contact-us', '/pricing'].includes(location.pathname);
   return (
     <div className="app-container">
       {showHeader && <Header />}
@@ -46,6 +46,7 @@ function Layout() {
             <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
             <Route path="/faq" element={<ProtectedRoute><FAQ /></ProtectedRoute>} />
             <Route path="/contact-us" element={<ProtectedRoute><div className="relative z-0 w-full p-10"><Contact /> <StarsCanvas/></div></ProtectedRoute>} />
+            {/* <Route path="/contact-us" element={<ProtectedRoute><ContactUs /></ProtectedRoute>} /> */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/error" element={<ErrorPage />} />
