@@ -13,7 +13,6 @@
 
 .grayBox {
     box-sizing: border-box;
-    background: #151515;
     border: 1px solid rgba(255, 255, 255, 0.04);
     box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.08);
     border-radius: 18px;
@@ -21,7 +20,7 @@
 
 .colorBox {
     box-sizing: border-box;
-    background: radial-gradient(101.04% 136.06% at 64.21% -19.34%, rgba(68, 60, 104, 0.55) 0%, rgba(217, 217, 217, 0.55) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    background: radial-gradient(101.04% 136.06% at 64.21% -19.34%, rgba(68, 60, 104, 0.55) 0%, rgba(217, 217, 217, 0.55) 100%);
     border: 1px solid rgba(255, 255, 255, 0.04);
     box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.08);
     border-radius: 16px;
@@ -90,11 +89,16 @@
 
 .options button {
     box-sizing: border-box;
-    background: #151515;
+    /* background: #151515; */
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.08);
     border-radius: 18px;
     padding: 3px 15px;
+}
+
+.options_light button {
+    border: 1px solid rgba(0, 0, 0, 0.412);
+    color: black;
 }
 
 .intervals {
@@ -151,6 +155,10 @@
     color: #BDD8B5;
 }
 
+.summary_light>h1, .summary_light>h2 {
+    color: green;
+}
+
 .side {
     grid-area: side;
     display: grid;
@@ -188,6 +196,10 @@
     text-align: center;
 }
 
+.deposit_light>h1 {
+    color: black;
+}
+
 .deposit>h2 {
     font-size: 20px;
     font-weight: 700;
@@ -195,6 +207,10 @@
 .deposit>p {
     color: #BDD8B5;
     font-weight: 700;
+}
+
+.deposit_light>p {
+    color: green;
 }
 
 

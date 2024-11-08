@@ -16,7 +16,7 @@
 /* general */
 .grayBox {
     box-sizing: border-box;
-    background: #151515;
+    /* background: #151515; */
     border: 1px solid rgba(255, 255, 255, 0.04);
     box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.08);
     border-radius: 16px;
@@ -148,7 +148,7 @@
     margin-left: 10px;
 }
 
-.newsTitle>div {
+.news_week {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -160,6 +160,12 @@
     background-color: #151515;
     margin-left: 40px;
     font-size: 15px;
+}
+
+.news_week_light {
+    background-color: #afafaf;
+    color: black;
+    border: solid black 2px;
 }
 
 .newsTitle>div>img {
