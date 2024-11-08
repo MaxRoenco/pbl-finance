@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './Bubbles.module.css';
 import * as d3 from 'd3';
 import Chart from '../Chart/Chart'
+import { authContext } from '../../hooks/Context';
 
 const Bubbles = () => {
     const [cryptoData, setCryptoData] = useState([]);
     const [currentVariable, setCurrentVariable] = useState('price_change_percentage_24h');
     const [selectedCrypto, setSelectedCrypto] = useState(null);
+    const {lightMode} = useContext(authContext);
 
     useEffect(() => {
         fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1')
@@ -124,18 +126,18 @@ const Bubbles = () => {
 
     return (
         <div className={styles.container}>
-            <button onClick={() => setCurrentVariable('market_cap')} className={styles.marketCap}>Market Capitalization</button>
-            <button onClick={() => setCurrentVariable('price_change_percentage_24h')} className={styles.percentage24h}>Price change 24h</button>
+            <button onClick={() => setCurrentVariable('market_cap')} className={styles.marketCap + " " + (lightMode?"bg-light-secondary text-black":"bg-dark-secondary text-white")}>Market Capitalization</button>
+            <button onClick={() => setCurrentVariable('price_change_percentage_24h')} className={styles.percentage24h + " " + (lightMode?"bg-light-secondary text-black":"bg-dark-secondary text-white")}>Price change 24h</button>
             <svg id="bubble-chart"></svg>
             {selectedCrypto && (
-                <div className={styles.infoWindow}>
+                <div className={styles.infoWindow + " " + (lightMode?styles.infoWindow_light:"")}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <img src={selectedCrypto.image} alt={selectedCrypto.name} className={styles.cryptoImage} />
                         <h3>{selectedCrypto.name}</h3>
                     </div>
-                    <p>Price Change (24h): {selectedCrypto.price_change_percentage_24h}%</p>
-                    <p>Market Cap: ${selectedCrypto.market_cap.toLocaleString()}</p>
-                    <p>Current Price: ${selectedCrypto.current_price}</p>
+                    <p className={(lightMode?"text-black":"text-white")}>Price Change (24h): {selectedCrypto.price_change_percentage_24h}%</p>
+                    <p className={(lightMode?"text-black":"text-white")}>Market Cap: ${selectedCrypto.market_cap.toLocaleString()}</p>
+                    <p className={(lightMode?"text-black":"text-white")}>Current Price: ${selectedCrypto.current_price}</p>
                     {console.log(selectedCrypto)}
                     <Chart symbol={selectedCrypto.symbol.toUpperCase() + "USDT"}></Chart>
                     <button className={styles.close} onClick={() => setSelectedCrypto(null)}>Close</button>

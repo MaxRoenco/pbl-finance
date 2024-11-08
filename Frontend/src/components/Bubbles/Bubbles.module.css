@@ -26,7 +26,6 @@
 
 .marketCap,
 .percentage24h {
-    background: rgba(21, 21, 21, 1);
     border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: 18px;
     position: absolute;
@@ -63,6 +62,11 @@
     height: 500px;
     z-index: 1000;
     overflow-y: scroll;
+}
+
+.infoWindow_light {
+    background-color: #C9C9C9;
+    color: black;
 }
 
 .close {
