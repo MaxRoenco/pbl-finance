@@ -67,10 +67,10 @@ app.post('/register', (req, res) => {
                                     return res.status(500).json({ error: 'Could not hash the password' });
                                 }
                                 const newUser = {
-                                    username: user.username,
-                                    firstName: user.firstName,
-                                    lastName: user.lastName,
-                                    email: user.email,
+                                    username: user.username.toLowerCase(),
+                                    firstName: user.firstName.toLowerCase(),
+                                    lastName: user.lastName.toLowerCase(),
+                                    email: user.email.toLowerCase(),
                                     password: hashedPassword,  // Store the hashed password
                                     phoneNumber: user.phoneNumber,
                                     assets: [],
@@ -105,7 +105,7 @@ app.post('/register', (req, res) => {
 app.post('/login', (req, res) => {
     const user = req.body;
     db.collection('users')
-        .findOne({ username: user.username })
+        .findOne({ username: user.username.toLowerCase() })
         .then(result => {
             if (!result) {
                 return res.status(201).json({ exists: "false" });
@@ -136,7 +136,7 @@ app.post('/buy', async (req, res) => {
     try {
         // Fetch current price (real-time price for the symbol)
         const response = await axios.get('https://api.binance.com/api/v3/ticker/price', {
-            params: { symbol: symbol }
+            params: { symbol: symbol }  
         });
         const closePriceOnStart = parseFloat(response.data.price);
 
@@ -155,13 +155,17 @@ app.post('/buy', async (req, res) => {
         const collection = db.collection('users');
         const result = await collection.updateOne(
             { _id: new ObjectId(userId) },
-            { $push: { assets: asset } }
+            {
+                $push: { assets: asset },
+                $inc: { 'deposit.invested': parseInt(money) }
+            },
         );
+
         res.send(`Bought ${quantity} ${symbol} at ${closePriceOnStart} USDT`);
 
     } catch (error) {
         console.error('Error during buying:', error);
-        res.render('error', { error });
+        res.status(500).json({ error: 'Error during buying process' }); // Return error as JSON
     }
 });
 
@@ -176,12 +180,13 @@ app.post('/sell/:id', async (req, res) => {
             .findOne(
                 { _id: new ObjectId(userId) },
                 { projection: { assets: { $elemMatch: { _id: new ObjectId(assetId) } } } }
-            )
-        let asset = assetsResponse.assets[0]
-
-        if (!assetsResponse) {
+            );
+        
+        if (!assetsResponse || !assetsResponse.assets.length) {
             return res.status(404).send('Asset not found');
         }
+
+        let asset = assetsResponse.assets[0];
 
         // Fetch current price
         const currentPriceResponse = await axios.get('https://api.binance.com/api/v3/ticker/price', {
@@ -189,14 +194,13 @@ app.post('/sell/:id', async (req, res) => {
         });
 
         const currentPrice = parseFloat(currentPriceResponse.data.price);
-        console.log(currentPriceResponse, currentPrice)
+        console.log(currentPriceResponse, currentPrice);
 
         // Calculate profit or loss
         const profitOrLoss = (currentPrice - asset.closePriceOnStart) * asset.quantity;
-        console.log(profitOrLoss)
+        console.log(profitOrLoss);
 
         // Save the transaction to the Post collection
-        
         const post = {
             _id: new ObjectId(),
             startTime: asset.startTime,
@@ -207,20 +211,35 @@ app.post('/sell/:id', async (req, res) => {
             quantity: asset.quantity,
             sellTime: new Date(),
         };
-        
-        const result = await collection.updateOne(
+
+        // Update the user's deposit:
+        // 1. Add the profitOrLoss to deposit.initial
+        // 2. Subtract the money (initial investment) from deposit.invested
+        const updateDeposit = await collection.updateOne(
+            { _id: new ObjectId(userId) },
+            {
+                $inc: {
+                    'deposit.initial': profitOrLoss, // Add the profit/loss
+                    'deposit.invested': -asset.money  // Subtract the money invested
+                }
+            }
+        );
+
+        // Push the sale record to the posts collection
+        const updatePosts = await collection.updateOne(
             { _id: new ObjectId(userId) },
             { $push: { posts: post } }
         );
-        // Remove the asset from the assets collection
-        const result2 = await collection.updateOne(
+
+        // Remove the sold asset from the assets collection
+        const updateAssets = await collection.updateOne(
             { _id: new ObjectId(userId) },
             { $pull: { assets: { _id: new ObjectId(assetId) } } }
         );
 
-        res.send({text: `Sold ${assetsResponse.symbol} with a profit/loss of ${profitOrLoss} USDT`});
+        res.json({ text: `Sold ${asset.symbol} with a profit/loss of ${profitOrLoss} USDT` });
     } catch (error) {
         console.error(error);
-        res.render('error');
+        res.status(500).json({ error: 'Error during selling process' });
     }
 });

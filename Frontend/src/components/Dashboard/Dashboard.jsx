@@ -6,24 +6,30 @@ import News from '../News/News';
 
 const Dashboard = () => {
     const { userData, loadData } = useContext(authContext);
+    useEffect(()=>{
+        loadData()
+    }, [])
+    useEffect(()=>{
+
+    }, [userData])
     console.log(userData)
     return (
         <div className={styles.main}>
             <h1 className={styles.overview}>{userData.firstName + ' ' + userData.lastName}’s Overview</h1>
             <div className={styles.initial}>
                 <p>Total Initial Deposit</p>
-                <div>${userData.deposit.initial}</div>
+                <div>${userData.deposit.initial.toFixed(2)}</div>
             </div>
             <div className={styles.invested}>
                 <p>Total Invested Deposit</p>
-                <div>${userData.deposit.invested}</div>
+                <div>${userData.deposit.invested.toFixed(2)}</div>
             </div>
             <div className={styles.remaining}>
                 <p>Total Remaining Deposit</p>
-                <div>${userData.deposit.initial - userData.deposit.invested}</div>
+                <div>${(userData.deposit.initial - userData.deposit.invested).toFixed(2)}</div>
             </div>
             <div className={styles.deposit + ' ' + styles.grayBox}>
-                <div>{Math.min((userData.deposit.invested / userData.deposit.initial * 100, 100)) || 0}%</div>
+                <div>{Math.min((userData.deposit.invested / userData.deposit.initial * 100, 100)).toFixed(2) || 0}%</div>
                 <p>of deposit <br /> invested</p>
             </div>
             <div className={styles.graphContainer + ' ' + styles.grayBox}>
