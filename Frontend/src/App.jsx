@@ -31,8 +31,10 @@ function Layout() {
   const location = useLocation();
   const showHeader = !['/', '/login', '/register', '/error', '/forgot', '/preferences'].includes(location.pathname);
   const showSidebar = !['/', '/login', '/register', '/error', '/forgot', '/contact-us', '/pricing', '/preferences'].includes(location.pathname);
+  const {lightMode, setLightMode} = useContext(authContext);
+  const toggleLightMode = _=> setLightMode((lightMode)=>{return !lightMode});
   return (
-    <div className="app-container">
+    <div className={`app-container${lightMode? " bg-light-primary":""}`}>
       {showHeader && <Header />}
       <div className="content-container">
         {showSidebar && <LeftBar />}
@@ -59,6 +61,7 @@ function Layout() {
           </Routes>
         </Content>
       </div>
+      <div className={'thing' + (lightMode?" thing_black":"")} onClick={toggleLightMode}></div>
     </div>
 
   );

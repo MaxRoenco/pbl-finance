@@ -4,6 +4,7 @@ export const authContext = createContext();
 
 const Context = (props) => {
     const [isRegistered, setIsRegistered] = useState(false);
+    const [lightMode, setLightMode] = useState(true);
     const [userData, setUserData] = useState({});
 
     useEffect(() => {
@@ -73,6 +74,8 @@ const Context = (props) => {
         setIsRegistered,
         userData,
         loadData,
+        lightMode,
+        setLightMode
     };
 
     return (

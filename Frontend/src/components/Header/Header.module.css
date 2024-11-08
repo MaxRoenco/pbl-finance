@@ -19,9 +19,12 @@
     display: flex;
     align-items: center;
 }
-.logo>img {
+.img {
     height: 40px;
     margin-left: 10px;
+}
+.img_light{
+    filter: invert(1);
 }
 
 .path {

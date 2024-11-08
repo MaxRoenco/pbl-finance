@@ -12,6 +12,7 @@
     height: 100%;
     /* background-color: red; */
 }
+
 .linkItem {
     text-shadow: transparent 1px 0 10px;
     transition: text-shadow 500ms ease;
@@ -40,6 +41,9 @@
 
 .logoImg {
     height: 50px;
+}
+.img_light {
+    filter: invert(1);
 }
 
 .links {
@@ -96,7 +100,7 @@
     padding: 0 50px;
 }
 
-.main>p {
+.main_p {
     font-size: 18px;
     line-height: 1.6;
     color: #ffffff;
@@ -131,6 +135,10 @@
 .login>img, .register>img {
     width: 23px;
     margin-right: 7px;
+}
+
+.invert{
+    filter: invert(1);
 }
 
 .login {

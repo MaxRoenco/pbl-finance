@@ -59,3 +59,22 @@ body,
   scrollbar-width: thin;             /* Scrollbar width */
   scrollbar-color: #555 #222;        /* Thumb and track colors */
 }
+
+.thing {
+  margin: 10px;
+  height: 100px;
+  width: 100px;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 100%;
+}
+
+.thing_black {
+  background-color: black;
+}
+
+.invert {
+  filter: invert(1);
+}
