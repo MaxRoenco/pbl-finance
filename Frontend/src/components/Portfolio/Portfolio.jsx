@@ -91,12 +91,12 @@ const Portfolio = () => {
                 <Link to='/buy' className={styles.invest + ' ' + styles.colorBox}>Buy Now</Link>
                 <div className={styles.deposit + ' ' + styles.colorBox}>
                     <h1>Deposit Analysis</h1>
-                    <h2>${userData.deposit.initial}</h2>
+                    <h2>${userData.deposit.initial.toFixed(2)}</h2>
                     <h3>Total Initial Deposit</h3>
-                    <h2>${userData.deposit.invested}</h2>
+                    <h2>${userData.deposit.invested.toFixed(2)}</h2>
                     <h3>Total Invested Deposit</h3>
-                    <p>{Math.min((userData.deposit.invested / userData.deposit.initial * 100, 100)) || 0}% of deposit invested</p>
-                    <h2>${userData.deposit.initial - userData.deposit.invested}</h2>
+                    <p>{Math.min((userData.deposit.invested / userData.deposit.initial * 100, 100)).toFixed(2) || 0}% of deposit invested</p>
+                    <h2>${(userData.deposit.initial - userData.deposit.invested).toFixed(2)}</h2>
                     <h3>Total Remaining Deposit</h3>
                 </div>
                 <div className={styles.preferences + ' ' + styles.colorBox}>
