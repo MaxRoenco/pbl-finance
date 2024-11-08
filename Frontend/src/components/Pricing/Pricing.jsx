@@ -1,9 +1,10 @@
 import styles from './Pricing.module.css'
+import FundMe from './FundMe/FundeMe';
 
 const Pricing = () => {
     return (
         <>
-            <h1>Pricing</h1>
+            <FundMe/>
         </>
     );
 }

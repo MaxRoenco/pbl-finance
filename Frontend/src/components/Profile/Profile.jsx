@@ -1,10 +1,10 @@
-import FundMe from './FundMe/FundeMe';
+
 import styles from './Profile.module.css'
 
 const Profile = () => {
     return (
         <>
-            <FundMe/>
+            <div className="">Profile</div>
         </>
     );
 }
