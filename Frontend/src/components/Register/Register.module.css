@@ -59,7 +59,7 @@
     width: 50%;
 }
 
-.loginContainer>h1 {
+.h1_dark {
     font-weight: 700;
     font-size: 60px;
     color: white;
@@ -96,6 +96,14 @@
     font-size: 20px;
 }
 
+.account_light>div>input {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.account_light>div>label {
+    color: black;
+}
+
 
 .account>div {
     width: 45%;
@@ -111,7 +119,7 @@
     background-color: green;
 }
 
-.loginContainer p {
+.forgot {
     color: #BDD8B5;
 }
 
@@ -126,9 +134,10 @@
     align-items: center;
 }
 
-.remember>label {
+.remember_label {
     font-size: 16px;
 }
+
 
 .remember>input {
     -webkit-appearance: none;
@@ -158,7 +167,9 @@
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1), inset 0px 1px 0px rgba(255, 255, 255, 0.25);
     border-radius: 60px;
 }
-
+.logIn_light {
+    background: rgba(28, 41, 26, 0.599);
+}
 .logIn:hover {
     filter: brightness(2);
 }

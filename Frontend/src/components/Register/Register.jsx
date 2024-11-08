@@ -11,6 +11,8 @@ const Register = () => {
         isRegistered,
         setIsRegistered,
         loadData,
+        lightMode,
+        setLightMode
     } = useContext(authContext);
     const [newUser, setNewUser] = useState({ username: '', firstName: '', lastName: '', email: '', phoneNumber: '', password: '', passwordRepeat: '' });
     const [isGood, setIsGood] = useState(false);
@@ -117,11 +119,11 @@ const Register = () => {
         <>
             <div className={styles.container}>
                 <Link to='/' className={styles.arrowContainer}>
-                    <img className={styles.arrow} src="arrow.svg" alt="" />
+                    <img className={styles.arrow+(lightMode?" invert":"")} src="arrow.svg" alt="" />
                 </Link>
                 <div className={styles.loginContainer}>
-                    <h1>Register<img data-tooltip-id="my-tooltip-1" src="/question_icon.png" alt="" /></h1>
-                    <div className={styles.account}>
+                    <h1 className={styles.h1_dark+(lightMode?" text-black":"")}>Register<img className={lightMode?"invert":""} data-tooltip-id="my-tooltip-1" src="/question_icon.png" alt="" /></h1>
+                    <div className={styles.account+(lightMode?" "+styles.account_light:"")}>
                         <div className={styles.first}>
                             <label>Username</label>
                             <input
@@ -194,7 +196,7 @@ const Register = () => {
                         </div>
                     </div>
                     {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
-                    <Link to='/login'><p>Already have an account?</p></Link>
+                    <Link to='/login'><p className={styles.forgot +(lightMode? " text-black": "")}>Already have an account?</p></Link>
                     <div className={styles.actions}>
                         <div className={styles.remember}>
                             <input
@@ -202,18 +204,18 @@ const Register = () => {
                                 checked={rememberMe}
                                 onChange={(e) => setRememberMe(e.target.checked)}
                             />
-                            <label htmlFor="remember">Remember Me</label>
+                            <label className={styles.remember_label +(lightMode? " text-black": "")} htmlFor="remember">Remember Me</label>
                         </div>
-                        <button className={styles.logIn} onClick={handleRegister}>Register</button>
+                        <button className={styles.logIn +(lightMode? " "+styles.logIn_light: "")} onClick={handleRegister}>Register</button>
                     </div>
                 </div>
                 <div className={styles.banner}>
-                    <img className={styles.logo} src="/logo.svg" alt="" />
-                    <h1>Invest Smarter,<br />Trade Together</h1>
+                    <img className={styles.logo + (lightMode?" invert":"")} src="/logo.svg" alt="" />
+                    <h1 className={styles.banner_h1 + (lightMode?" text-black":"")}>Invest Smarter,<br/>Trade Together</h1>
                     <img className={styles.illustration} src="/login_img.svg" alt="" />
                     <div className={styles.navigation}>
-                        <Link to='/faq' className={styles.linkItem}>FAQ</Link>
-                        <Link to='/contact-us' className={styles.linkItem}>Contact Us</Link>
+                        <Link to='/faq' className={styles.linkItem + (lightMode?" text-black":"")}>FAQ</Link>
+                        <Link to='/contact-us' className={styles.linkItem + (lightMode?" text-black":"")}>Contact Us</Link>
                     </div>
                 </div>
             </div>
