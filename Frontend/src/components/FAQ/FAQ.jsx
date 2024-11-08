@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from './FAQ.module.css';
+import { authContext } from "../../hooks/Context";
 
 const FAQ = () => {
+  let {lightMode, setLightMode} = useContext(authContext);
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleFAQ = (index) => {

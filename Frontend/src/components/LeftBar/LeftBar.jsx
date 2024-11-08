@@ -12,19 +12,19 @@ const LeftBar = () => {
             <div className={`${styles.container} ${lightMode ? "bg-light-secondary text-black" : ""}`}>
                 <ul className={styles.links}>
                     <Link to='/dashboard' className={`${styles.linkItem} ${location.pathname === '/dashboard' ? styles.selected : ''}`}>
-                        <img src="/dashboard.png" alt="" /> Dashboard
+                        <img src="/dashboard.png" className={`${lightMode ? "invert" : ""}`} alt="" /> Dashboard
                     </Link>
                     <Link to='/portfolio' className={`${styles.linkItem} ${location.pathname === '/portfolio' ? styles.selected : ''}`}>
-                        <img src="/portfolio.png" alt="" /> My Portfolio
+                        <img src="/portfolio.png" className={`${lightMode ? "invert" : ""}`} alt="" /> My Portfolio
                     </Link>
                     <Link to='/profile' className={`${styles.linkItem} ${location.pathname === '/profile' ? styles.selected : ''}`}>
-                        <img src="/profile.png" alt="" /> Profile
+                        <img src="/profile.png" className={`${lightMode ? "invert" : ""}`} alt="" /> Profile
                     </Link>
                     <Link to='/assets' className={`${styles.linkItem} ${location.pathname === '/assets' ? styles.selected : ''}`}>
-                        <img src="/assets.png" alt="" /> Assets
+                        <img src="/assets.png" className={`${lightMode ? "invert" : ""}`} alt="" /> Assets
                     </Link>
                     <Link to='/bubbles' className={`${styles.linkItem} ${location.pathname === '/bubbles' ? styles.selected : ''}`}>
-                        <img src="/bubble.png" style={{ filter: 'invert(1)' }} alt="" /> Bubbles
+                        <img src="/bubble.png"  className={`${lightMode ? "" : "invert"}`} alt="" /> Bubbles
                     </Link>
                 </ul>
                 <div className={styles.lowerWrapper}>

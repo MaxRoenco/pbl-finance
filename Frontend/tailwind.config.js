@@ -13,7 +13,7 @@ module.exports = {
         "white-100": "#f3f3f3",
         "light-primary": "#E7E7E7",
         "light-secondary": "#C9C9C9",
-        "light-tertiary": "#1B1B1BB2",
+        "light-tertiary": "#020202B2",
         "dark-primary": "rgba(2, 2, 2, 1)",
         "dark-secondary": "#151515",
         "dark-tertiary": "#070707",
