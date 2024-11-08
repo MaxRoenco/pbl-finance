@@ -11,7 +11,7 @@ const Header = () => {
     location = location.charAt(0).toUpperCase() + location.slice(1);
     return (
         <>
-            <div className={styles.logoContainer}>
+            <div className={`${styles.logoContainer} ${lightMode ? "bg-light-primary" : "bg-black"}`} >
                     <Link to='/' className={styles.logo}><img className={styles.img} src="/logo.png" alt="" /></Link>
                     <div className={styles.path}><img src="/home.png" alt="" />{`${location}`}</div>
                     <div className={styles.loopContainer}>

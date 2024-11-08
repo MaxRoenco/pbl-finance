@@ -48,8 +48,8 @@ function Layout() {
             <Route path="/bubbles" element={<ProtectedRoute><Bubbles /></ProtectedRoute>} />
             <Route path="/features" element={<ProtectedRoute><Features /></ProtectedRoute>} />
             <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
-            <Route path="/faq" element={<ProtectedRoute><FAQ /></ProtectedRoute>} />
-            <Route path="/contact-us" element={<ProtectedRoute><div className="relative z-0 w-full p-10 "><Contact /> <StarsCanvas/></div></ProtectedRoute>} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/contact-us" element={<div className="relative z-0 w-full p-10 "><Contact /> <StarsCanvas/></div>} />
             {/* <Route path="/contact-us" element={<ProtectedRoute><ContactUs /></ProtectedRoute>} /> */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

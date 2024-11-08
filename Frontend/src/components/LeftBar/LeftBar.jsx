@@ -6,10 +6,10 @@ import { authContext } from '../../hooks/Context';
 
 const LeftBar = () => {
     const location = useLocation(); // Get the current route
-    const { userData } = useContext(authContext);
+    const { userData, lightMode, seLightMode } = useContext(authContext);
     return (
         <div className={styles.mainContainer}>
-            <div className={styles.container}>
+            <div className={`${styles.container} ${lightMode ? "bg-light-secondary text-black" : ""}`}>
                 <ul className={styles.links}>
                     <Link to='/dashboard' className={`${styles.linkItem} ${location.pathname === '/dashboard' ? styles.selected : ''}`}>
                         <img src="/dashboard.png" alt="" /> Dashboard
@@ -29,15 +29,15 @@ const LeftBar = () => {
                 </ul>
                 <div className={styles.lowerWrapper}>
                     <div className={styles.settings}>
-                        <div><img src="/gear.png" alt="" /> Settings</div>
-                        <div><img src="/bell.png" alt="" /> Notifications</div>
+                        <div><img src={`${lightMode ? "gearLight.svg" : "gear.png"}`} alt="gear" /> Settings</div>
+                        <div><img src={`${lightMode ? "bellLight.svg" : "bell.png"}`} alt="bell" /> Notifications</div>
                     </div>
                     <div className={styles.infoContainer}>
-                        <img src="/profilepic.png" alt="Profile" />
-                        <div className={styles.info}>
+                        <img src={`${lightMode ? "profileLight.svg" : "/profilepic.png"}`} alt="Profile" />
+                        <div className={`${styles.info}`}>
                             <h1>{userData.firstName + ' ' + userData.lastName}</h1>
-                            <p>@{userData.username}</p>
-                            <h6>Log out</h6>
+                            <p className={`${lightMode ? "text-black": ""}`}>@{userData.username}</p>
+                            <h6 className={`${lightMode ? "text-black": "text-rgba(255, 255, 255, 0.3)"}`}>Log out</h6>
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,7 @@
     position: fixed;
     height: calc(100% - 90px);
     top: 75px;
+    border-radius: 19px;
 }
 
 .container {
@@ -141,7 +142,6 @@ transform: matrix(0.75, 0.66, -0.33, 0.94, 0, 0);
 }
 
 .info>h6 {
-    color: rgba(255, 255, 255, 0.3);
     font-weight: 300;
     font-size: 14px;
 }
