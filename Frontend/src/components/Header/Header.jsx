@@ -12,7 +12,7 @@ const Header = () => {
     return (
         <>
             <div className={`${styles.logoContainer} ${lightMode ? "bg-light-primary" : "bg-black"}`} >
-                    <Link to='/' className={styles.logo}><img className={`${styles.img}`} src={`${lightMode ? "logoBlack.svg" : "logo.png"}`} alt="logo" /></Link>
+                    <Link to='/' className={styles.logo}><img className={`${styles.img} ${lightMode?"invert":""}`} src="logo.png" alt="logo" /></Link>
                     <div className={`${styles.path} ${lightMode ? "text-light-tertiary" : ""}`}><img src="/home.png" className={`${lightMode ? "invert" : ""}`} alt="homeIcon" />{`${location}`}</div>
                     <div className={styles.loopContainer}>
                         <div className={`${styles.loop} ${lightMode ? "bg-light-secondary" : ""}`} type='text'>
