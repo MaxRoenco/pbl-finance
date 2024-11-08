@@ -10,6 +10,7 @@ const Login = () => {
     const [info, setInfo] = useState({ username: '', password: '' });
     const [redirect, setRedirect] = useState(false);
     const [validationError, setValidationError] = useState('');
+    let {lightMode, setLightMode} = useContext(authContext);
 
     const handleLogIn = () => {
         let user = {
@@ -66,48 +67,50 @@ const Login = () => {
         <>
             <div className={styles.container}>
                 <Link to='/' className={styles.arrowContainer}>
-                    <img className={styles.arrow} src="arrow.svg" alt="" />
+                    <img className={styles.arrow+(lightMode?" invert":"")} src="arrow.svg"  alt="" />
                 </Link>
                 <div className={styles.loginContainer}>
-                    <h1>Log In <img data-tooltip-id="my-tooltip-1" src="/question_icon.png" alt="" /></h1>
+                    <h1 className={styles.h1_dark+(lightMode?" text-black":"")}>Log In <img className={lightMode?"invert":""} data-tooltip-id="my-tooltip-1" src="/question_icon.png" alt="" /></h1>
                     <div className={styles.account}>
-                        <h1>Account</h1>
+                        <h1 className={styles.h1_account+(lightMode?" text-black":"")}>Account</h1>
                         <div>
                             <input 
+                                className={styles.account_input +(lightMode? " "+styles.account_input_light: "")}
                                 type="name" 
                                 placeholder='Username' 
                                 onChange={(e) => setInfo({ ...info, username: e.target.value })}
-                                onKeyPress={handleKeyPress} // Add onKeyPress event
+                                onKeyDown={handleKeyPress}
                             />
-                            <img src="/user.svg" alt="" />
+                            <img className={lightMode?"invert":""} src="/user.svg" alt="" />
                         </div>
                         <div>
                             <input 
+                                className={styles.account_input +(lightMode? " "+styles.account_input_light: "")}
                                 type="password" 
                                 placeholder='Password' 
                                 onChange={(e) => setInfo({ ...info, password: e.target.value })} 
                                 onKeyPress={handleKeyPress} // Add onKeyPress event
                             />
-                            <img src="/key.svg" alt="" />
+                            <img className={lightMode?"invert":""} src="/key.svg" alt="" />
                         </div>
-                        <Link to='/forgot'><p>Forgot your password?</p></Link>
+                        <Link to='/forgot'><p className={styles.forgot +(lightMode? " text-black": "")}>Forgot your password?</p></Link>
                         {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
                     </div>
                     <div className={styles.actions}>
                         <div className={styles.remember}>
                             <input type="checkbox" name="remember"/>
-                            <label htmlFor="remember">Remember Me</label>
+                            <label className={styles.remember_label +(lightMode? " text-black": "")} htmlFor="remember">Remember Me</label>
                         </div>
-                        <button className={styles.logIn} onClick={handleLogIn}>Log in</button>
+                        <button className={styles.logIn +(lightMode? " "+styles.logIn_light: "")} onClick={handleLogIn}>Log in</button>
                     </div>
                 </div>
                 <div className={styles.banner}>
-                    <img className={styles.logo} src="/logo.svg" alt="" />
-                    <h1>Invest Smarter,<br/>Trade Together</h1>
+                    <img className={styles.logo + (lightMode?" invert":"")} src="/logo.svg" alt="" />
+                    <h1 className={styles.banner_h1 + (lightMode?" text-black":"")}>Invest Smarter,<br/>Trade Together</h1>
                     <img className={styles.illustration} src="/login_img.svg" alt="" />
                     <div className={styles.navigation}>
-                        <Link to='/faq' className={styles.linkItem}>FAQ</Link>
-                        <Link to='/contact-us' className={styles.linkItem}>Contact Us</Link>
+                        <Link to='/faq' className={styles.linkItem + (lightMode?" text-black":"")}>FAQ</Link>
+                        <Link to='/contact-us' className={styles.linkItem + (lightMode?" text-black":"")}>Contact Us</Link>
                     </div>
                 </div>
             </div>
