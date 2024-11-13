@@ -6,12 +6,12 @@ const Preferences = (props) => {
   const { lightMode, setLightMode } = useContext(authContext);
   return (
     <section 
-      className={`${lightMode ? "bg-light-primary" : "bg-light-secondary"} relative w-full h-full p-10 flex flex-col gap-5 flex-wrap`} 
+      className={`${lightMode ? "bg-light-primary text-black-100" : "bg-dark-primary"} relative w-full h-full p-10 flex flex-col gap-5 flex-wrap`} 
       id='preferences'
     >
       {/* Background Image */}
       <div className="top-0 left-0 absolute w-full h-full">
-        <img src="./backgroundGradient.png" alt="backGradient" className=' w-full h-full object-cover' />
+        <img src="./gradients.png" alt="backGradient" className=' w-full h-full object-cover' />
         
       </div>
       
@@ -24,14 +24,14 @@ const Preferences = (props) => {
 
       {/* Content */}
       <div className=" w-full h-full z-10 font-grotesk font-semibold">
-        <img src="logoBlack.svg" alt="logo" className='w-[250px] object-contain' />
-        <h2 className="text-black text-[56px]">Choose your preferences</h2>
+        <img src={`${lightMode ? "logoBlack.svg" : "application_brand.png"}`} alt="logo" className={` w-[250px] object-contain`}  />
+        <h2 className=" text-[56px]">Choose your preferences</h2>
         
         <div className="w-full flex flex-row flex-wrap gap-10">
           {preferences.map(({ title, items }) => (
-            <ul className="text-black" key={title}>
+            <ul className="" key={title}>
               <h3 className='text-[32px] text-black-500'>{title}</h3>
-              <div className="bg-[#C9C9C9] p-4 w-[300px] rounded-2xl flex flex-col gap-2">
+              <div className={` ${lightMode ? "bg-light-secondary" : "bg-dark-secondary"} p-4 w-[300px] rounded-2xl flex flex-col gap-2`}>
                 {items.map((item) => (
                   <li className="flex items-center gap-2" key={item}>
                     <input 
@@ -47,7 +47,7 @@ const Preferences = (props) => {
             </ul>
           ))}
         </div>
-          <p className="text-black mt-5 ml-3">You can always change this later.</p>
+          <p className={`${lightMode ? "text-black" : "text-white"} mt-5 ml-3`}>You can always change this later.</p>
       </div>
     </section>
   );
