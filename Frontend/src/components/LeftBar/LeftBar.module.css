@@ -48,7 +48,7 @@ transform: matrix(0.75, 0.66, -0.33, 0.94, 0, 0);
 }
 
 .linkItem {
-    padding: 20px;
+    padding: 17px;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -58,7 +58,7 @@ transform: matrix(0.75, 0.66, -0.33, 0.94, 0, 0);
     transition: background-color ease 1s;
 }
 
-.linkItem::before {
+.linkItem::before, .linkItem1::before {
     content: '';
     position: absolute;
     left: 0;
@@ -69,17 +69,36 @@ transform: matrix(0.75, 0.66, -0.33, 0.94, 0, 0);
     transition: width 0.3s ease; /* Transition for width */
 }
 
-.linkItem:hover::before {
+.linkItem:hover::before , .linkItem1:hover::before {
     width: 3px; /* Expands to create the "border" */
 }
 
-.linkItem:hover {
+.linkItem:hover, .linkItem1:hover {
     background-color: rgba(220, 214, 241, 0.4);
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .linkItem>img {
     width: 20px;
+    margin-right: 20px;
+    margin-left: 10px;
+    z-index: 1
+}
+
+
+.linkItem1 {
+    padding: 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    background-color: rgba(0, 0, 0, 0);
+    position: relative;
+    transition: background-color ease 1s;
+}
+
+.linkItem1>img {
+    width: 40px;
     margin-right: 20px;
     margin-left: 10px;
     z-index: 1
@@ -104,7 +123,7 @@ transform: matrix(0.75, 0.66, -0.33, 0.94, 0, 0);
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 
 .settings>div {

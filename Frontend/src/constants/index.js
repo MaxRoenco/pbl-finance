@@ -60,3 +60,37 @@ export const faqs = [
           "No, We cannot guarantee returns. Their performance is subject to market conditions and the success of the investment strategies employed. Like all investments, hedge funds carry the risk of loss.",
     },
   ];
+
+  export const settings = [
+    {
+      name: "account",
+      title: "Account",
+      desc: "The account"
+    },
+    {
+      name: "notifications",
+      title: "Notifications",
+      desc: "The notifications"
+    },
+    {
+      name: "privacy",
+      title: "Privacy",
+      desc: "The privacy settings"
+    },
+    {
+      name: "preferences",
+      title: "Preferences",
+      desc: "The preferences"
+    },
+    {
+      name: "appearance",
+      title: "Appearance",
+      desc: "The appearance"
+    },
+    {
+      name: "compliance",
+      title: "Compliance",
+      desc: "The compliance"
+    }
+  ]
+  
