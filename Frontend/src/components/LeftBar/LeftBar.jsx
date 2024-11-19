@@ -29,8 +29,14 @@ const LeftBar = () => {
                 </ul>
                 <div className={styles.lowerWrapper}>
                     <div className={styles.settings}>
-                        <div><img src={`${lightMode ? "gearLight.svg" : "gear.png"}`} alt="gear" /> Settings</div>
-                        <div><img src={`${lightMode ? "bellLight.svg" : "bell.png"}`} alt="bell" /> Notifications</div>
+                        <Link to='/settings' className={`${styles.linkItem1} ${location.pathname === '/settings' ? styles.selected : ''}`}>
+                            <img src={`${lightMode ? "gearLight.svg" : "gear.png"}`} alt="gear" /> 
+                            Settings
+                        </Link>
+                        <Link to='/notifications' className={`${styles.linkItem1} ${location.pathname === '/notifications' ? styles.selected : ''}`}>
+                            <img src={`${lightMode ? "bellLight.svg" : "bell.png"} `} alt="bell" className='' /> 
+                            Notifications
+                        </Link>
                     </div>
                     <div className={styles.infoContainer}>
                         <img src={`${lightMode ? "profileLight.svg" : "/profilepic.png"}`} alt="Profile" />

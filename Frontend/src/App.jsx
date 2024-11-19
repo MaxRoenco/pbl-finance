@@ -26,6 +26,8 @@ import Assets from './components/Assets/Assets';
 import Contact from './components/ContactUs/Contact';
 import { StarsCanvas } from './components/canvas';
 import Preferences from './components/Preferences/Preferences';
+import Settings from './components/Settings/Settings';
+import Notifications from './components/Notifications/Notifications';
 
 function Layout() {
   const location = useLocation();
@@ -70,6 +72,8 @@ function Layout() {
             <Route path="/forgot" element={<ForgotPassword />} />
             <Route path="/buy" element={<Buy />} />
             <Route path="/assets" element={<Assets />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/notifications" element={<Notifications />} />
             <Route path="/chart" element={<Chart symbol='ETCUSDT' />} />
           </Routes>
         </Content>

@@ -28,6 +28,9 @@ module.exports = {
       backgroundImage: {
         "hero-pattern": "url('/src/assets/herobg.png')",
       },
+      fontFamily: {
+        grotesk: ["Space Grotesk", "sans-serif"],
+      },
     },
   },
   plugins: [],
