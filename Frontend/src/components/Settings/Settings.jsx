@@ -7,7 +7,7 @@ const Settings = () => {
   const [activeCategory, setActiveCategory] = useState(0);
   const [lineStyle, setLineStyle] = useState({ width: '0px', left: '0px' });
   const categoryRefs = useRef([]);
-  const {lightMode, setLightMode} = useContext(authContext);
+  const {lightMode, setLightMode, preferredMode, changeMode} = useContext(authContext);
 
   useEffect(() => {
     if (categoryRefs.current[activeCategory]) {
@@ -61,24 +61,32 @@ const Settings = () => {
             </p>
             {settings[activeCategory].title === "Appearance" && (
               <div className="mt-8">
-                <label className={`text-[16px] font-bold`}>Light Mode:</label>
+                <label className={`text-[16px] font-bold`}>Color Scheme:</label>
                 <div className="flex items-center gap-2">
                   <input
                     type="radio"
-                    name="lightMode"
-                    value={lightMode}
-                    checked={lightMode}
-                    onChange={() => setLightMode(!lightMode)}
+                    name="system"
+                    value="system"
+                    checked={preferredMode === "system"}
+                    onChange={() => changeMode("system")}
                   />
-                  <span className={`text-[14px] ${lightMode? 'text-black' : 'text-white'}`}>On</span>
+                  <span className={`text-[14px] ${lightMode? 'text-black' : 'text-white'}`}>System</span>
                   <input
                     type="radio"
-                    name="lightMode"
-                    value={!lightMode}
-                    checked={!lightMode}
-                    onChange={() => setLightMode(!lightMode)}
+                    name="dark"
+                    value="dark"
+                    checked={preferredMode === "dark"}
+                    onChange={() => changeMode("dark")}
                   />
-                  <span className={`text-[14px] ${lightMode? 'text-black' : 'text-white'}`}>Off</span>
+                  <span className={`text-[14px] ${lightMode? 'text-black' : 'text-white'}`}>Dark</span>
+                  <input
+                    type="radio"
+                    name="light"
+                    value="light"
+                    checked={preferredMode === "light"}
+                    onChange={() => changeMode("light")}
+                  />
+                  <span className={`text-[14px] ${lightMode? 'text-black' : 'text-white'}`}>Light</span>
                 </div>
               </div>
             )}
