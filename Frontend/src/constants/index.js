@@ -85,7 +85,7 @@ export const faqs = [
     {
       name: "appearance",
       title: "Appearance",
-      desc: "The appearance"
+      desc: "The appearance",
     },
     {
       name: "compliance",

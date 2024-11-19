@@ -59,13 +59,13 @@ function Layout() {
             <Route path="/forgot" element={<ForgotPassword />} />
             <Route path="/buy" element={<Buy />} />
             <Route path="/assets" element={<Assets />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/settings"  element={<Settings />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/chart" element={<Chart symbol='ETCUSDT' />} />
           </Routes>
         </Content>
       </div>
-      <div className={'thing' + (lightMode?" thing_black":"")} onClick={toggleLightMode}></div>
+      {/* <div className={'thing' + (lightMode?" thing_black":"")} onClick={toggleLightMode}></div> */}
     </div>
 
   );
