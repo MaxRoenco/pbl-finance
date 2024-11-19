@@ -33,7 +33,29 @@ function Layout() {
   const location = useLocation();
   const showHeader = !['/', '/login', '/register', '/error', '/forgot', '/preferences'].includes(location.pathname);
   const showSidebar = !['/', '/login', '/register', '/error', '/forgot', '/contact-us', '/pricing', '/preferences'].includes(location.pathname);
-  const {lightMode, setLightMode} = useContext(authContext);
+  const {lightMode, setLightMode, changeMode, preferredMode} = useContext(authContext);
+  useEffect(() => {
+    console.log("Preferred mode before change:", preferredMode);
+    // Use changeMode to update the mode
+    changeMode(preferredMode);
+  
+    console.log("Preferred mode after change:", preferredMode);
+  
+    if (preferredMode === 'system') {
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
+      const handleChange = (event) => {
+        const isLightMode = event.matches;
+        console.log("System color scheme changed:", isLightMode ? "light" : "dark");
+        setLightMode(isLightMode);
+      };
+      mediaQuery.addEventListener("change", handleChange);
+      setLightMode(mediaQuery.matches);
+      return () => mediaQuery.removeEventListener("change", handleChange);
+    } else {
+      setLightMode(preferredMode === 'light');
+    }
+  }, [preferredMode]);
+
   const toggleLightMode = _=> setLightMode((lightMode)=>{return !lightMode});
   return (
     <div className={`app-container${lightMode? " bg-light-primary":""}`}>
