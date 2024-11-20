@@ -15,7 +15,8 @@
     "express": "^4.21.0",
     "mongodb": "^6.9.0",
     "mongoose": "^8.6.3",
-    "mongotest": "file:"
+    "mongotest": "file:",
+    "pbl-finance": "file:.."
   },
   "devDependencies": {
     "bcryptjs": "^2.4.3"
