@@ -3,16 +3,17 @@ const { ObjectId } = require('mongodb')
 const { connectToDb, getDb } = require('./db')
 const cors = require('cors');  // Import the cors package
 const axios = require('axios');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;  // Number of salt rounds for hashing
 
 // init app & middleware
 const app = express()
+const port = process.env.PORT || 8080; 
 app.use(express.json())
 
 app.use(cors({
-    origin: 'http://localhost:5173', // Allow requests from your frontend
-    methods: ['GET', 'POST', 'PATCH', 'DELETE'] // Allow specific HTTP methods
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'], // Allow specific HTTP methods
 }));
 
 // db connection
@@ -20,14 +21,18 @@ let db;
 
 connectToDb((err) => {
     if (!err) {
-        app.listen(3000, () => {
-            console.log('app listening on port 3000');
+        app.listen(port, () => {
+            console.log('app listening on port '+port);
         })
         db = getDb();
     } else {
 
     }
 })
+
+app.get("/", (req, res) => {
+    res.status(200).send("<h1>Hello, World!</h1>");
+});
 
 
 app.get('/users/:id', (req, res) => {

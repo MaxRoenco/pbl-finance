@@ -7,6 +7,7 @@ const Context = (props) => {
     const [lightMode, setLightMode] = useState(true);
     const [preferredMode, setPrefferedMode] = useState(localStorage.getItem("preferredMode"));
     const [userData, setUserData] = useState({});
+    const [url, setUrl] = useState("http://localhost:8080");
 
     useEffect(() => {
         loadData();
@@ -86,7 +87,8 @@ const Context = (props) => {
         lightMode,
         setLightMode,
         changeMode,
-        preferredMode
+        preferredMode,
+        url
     };
 
     return (
