@@ -1,0 +1,21 @@
+.select-crypto {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    color: white;
+    font-size: 1rem;
+    transition: border 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .select-crypto:focus {
+    border-color: #8b5cf6; /* Purple focus border */
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .select-crypto option {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+  
+  
