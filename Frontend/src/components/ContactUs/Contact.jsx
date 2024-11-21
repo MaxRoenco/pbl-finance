@@ -86,20 +86,20 @@ const Contact = () => {
                 <h1 className={` ${lightMode ? "text-dark-secondary" : "text-white"} ${styles1.heading}`}>Who We Are?</h1>
                 <div className={styles1.whoWeAreGrid}>
                     <div className={`${lightMode ? "bg-light-fourth/20 text-black" : "bg-[#2b2b2b]"} ${styles1.whoWeAreItem}`}>
-                        <img src="../public/yellow-group.png" alt="people" className={styles1.whoWeAreImage} />
+                        <img src="./yellow-group.png" alt="people" className={styles1.whoWeAreImage} />
                         <p className={` ${lightMode ? "text-[#32395c]" : "text-[#ddd341]"} ${styles1.whoWeAreTitle}`}>19,000+ people </p>
 
-                        <p className={` ${lightMode ? "text-[#32395c]" : "text-[#ddd341]"} ${styles1.whoWeAreText}`}> of different backgrounds, races, and nationalities.</p>
+                        <p className={` ${lightMode ? "text-[#32395c]" : "text-[#f9f9f9bd]"} ${styles1.whoWeAreText}`}> of different backgrounds, races, and nationalities.</p>
                     </div>
                     <div className={`${lightMode ? "bg-light-fourth/20 text-black" : "bg-[#2b2b2b]"} ${styles1.whoWeAreItem}`}>
-                        <img src="../public/languages.png" alt="Multilingual Support" className={styles1.whoWeAreImage} />
+                        <img src="./languages.png" alt="Multilingual Support" className={styles1.whoWeAreImage} />
                         <p className={` ${lightMode ? "text-[#32395c]" : "text-[#ddd341]"} ${styles1.whoWeAreTitle}`}>135 languages</p>
-                        <p className={` ${lightMode ? "text-[#32395c]" : "text-[#ddd341]"} ${styles1.whoWeAreText}`}>addressing the needs of a multilingual client base.</p>
+                        <p className={` ${lightMode ? "text-[#32395c]" : "text-[#f9f9f9bd]"} ${styles1.whoWeAreText}`}>addressing the needs of a multilingual client base.</p>
                     </div>
                     <div className={`${lightMode ? "bg-light-fourth/20 text-black" : "bg-[#2b2b2b]"} ${styles1.whoWeAreItem}`}>
-                        <img src="../public/countries.webp" alt="countries" className={styles1.whoWeAreImage} />
+                        <img src="./countries.webp" alt="countries" className={styles1.whoWeAreImage} />
                         <p className={` ${lightMode ? "text-[#32395c]" : "text-[#ddd341]"} ${styles1.whoWeAreTitle}`}>42 countries</p>
-                        <p className={` ${lightMode ? "text-[#32395c]" : "text-[#ddd341]"} ${styles1.whoWeAreText}`}>enabling us to help more and more people.</p>
+                        <p className={` ${lightMode ? "text-[#32395c]" : "text-[#f9f9f9bd]"} ${styles1.whoWeAreText}`}>enabling us to help more and more people.</p>
                     </div>
                 </div>
             </div>
