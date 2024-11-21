@@ -87,7 +87,7 @@ function Layout() {
           </Routes>
         </Content>
       </div>
-      {/* <div className={'thing' + (lightMode?" thing_black":"")} onClick={toggleLightMode}></div> */}
+      <div className={'thing' + (lightMode?" thing_black":"")} onClick={toggleLightMode}></div>
     </div>
 
   );

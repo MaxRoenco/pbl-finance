@@ -1,10 +1,12 @@
-import { useState, useRef, Suspense } from 'react';
+import { useState, useRef, Suspense, useContext } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import {Points, PointMaterial, Preload} from '@react-three/drei';
 import * as random from 'maath/random/dist/maath-random.esm';
+import { authContext } from '../../hooks/Context';
 
 
 const Stars = (props) => {
+  const {lightMode, setLightMode} = useContext(authContext);
 
   const ref = useRef();
 
@@ -20,7 +22,7 @@ const Stars = (props) => {
       <Points ref={ref} positions={sphere} stride={3} frustumCulled {...props}>
         <PointMaterial 
         transparent
-        color="#f272c8"
+        color={`${lightMode ? "#2b0e21" : "#f272c8"}`}
         size={0.002} 
         sizeAttenuation={true}
         depthWrite={false}
