@@ -7,7 +7,7 @@ const Context = (props) => {
     const [lightMode, setLightMode] = useState(true);
     const [preferredMode, setPrefferedMode] = useState(localStorage.getItem("preferredMode"));
     const [userData, setUserData] = useState({});
-    const [url, setUrl] = useState("https://investora.azurewebsites.net/");
+    const [url, setUrl] = useState("https://investora.azurewebsites.net");
 
     useEffect(() => {
         loadData();
@@ -23,7 +23,7 @@ const Context = (props) => {
     }
     const register = async (user) => {
         try {
-            const response = await fetch('http://localhost:3000/register', {
+            const response = await fetch(url+'/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const Context = (props) => {
         console.log("Fetching data for user ID:", userId);
 
         try {
-            const response = await fetch('http://localhost:3000/users/' + userId);
+            const response = await fetch(url+'/users/' + userId);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
