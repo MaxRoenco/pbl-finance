@@ -12,7 +12,7 @@ const port = process.env.PORT || 8080;
 app.use(express.json())
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://salmon-dune-0bbe1d503.5.azurestaticapps.net/',
     methods: ['GET', 'POST', 'PATCH', 'DELETE'], // Allow specific HTTP methods
 }));
 
