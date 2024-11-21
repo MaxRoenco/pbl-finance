@@ -11,7 +11,7 @@ const Portfolio = () => {
     useEffect(() => {
         const fetchTradingHistory = async () => {
             try {
-                const response = await fetch('http://localhost:3000/users/'+localStorage.getItem("id")); // Update with your API endpoint
+                const response = await fetch(url+'/users/'+localStorage.getItem("id")); // Update with your API endpoint
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

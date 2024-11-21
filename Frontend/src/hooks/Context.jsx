@@ -5,12 +5,22 @@ export const authContext = createContext();
 const Context = (props) => {
     const [isRegistered, setIsRegistered] = useState(false);
     const [lightMode, setLightMode] = useState(true);
+    const [preferredMode, setPrefferedMode] = useState(localStorage.getItem("preferredMode"));
     const [userData, setUserData] = useState({});
+    const [url, setUrl] = useState("http://localhost:8080");
 
     useEffect(() => {
         loadData();
     }, []);
-
+    const changeMode = mode => {
+        if(!mode || !(["system", "light", "dark"].includes(mode))) {
+            setPrefferedMode("system");
+            localStorage.setItem("preferredMode", "system");
+            return;
+        }
+        setPrefferedMode(mode);
+        localStorage.setItem("preferredMode", mode);
+    }
     const register = async (user) => {
         try {
             const response = await fetch('http://localhost:3000/register', {
@@ -75,7 +85,10 @@ const Context = (props) => {
         userData,
         loadData,
         lightMode,
-        setLightMode
+        setLightMode,
+        changeMode,
+        preferredMode,
+        url
     };
 
     return (

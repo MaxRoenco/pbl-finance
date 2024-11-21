@@ -8,7 +8,7 @@ const LeftBar = () => {
     const location = useLocation(); // Get the current route
     const { userData, lightMode, seLightMode } = useContext(authContext);
     return (
-        <div className={styles.mainContainer}>
+        <div className={`${styles.mainContainer} sm:w-[315px] sm:text-[16px] text-[12px]`}>
             <div className={`${styles.container} ${lightMode ? "bg-light-secondary text-black" : ""}`}>
                 <ul className={styles.links}>
                     <Link to='/dashboard' className={`${styles.linkItem} ${location.pathname === '/dashboard' ? styles.selected : ''}`}>
