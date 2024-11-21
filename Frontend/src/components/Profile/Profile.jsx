@@ -1,10 +1,11 @@
 
+import Pricing from '../Pricing/Pricing';
 import styles from './Profile.module.css'
 
 const Profile = () => {
     return (
         <>
-            <div className="">Profile</div>
+        <Pricing/>
         </>
     );
 }
