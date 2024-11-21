@@ -3,16 +3,17 @@ const { ObjectId } = require('mongodb')
 const { connectToDb, getDb } = require('./db')
 const cors = require('cors');  // Import the cors package
 const axios = require('axios');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;  // Number of salt rounds for hashing
 
 // init app & middleware
 const app = express()
+const port = process.env.PORT || 8080;
 app.use(express.json())
 
 app.use(cors({
-    origin: 'http://localhost:5173', // Allow requests from your frontend
-    methods: ['GET', 'POST', 'PATCH', 'DELETE'] // Allow specific HTTP methods
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'], // Allow specific HTTP methods
 }));
 
 // db connection
@@ -20,14 +21,18 @@ let db;
 
 connectToDb((err) => {
     if (!err) {
-        app.listen(3000, () => {
-            console.log('app listening on port 3000');
+        app.listen(port, () => {
+            console.log('app listening on port ' + port);
         })
         db = getDb();
     } else {
 
     }
 })
+
+app.get("/", (req, res) => {
+    res.status(200).send("<h1>Hello, World!</h1>");
+});
 
 
 app.get('/users/:id', (req, res) => {
@@ -136,7 +141,7 @@ app.post('/buy', async (req, res) => {
     try {
         // Fetch current price (real-time price for the symbol)
         const response = await axios.get('https://api.binance.com/api/v3/ticker/price', {
-            params: { symbol: symbol }  
+            params: { symbol: symbol }
         });
         const closePriceOnStart = parseFloat(response.data.price);
 
@@ -181,7 +186,7 @@ app.post('/sell/:id', async (req, res) => {
                 { _id: new ObjectId(userId) },
                 { projection: { assets: { $elemMatch: { _id: new ObjectId(assetId) } } } }
             );
-        
+
         if (!assetsResponse || !assetsResponse.assets.length) {
             return res.status(404).send('Asset not found');
         }
@@ -241,5 +246,78 @@ app.post('/sell/:id', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error during selling process' });
+    }
+});
+
+// Function to fetch cryptocurrencies and their prices
+app.post('/coins', async (req, res) => {
+    const baseUrl = "https://api.coinpaprika.com/v1";
+    const result = [];
+    try {
+        // Fetch top 10 cryptocurrencies
+        const response = await axios.get(`${baseUrl}/coins`);
+        const coins = response.data.slice(0, 10);
+        for (const coin of coins) {
+            // Fetch current price
+            const priceResponse = await axios.get(`${baseUrl}/tickers/${coin.id}`);
+            const currentPrice = priceResponse.data.quotes.USD.price;
+
+            // Helper function to calculate profit/loss
+            const calculateProfitLoss = async (days) => {
+                const endDate = new Date();
+                const startDate = new Date();
+                startDate.setDate(endDate.getDate() - days);
+
+                const start = startDate.toISOString().split("T")[0];
+                const end = endDate.toISOString().split("T")[0];
+
+                try {
+                    const historicalResponse = await axios.get(
+                        `${baseUrl}/tickers/${coin.id}/historical`,
+                        {
+                            params: {
+                                start: start,
+                                end: end,
+                                interval: "1d",
+                            },
+                        }
+                    );
+
+                    const historicalData = historicalResponse.data;
+
+                    // Use the first price in the historical data as the base price
+                    if (historicalData.length > 0) {
+                        const historicalPrice = historicalData[0].price;
+                        const profitLoss =
+                            ((currentPrice - historicalPrice) / historicalPrice) * 100;
+                        return profitLoss.toFixed(2);
+                    }
+                } catch (error) {
+                    console.error(
+                        `Error fetching historical data for ${days} days:`,
+                        error.message
+                    );
+                    return "N/A";
+                }
+            };
+
+            // Calculate profit/loss for different periods
+            const profitLoss24h = priceResponse.data.quotes.USD.percent_change_24h.toFixed(2); // Already provided by the API
+            const profitLoss7d = await calculateProfitLoss(7);
+            const profitLoss1m = await calculateProfitLoss(30);
+            const obj = {
+                name: coin.name,
+                symbol: coin.symbol,
+                currentPrice: currentPrice.toFixed(2),
+                profitLoss24h,
+                profitLoss7d,
+                profitLoss1m,
+            }
+            console.log(obj);
+            result.push(obj)
+        }
+        res.json({coins: result});
+    } catch (error) {
+        res.status(500).json({ error: 'Error during fetchin coins' });
     }
 });
