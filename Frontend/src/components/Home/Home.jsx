@@ -29,6 +29,9 @@ const Home = () => {
                     <Link to='/' className={styles.logo}><img className={styles.logoImg+(lightMode?(" "+styles.img_light):"")} src="/logo.svg" /></Link>
                     <ul className={styles.links+(lightMode?(" text-black"):"")}>
                         <li>
+                            <Link to='/preferences' className={styles.linkItem}>Preferences</Link>
+                        </li>
+                        <li>
                             <Link to='/features' className={styles.linkItem}>Features</Link>
                         </li>
                         <li>
