@@ -1,7 +1,19 @@
 # Changelog
 > We enhance our project  by introducing new features, resolving issues, and updating documentation. The changelog provides a detailed account of these ongoing improvements.
 ___
-## New Updates:
+## New Update:
+## [v0.5.1] - 2024-11-22
+- Updated Payment page, with better UI and functionalities.
+- Users can now toggle Light Mode from the settings page.
+- Light Mode preferences are saved in local storage and adapt to the system's default color scheme.
+- Light Mode implementation for the "Contact Us" page.
+- Centralized the backend public API URL for all pages.
+- Implemented value fetching logic to enhance data processing.
+- Fixed style issues on the "Contact Us" page for consistency.
+- Improved responsiveness to system color scheme changes.
+- Integrated Azure Static Web Apps workflow for deployment.
+- Updated project libraries for improved stability and compatibility.
+___
 ## [v0.5.0] - 2024-11-08
 - Implemented full Light Mode for improved accessibility.
 - Added a 3D graphic for the "About Us" page.
@@ -10,7 +22,7 @@ ___
 - Implemented Preferences Page, allowing users to customize their experience.
 - Developed Settings mockups.
 - Developed and integrated payment logic.
-___
+
 ## [v0.4.5]
 - Added a detailed asset history, including profit display and other relevant data for user insights.
 - Enhanced functionalities on the assets page, improving user experience and data access.
